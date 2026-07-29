@@ -82,6 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const esLab = document.getElementById('es-label');
     const enLab = document.getElementById('en-label');
+    const esLabMobile = document.getElementById('es-label-mobile');
+    const enLabMobile = document.getElementById('en-label-mobile');
+    const toggleMobile = document.getElementById('lang-toggle-mobile');
     const wa = document.getElementById('wa-btn');
 
     function translateSelectOptions(isEnglish) {
@@ -108,22 +111,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Language switch function
     window.toggleLanguage = function() {
         body.classList.toggle('lang-en');
-        toggle.classList.toggle('lang-en-active');
+        if (toggle) toggle.classList.toggle('lang-en-active');
+        if (toggleMobile) toggleMobile.classList.toggle('lang-en-active');
 
         const isEnglish = body.classList.contains('lang-en');
 
         if(isEnglish) {
-            esLab.classList.replace('text-white', 'text-white/50');
-            enLab.classList.replace('text-white/50', 'text-white');
+            if (esLab) esLab.classList.replace('text-white', 'text-white/50');
+            if (enLab) enLab.classList.replace('text-white/50', 'text-white');
+            if (esLabMobile) esLabMobile.classList.replace('text-white', 'text-white/50');
+            if (enLabMobile) enLabMobile.classList.replace('text-white/50', 'text-white');
             if (wa) wa.href = "https://wa.me/522717128316?text=Hello%20Acarrealiquidos.%20Quote%20request.";
             
             // Adjust input placeholders
-            document.getElementById('form-name').placeholder = "Your Full Name";
-            document.getElementById('form-company').placeholder = "Company Name";
-            document.getElementById('form-email').placeholder = "Email Address";
-            document.getElementById('form-phone').placeholder = "Contact Phone";
-            document.getElementById('form-msg').placeholder = "Tell us about your cargo requirements, origin, and destination...";
-            document.getElementById('ai-chat-input').placeholder = "Type message...";
+            if (document.getElementById('form-name')) document.getElementById('form-name').placeholder = "Your Full Name";
+            if (document.getElementById('form-company')) document.getElementById('form-company').placeholder = "Company Name";
+            if (document.getElementById('form-email')) document.getElementById('form-email').placeholder = "Email Address";
+            if (document.getElementById('form-phone')) document.getElementById('form-phone').placeholder = "Contact Phone";
+            if (document.getElementById('form-msg')) document.getElementById('form-msg').placeholder = "Tell us about your cargo requirements, origin, and destination...";
+            if (document.getElementById('ai-chat-input')) document.getElementById('ai-chat-input').placeholder = "Type message...";
             
             const waFloat = document.getElementById('wa-float-btn');
             if (waFloat) waFloat.href = "https://wa.me/522717128316?text=Hello%20Acarrealiquidos.%20Quote%20request.";
@@ -131,17 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // Translate dropdowns
             translateSelectOptions(true);
         } else {
-            esLab.classList.replace('text-white/50', 'text-white');
-            enLab.classList.replace('text-white', 'text-white/50');
+            if (esLab) esLab.classList.replace('text-white/50', 'text-white');
+            if (enLab) enLab.classList.replace('text-white', 'text-white/50');
+            if (esLabMobile) esLabMobile.classList.replace('text-white/50', 'text-white');
+            if (enLabMobile) enLabMobile.classList.replace('text-white', 'text-white/50');
             if (wa) wa.href = "https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion.";
             
             // Adjust input placeholders
-            document.getElementById('form-name').placeholder = "Nombre y Apellido";
-            document.getElementById('form-company').placeholder = "Empresa";
-            document.getElementById('form-email').placeholder = "Correo Electrónico";
-            document.getElementById('form-phone').placeholder = "Teléfono de contacto";
-            document.getElementById('form-msg').placeholder = "Escriba detalles de la carga, origen, destino y fechas requeridas...";
-            document.getElementById('ai-chat-input').placeholder = "Escribe tu mensaje...";
+            if (document.getElementById('form-name')) document.getElementById('form-name').placeholder = "Nombre y Apellido";
+            if (document.getElementById('form-company')) document.getElementById('form-company').placeholder = "Empresa";
+            if (document.getElementById('form-email')) document.getElementById('form-email').placeholder = "Correo Electrónico";
+            if (document.getElementById('form-phone')) document.getElementById('form-phone').placeholder = "Teléfono de contacto";
+            if (document.getElementById('form-msg')) document.getElementById('form-msg').placeholder = "Escriba detalles de la carga, origen, destino y fechas requeridas...";
+            if (document.getElementById('ai-chat-input')) document.getElementById('ai-chat-input').placeholder = "Escribe tu mensaje...";
             
             const waFloat = document.getElementById('wa-float-btn');
             if (waFloat) waFloat.href = "https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion.";
@@ -153,6 +161,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Run initial dropdown option translation (default Spanish)
     translateSelectOptions(false);
+
+    // Mobile Drawer Navigation Menu Controls
+    const mobileDrawer = document.getElementById('mobile-menu-drawer');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenuCloseBtn = document.getElementById('mobile-menu-close-btn');
+
+    window.openMobileMenu = function() {
+        if (mobileDrawer) {
+            mobileDrawer.classList.remove('translate-x-full');
+            body.style.overflow = 'hidden'; // lock parent scroll while browsing menu
+        }
+    };
+
+    window.closeMobileMenu = function() {
+        if (mobileDrawer) {
+            mobileDrawer.classList.add('translate-x-full');
+            // Re-enable page scrolling (only if preloader has already finished)
+            const preloader = document.getElementById('preloader');
+            if (!preloader || preloader.classList.contains('opacity-0')) {
+                body.style.overflow = '';
+            }
+        }
+    };
+
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', window.openMobileMenu);
+    if (mobileMenuCloseBtn) mobileMenuCloseBtn.addEventListener('click', window.closeMobileMenu);
 
     // 2. Navigation Scroll Effect
     const nav = document.getElementById('main-nav');

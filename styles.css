@@ -296,21 +296,26 @@ body {
 /* --- LEAD FRONTEND ARCHITECT MOBILE RESPONSIVENESS PATCH --- */
 html, body, #root-wrapper {
     overflow-x: hidden !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     width: 100% !important;
     box-sizing: border-box !important;
 }
 
 header, section, footer, nav {
-    max-width: 100vw !important;
+    max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
 }
 
+h1 {
+    font-size: clamp(1.5rem, 8vw, 4.5rem) !important; /* fluid typography scaling */
+    line-height: 1.2 !important;
+}
+
 @media (max-width: 767px) {
-    /* Hero Typography mobile scale override */
+    /* Hero Typography mobile scale override using fluid clamp */
     h1 {
-        font-size: 1.75rem !important; /* 28px max-w */
+        font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
         line-height: 1.25 !important;  /* leading-tight */
     }
     
@@ -320,14 +325,9 @@ header, section, footer, nav {
         padding-right: 1.5rem !important; /* px-6 */
     }
     
-    /* Mobile-specific Grain Overlay fix to prevent pushing content right */
+    /* Hide Grain Overlay entirely on mobile to save performance and prevent layout shifts */
     .grain-overlay {
-        width: 100% !important;
-        height: 100% !important;
-        left: 0 !important;
-        top: 0 !important;
-        transform: none !important;
-        animation: none !important;
+        display: none !important;
     }
 
     /* Navbar mobile bezel padding */
@@ -342,10 +342,10 @@ header, section, footer, nav {
         gap: 1rem !important; /* gap-4 */
     }
     
-    /* Testimonials Mobile Card bounds */
+    /* Testimonials Mobile Card bounds without using 100vw */
     #testimonios .glass-panel,
     .glass-panel {
-        max-width: calc(100vw - 40px) !important;
+        max-width: calc(100% - 40px) !important;
         margin-left: auto !important;
         margin-right: auto !important;
         box-sizing: border-box !important;

@@ -28,14 +28,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Step 3: Trigger the splash particle reveal (salpicadura)
         setTimeout(() => {
-            if (preloaderLogo) {
-                // Emitting particles relative to logo wrap for perfect responsive centering
+            const emitter = document.getElementById('splash-emitter');
+            if (emitter) {
+                // Emitting particles directly inside the absolute emitter element
+                // This ensures they align with the visual drop 100% of the time, regardless of parent height or zoom.
                 const colors = ['#FF6B00', '#051024', '#ff8533', '#25D366', '#00d2ff'];
-                const count = 35; // High particle count for detailed salpicadura
+                const count = 38; // High particle count for detailed salpicadura
 
                 for (let i = 0; i < count; i++) {
                     const particle = document.createElement('div');
-                    const size = Math.random() * 8 + 4; // 4px to 12px
+                    const size = Math.random() * 5 + 3; // Smaller, more elegant size: 3px to 8px
                     const isOrange = Math.random() > 0.35; // mostly brand safety orange
                     
                     particle.className = 'splash-droplet';
@@ -43,17 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     particle.style.height = `${size}px`;
                     particle.style.backgroundColor = isOrange ? '#FF6B00' : colors[Math.floor(Math.random() * colors.length)];
                     
-                    // Position relative to logo wrapper container (perfectly centers on 'O' splash drop)
-                    particle.style.left = '86.5%';
-                    particle.style.top = '41%';
+                    // Position at the exact center of the absolute emitter div
+                    particle.style.left = '50%';
+                    particle.style.top = '50%';
                     
-                    // Random destination
+                    // Controlled elegant velocity (lower spread distance to look centered and not scattered)
                     const angle = Math.random() * Math.PI * 2;
-                    const velocity = Math.random() * 160 + 60; // travel distance
+                    const velocity = Math.random() * 55 + 15; // travel distance
                     const dx = Math.cos(angle) * velocity;
                     const dy = Math.sin(angle) * velocity;
 
-                    preloaderLogo.appendChild(particle);
+                    emitter.appendChild(particle);
 
                     // Trigger animation
                     requestAnimationFrame(() => {

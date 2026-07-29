@@ -350,6 +350,12 @@ h1 {
         margin-right: auto !important;
         box-sizing: border-box !important;
     }
+
+    /* Convert horizontal translate entrance animations to vertical on mobile to avoid page offset */
+    .fade-in.from-left,
+    .fade-in.from-right {
+        transform: translateY(20px) !important;
+    }
 }
 
 @media (min-width: 480px) and (max-width: 767px) {

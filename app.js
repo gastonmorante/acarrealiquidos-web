@@ -100,56 +100,93 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Language switch function
-    window.toggleLanguage = function() {
-        body.classList.toggle('lang-en');
-        if (toggle) toggle.classList.toggle('lang-en-active');
-        if (toggleMobile) toggleMobile.classList.toggle('lang-en-active');
+    // Helper to translate everything on the page
+    window.applyLanguageState = function(isEnglish) {
+        if (isEnglish) {
+            body.classList.add('lang-en');
+            if (toggle) toggle.classList.add('lang-en-active');
+            if (toggleMobile) toggleMobile.classList.add('lang-en-active');
 
-        const isEnglish = body.classList.contains('lang-en');
+            // Translate head title, desc, lang
+            document.title = "Acarrealíquidos | Leaders in Specialized Freight & Liquid Transport";
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', 'Liquid logistics leaders with 42 years of experience. Transport of hydrocarbons, oils, and chemicals from Veracruz to all of Mexico. SCT certified safety.');
+            document.documentElement.setAttribute('lang', 'en');
 
-        if(isEnglish) {
             if (esLab) esLab.classList.replace('text-white', 'text-white/50');
             if (enLab) enLab.classList.replace('text-white/50', 'text-white');
             if (esLabMobile) esLabMobile.classList.replace('text-white', 'text-white/50');
             if (enLabMobile) enLabMobile.classList.replace('text-white/50', 'text-white');
-            if (wa) wa.href = "https://wa.me/522717128316?text=Hello%20Acarrealiquidos.%20Quote%20request.";
             
-            // Adjust input placeholders
+            if (wa) wa.href = "https://wa.me/522717128316?text=Hello%20Acarrealiquidos.%20Quote%20request.";
+            const waFloat = document.getElementById('wa-float-btn');
+            if (waFloat) waFloat.href = "https://wa.me/522717128316?text=Hello%20Acarrealiquidos.%20Quote%20request.";
+
+            // Adjust placeholders
             if (document.getElementById('form-name')) document.getElementById('form-name').placeholder = "Your Full Name";
             if (document.getElementById('form-company')) document.getElementById('form-company').placeholder = "Company Name";
             if (document.getElementById('form-email')) document.getElementById('form-email').placeholder = "Email Address";
             if (document.getElementById('form-phone')) document.getElementById('form-phone').placeholder = "Contact Phone";
             if (document.getElementById('form-msg')) document.getElementById('form-msg').placeholder = "Tell us about your cargo requirements, origin, and destination...";
             if (document.getElementById('ai-chat-input')) document.getElementById('ai-chat-input').placeholder = "Type message...";
-            
-            const waFloat = document.getElementById('wa-float-btn');
-            if (waFloat) waFloat.href = "https://wa.me/522717128316?text=Hello%20Acarrealiquidos.%20Quote%20request.";
-            
-            // Translate dropdowns
-            translateSelectOptions(true);
         } else {
+            body.classList.remove('lang-en');
+            if (toggle) toggle.classList.remove('lang-en-active');
+            if (toggleMobile) toggleMobile.classList.remove('lang-en-active');
+
+            // Translate head title, desc, lang
+            document.title = "Acarrealíquidos | Líderes en Transporte Especializado de Carga y Líquidos";
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', 'Líderes en logística de líquidos con 42 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT.');
+            document.documentElement.setAttribute('lang', 'es');
+
             if (esLab) esLab.classList.replace('text-white/50', 'text-white');
             if (enLab) enLab.classList.replace('text-white', 'text-white/50');
             if (esLabMobile) esLabMobile.classList.replace('text-white/50', 'text-white');
             if (enLabMobile) enLabMobile.classList.replace('text-white', 'text-white/50');
+
             if (wa) wa.href = "https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion.";
-            
-            // Adjust input placeholders
+            const waFloat = document.getElementById('wa-float-btn');
+            if (waFloat) waFloat.href = "https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion.";
+
+            // Adjust placeholders
             if (document.getElementById('form-name')) document.getElementById('form-name').placeholder = "Nombre y Apellido";
             if (document.getElementById('form-company')) document.getElementById('form-company').placeholder = "Empresa";
             if (document.getElementById('form-email')) document.getElementById('form-email').placeholder = "Correo Electrónico";
             if (document.getElementById('form-phone')) document.getElementById('form-phone').placeholder = "Teléfono de contacto";
             if (document.getElementById('form-msg')) document.getElementById('form-msg').placeholder = "Escriba detalles de la carga, origen, destino y fechas requeridas...";
             if (document.getElementById('ai-chat-input')) document.getElementById('ai-chat-input').placeholder = "Escribe tu mensaje...";
-            
-            const waFloat = document.getElementById('wa-float-btn');
-            if (waFloat) waFloat.href = "https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion.";
-            
-            // Translate dropdowns
-            translateSelectOptions(false);
         }
-    }
+
+        // Translate select options
+        translateSelectOptions(isEnglish);
+
+        // Translate image alts
+        const imgs = document.querySelectorAll('img[data-es-alt]');
+        imgs.forEach(img => {
+            const altText = isEnglish ? img.getAttribute('data-en-alt') : img.getAttribute('data-es-alt');
+            if (altText) img.alt = altText;
+        });
+
+        // Refresh dynamic fleet specs if already loaded
+        if (typeof fleetData !== 'undefined') {
+            const activeTab = document.querySelector('.fleet-tab.tab-active');
+            if (activeTab) {
+                const key = activeTab.getAttribute('data-tab');
+                if (key && fleetData[key]) {
+                    updateFleetText(fleetData[key].specs);
+                }
+            }
+        }
+    };
+
+    // Language switch function
+    window.toggleLanguage = function() {
+        body.classList.toggle('lang-en');
+        const isEnglish = body.classList.contains('lang-en');
+        localStorage.setItem('lang', isEnglish ? 'en' : 'es');
+        window.applyLanguageState(isEnglish);
+    };
 
     // Run initial dropdown option translation (default Spanish)
     translateSelectOptions(false);
@@ -390,6 +427,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Drawer handlers
     window.openAIDrawer = function() {
         aiDrawer.classList.remove('translate-x-full');
+        setTimeout(() => {
+            if (aiChatInput) aiChatInput.focus();
+        }, 350);
     }
 
     window.closeAIDrawer = function() {
@@ -559,6 +599,77 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            // Validation elements
+            const nameEl = document.getElementById('form-name');
+            const companyEl = document.getElementById('form-company');
+            const emailEl = document.getElementById('form-email');
+            const phoneEl = document.getElementById('form-phone');
+            const serviceEl = document.getElementById('form-service');
+            const msgEl = document.getElementById('form-msg');
+            const privacyEl = document.getElementById('privacy');
+
+            let isValid = true;
+            let firstInvalidEl = null;
+
+            // Reset validation states
+            [nameEl, companyEl, emailEl, phoneEl, serviceEl, msgEl, privacyEl].forEach(el => {
+                if (el) {
+                    el.classList.remove('border-red-500', 'focus:ring-red-500/15');
+                    el.classList.add('border-gray-200');
+                }
+            });
+
+            function setInvalid(el) {
+                if (el) {
+                    el.classList.remove('border-gray-200');
+                    el.classList.add('border-red-500', 'focus:ring-red-500/15');
+                    isValid = false;
+                    if (!firstInvalidEl) firstInvalidEl = el;
+                }
+            }
+
+            // Name validation (min 3 chars)
+            if (!nameEl || nameEl.value.trim().length < 3) {
+                setInvalid(nameEl);
+            }
+
+            // Company validation (min 2 chars)
+            if (!companyEl || companyEl.value.trim().length < 2) {
+                setInvalid(companyEl);
+            }
+
+            // Email validation (regex)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailEl || !emailRegex.test(emailEl.value.trim())) {
+                setInvalid(emailEl);
+            }
+
+            // Phone validation (10 digits)
+            const cleanedPhone = phoneEl ? phoneEl.value.replace(/\D/g, '') : '';
+            if (!phoneEl || cleanedPhone.length !== 10) {
+                setInvalid(phoneEl);
+            }
+
+            // Service validation
+            if (!serviceEl || serviceEl.value === "") {
+                setInvalid(serviceEl);
+            }
+
+            // Message validation (min 10 chars)
+            if (!msgEl || msgEl.value.trim().length < 10) {
+                setInvalid(msgEl);
+            }
+
+            // Privacy validation
+            if (!privacyEl || !privacyEl.checked) {
+                setInvalid(privacyEl);
+            }
+
+            if (!isValid) {
+                if (firstInvalidEl) firstInvalidEl.focus();
+                return;
+            }
+
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalContent = submitBtn.innerHTML;
             const isEnglish = body.classList.contains('lang-en');
@@ -574,26 +685,72 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span>${isEnglish ? 'Sending Request...' : 'Enviando Solicitud...'}</span>
             `;
 
-            // Simulate server request
-            setTimeout(() => {
-                // Success animation: replace form content with success message
+            // Prepare payload
+            const formData = {
+                name: nameEl.value.trim(),
+                company: companyEl.value.trim(),
+                email: emailEl.value.trim(),
+                phone: cleanedPhone,
+                service: serviceEl.value,
+                message: msgEl.value.trim(),
+                _timestamp: new Date().toISOString(),
+                _language: isEnglish ? 'en' : 'es',
+                _entry_page: window.location.href,
+                _user_agent: navigator.userAgent
+            };
+
+            // Post request to Formspree
+            fetch('https://formspree.io/f/mqazpypy', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Success animation: replace form content with success message
+                    contactForm.innerHTML = `
+                        <div class="text-center py-12 px-6 flex flex-col items-center justify-center animate-fade-in" style="animation: fadeIn 0.6s ease-out;">
+                            <div class="w-16 h-16 rounded-full bg-green-50 border border-green-500 flex items-center justify-center mb-6 text-green-500 animate-bounce-in">
+                                <span class="material-symbols-outlined text-4xl font-bold">check</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-deep-navy mb-4 font-headline-display">
+                                ${isEnglish ? 'Request Submitted Successfully!' : '¡Solicitud Enviada con Éxito!'}
+                            </h4>
+                            <p class="text-sm text-slate-gray max-w-md mb-8 leading-relaxed font-body-md">
+                                ${isEnglish ? 'Your quote request has been received. Our logistics dispatch team will contact you within the next 2 hours with a formal proposal.' : 'Hemos recibido su solicitud de cotización. Nuestro equipo de tráfico se pondrá en contacto con usted en un plazo máximo de 2 horas con una propuesta formal.'}
+                            </p>
+                            <button type="button" onclick="window.location.reload()" class="bg-deep-navy hover:bg-safety-orange active:scale-95 text-white px-6 py-3.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-lg shadow-md hover:shadow-safety-orange/20 cursor-pointer font-headline-display">
+                                ${isEnglish ? 'Send Another Request' : 'Enviar otra solicitud'}
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Formspree response not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error sending form:', error);
+                // Error feedback block
                 contactForm.innerHTML = `
                     <div class="text-center py-12 px-6 flex flex-col items-center justify-center animate-fade-in" style="animation: fadeIn 0.6s ease-out;">
-                        <div class="w-16 h-16 rounded-full bg-green-50 border border-green-500 flex items-center justify-center mb-6 text-green-500 animate-bounce-in">
-                            <span class="material-symbols-outlined text-4xl font-bold">check</span>
+                        <div class="w-16 h-16 rounded-full bg-red-50 border border-red-500 flex items-center justify-center mb-6 text-red-500">
+                            <span class="material-symbols-outlined text-4xl font-bold">error</span>
                         </div>
                         <h4 class="text-2xl font-bold text-deep-navy mb-4 font-headline-display">
-                            ${isEnglish ? 'Request Submitted Successfully!' : '¡Solicitud Enviada con Éxito!'}
+                            ${isEnglish ? 'Error Sending Request' : 'Error al enviar la solicitud'}
                         </h4>
                         <p class="text-sm text-slate-gray max-w-md mb-8 leading-relaxed font-body-md">
-                            ${isEnglish ? 'Your quote request has been received. Our logistics dispatch team will contact you within the next 2 hours with a formal proposal.' : 'Hemos recibido su solicitud de cotización. Nuestro equipo de tráfico se pondrá en contacto con usted en un plazo máximo de 2 horas con una propuesta formal.'}
+                            ${isEnglish ? 'There was a problem submitting your request! Please try again or contact us directly via WhatsApp.' : 'Hubo un problema al enviar su solicitud. Por favor, intente de nuevo o póngase en contacto directo por WhatsApp.'}
                         </p>
                         <button type="button" onclick="window.location.reload()" class="bg-deep-navy hover:bg-safety-orange active:scale-95 text-white px-6 py-3.5 text-xs font-bold tracking-widest uppercase transition-all duration-300 rounded-lg shadow-md hover:shadow-safety-orange/20 cursor-pointer font-headline-display">
-                            ${isEnglish ? 'Send Another Request' : 'Enviar otra solicitud'}
+                            ${isEnglish ? 'Retry' : 'Reintentar'}
                         </button>
                     </div>
                 `;
-            }, 1800);
+            });
         });
     }
 
@@ -680,6 +837,24 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = '';
         }
     };
+
+    // Global Keydown Esc Event Listener to Close Open Drawers and Modals
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (typeof window.closeAIDrawer === 'function') window.closeAIDrawer();
+            if (typeof window.closeMobileMenu === 'function') window.closeMobileMenu();
+            if (typeof window.closeLegalModal === 'function') window.closeLegalModal();
+        }
+    });
+
+    // Initialize page language state from localStorage or browser preferences
+    let initialLang = localStorage.getItem('lang');
+    if (!initialLang) {
+        const userLanguage = navigator.language || navigator.userLanguage;
+        initialLang = userLanguage && userLanguage.startsWith('en') ? 'en' : 'es';
+    }
+    const isInitialEnglish = (initialLang === 'en');
+    window.applyLanguageState(isInitialEnglish);
 
     initStatsCounter();
 });

@@ -94,6 +94,7 @@ body {
 /* Drawer UI transitions */
 #ai-drawer {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
 /* Navigation scrolled style */
@@ -125,11 +126,18 @@ body {
 .fade-in {
     opacity: 0;
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
 }
 
 .fade-in.visible {
     opacity: 1;
     transform: none;
+}
+
+/* Force select option visibility and styling regardless of OS theme */
+select, select option {
+    background-color: var(--industrial-white) !important;
+    color: var(--deep-navy) !important;
 }
 
 .fade-in.from-bottom {

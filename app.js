@@ -24,16 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 preloaderLogo.classList.remove('opacity-0', 'scale-95');
                 preloaderLogo.classList.add('opacity-100', 'scale-100');
             }
-        }, 800);
+        }, 1200);
 
         // Step 3: Trigger the splash particle reveal (salpicadura)
         setTimeout(() => {
-            if (emitter) {
-                const rect = emitter.getBoundingClientRect();
-                const x = rect.left + rect.width / 2;
-                const y = rect.top + rect.height / 2;
-                
-                // Emitting particles
+            if (preloaderLogo) {
+                // Emitting particles relative to logo wrap for perfect responsive centering
                 const colors = ['#FF6B00', '#051024', '#ff8533', '#25D366', '#00d2ff'];
                 const count = 35; // High particle count for detailed salpicadura
 
@@ -46,8 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     particle.style.width = `${size}px`;
                     particle.style.height = `${size}px`;
                     particle.style.backgroundColor = isOrange ? '#FF6B00' : colors[Math.floor(Math.random() * colors.length)];
-                    particle.style.left = `${x}px`;
-                    particle.style.top = `${y}px`;
+                    
+                    // Position relative to logo wrapper container (perfectly centers on 'O' splash drop)
+                    particle.style.left = '86.5%';
+                    particle.style.top = '41%';
                     
                     // Random destination
                     const angle = Math.random() * Math.PI * 2;
@@ -55,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dx = Math.cos(angle) * velocity;
                     const dy = Math.sin(angle) * velocity;
 
-                    preloader.appendChild(particle);
+                    preloaderLogo.appendChild(particle);
 
                     // Trigger animation
                     requestAnimationFrame(() => {
@@ -66,19 +64,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             }
-        }, 1900); // Trigger right as logo is fully revealed and bar is 100%
+        }, 4900); // Trigger right as logo is fully revealed and bar is 100%
 
         // Step 4: Fade out preloader and enable scrolling
         setTimeout(() => {
             preloader.classList.add('opacity-0');
             preloader.style.pointerEvents = 'none';
             body.style.overflow = '';
-        }, 2800);
+        }, 5800);
 
         // Step 5: Completely remove preloader from DOM
         setTimeout(() => {
             preloader.remove();
-        }, 3800);
+        }, 6800);
     }
     const esLab = document.getElementById('es-label');
     const enLab = document.getElementById('en-label');

@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Step 2: Fade-in and scale up the logo elegantly
         setTimeout(() => {
             if (preloaderLogo) {
-                preloaderLogo.classList.remove('opacity-0', 'scale-95');
-                preloaderLogo.classList.add('opacity-100', 'scale-100');
+                preloaderLogo.style.opacity = '1';
+                preloaderLogo.style.transform = 'scale(1)';
             }
         }, 1200);
 
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Step 4: Fade out preloader and enable scrolling
         setTimeout(() => {
-            preloader.classList.add('opacity-0');
+            preloader.style.opacity = '0';
             preloader.style.pointerEvents = 'none';
             body.style.overflow = '';
         }, 5800);

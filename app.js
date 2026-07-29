@@ -91,20 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const formService = document.getElementById('form-service');
 
         if (formService) {
-            const options = formService.options;
-            if (isEnglish) {
-                options[0].text = "Select Service";
-                options[1].text = "Fuels / Hydrocarbons";
-                options[2].text = "Oils / Food Grade Liquids";
-                options[3].text = "Chemicals / Dangerous HazMat";
-                options[4].text = "ISOTanks / General Flatbed";
-            } else {
-                options[0].text = "Seleccione Servicio";
-                options[1].text = "Combustibles / Hidrocarburos";
-                options[2].text = "Aceites / Glucosa Grado Alimenticio";
-                options[3].text = "Químicos / Ácidos Corrosivos (HazMat)";
-                options[4].text = "Isocontenedores / Plataformas";
-            }
+            Array.from(formService.options).forEach(opt => {
+                const text = isEnglish ? opt.getAttribute('data-en') : opt.getAttribute('data-es');
+                if (text) {
+                    opt.text = text;
+                }
+            });
         }
     }
 

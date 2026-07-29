@@ -366,3 +366,14 @@ h1 {
     }
 }
 
+/* Force select option dropdown text visibility (Deep Navy on White background) */
+#form-service,
+#form-service option {
+    color: #051024 !important;
+    background-color: #ffffff !important;
+}
+
+#form-service:focus {
+    border-color: #FF6B00 !important;
+    outline: none !important;
+}

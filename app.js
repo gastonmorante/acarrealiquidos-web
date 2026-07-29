@@ -449,7 +449,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cleanInput.includes('certif') || cleanInput.includes('sct') || cleanInput.includes('iso')) {
                 reply = "Acarrealíquidos is fully certified by the <strong>SCT</strong> (Secretaría de Infraestructura, Comunicaciones y Transportes) for HazMat transport (Class 3, 8, and 9). We operate under <strong>ISO 9001:2015</strong> quality guidelines and follow strict safety procedures.";
             } else if (cleanInput.includes('quote') || cleanInput.includes('cost') || cleanInput.includes('price') || cleanInput.includes('cotiz')) {
-                reply = "To receive an official technical quote, please complete the calculator on our website or submit the contact form with your specific origin, destination, and product sheet. You can also chat directly with our sales team via WhatsApp by clicking the button in the footer!";
+                reply = "To receive a formal technical quote, please submit the quote request form at the bottom of this page. Our logistics dispatch team will contact you within the next 2 hours. You can also click the WhatsApp button in the footer to chat directly with us!";
             } else if (cleanInput.includes('fleet') || cleanInput.includes('truck') || cleanInput.includes('capacity') || cleanInput.includes('tank')) {
                 reply = "Our fleet contains carbon steel, stainless steel (316L), and insulated food-grade tankers. Capacities range from 25,000 to 45,000 Liters, with modern double-trailer (full) and single configurations monitored 24/7 via GPS.";
             } else if (cleanInput.includes('time') || cleanInput.includes('speed') || cleanInput.includes('urgent')) {
@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (cleanInput.includes('certif') || cleanInput.includes('sct') || cleanInput.includes('iso') || cleanInput.includes('permis')) {
                 reply = "Acarrealíquidos cuenta con todas las certificaciones de la <strong>SCT</strong> (Secretaría de Infraestructura, Comunicaciones y Transportes) para el transporte de materiales peligrosos (HazMat clases 3, 8 y 9). Operamos bajo directrices de calidad <strong>ISO 9001:2015</strong>.";
             } else if (cleanInput.includes('cotiz') || cleanInput.includes('costo') || cleanInput.includes('precio') || cleanInput.includes('presupuesto')) {
-                reply = "Para obtener una cotización formal, le recomendamos usar nuestra calculadora de tarifas en la sección superior, o llenar el formulario de contacto con la ficha técnica del líquido. También puede contactar directamente a ventas por WhatsApp en el botón del footer.";
+                reply = "Para recibir una cotización técnica formal, le sugerimos completar el formulario de solicitud al final de esta página. Nuestro equipo de tráfico le responderá en menos de 2 horas con una propuesta formal. También puede contactar directamente a ventas por WhatsApp usando el botón en el footer.";
             } else if (cleanInput.includes('flota') || cleanInput.includes('tanque') || cleanInput.includes('capacidad') || cleanInput.includes('camion')) {
                 reply = "Contamos con autotanques de acero inoxidable (316L), grado alimenticio térmico y acero al carbón. Capacidades desde 25,000 hasta 45,000 Litros, configurados en sencillo y full, monitoreados 24/7 mediante satélite.";
             } else if (cleanInput.includes('tiempo') || cleanInput.includes('entrega') || cleanInput.includes('urgente') || cleanInput.includes('ruta')) {

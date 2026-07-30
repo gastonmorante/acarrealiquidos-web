@@ -63,13 +63,27 @@ document.addEventListener('DOMContentLoaded', () => {
             if (canvas) {
                 const ctx = canvas.getContext('2d');
                 if (ctx) {
-                    let width = canvas.width = window.innerWidth || 1024;
-                    let height = canvas.height = window.innerHeight || 768;
+                    let width = window.innerWidth || 1024;
+                    let height = window.innerHeight || 768;
+                    
+                    // High-DPI (HD / Retina) Canvas scaling support
+                    const dpr = window.devicePixelRatio || 1;
+                    canvas.width = width * dpr;
+                    canvas.height = height * dpr;
+                    canvas.style.width = width + 'px';
+                    canvas.style.height = height + 'px';
+                    ctx.scale(dpr, dpr);
 
                     window.addEventListener('resize', () => {
                         if (canvas.parentNode) {
-                            width = canvas.width = window.innerWidth || 1024;
-                            height = canvas.height = window.innerHeight || 768;
+                            width = window.innerWidth || 1024;
+                            height = window.innerHeight || 768;
+                            const dprResized = window.devicePixelRatio || 1;
+                            canvas.width = width * dprResized;
+                            canvas.height = height * dprResized;
+                            canvas.style.width = width + 'px';
+                            canvas.style.height = height + 'px';
+                            ctx.scale(dprResized, dprResized);
                         }
                     });
 
@@ -100,7 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                             // Reduce particle count on mobile for target 60fps performance
                             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                            const step = isMobile ? 8 : 4;
+                            const dpr = window.devicePixelRatio || 1;
+                            const step = isMobile ? 8 : (dpr > 1.5 ? 3 : 4);
                             
                             const cx = offscreen.width / 2;
                             const cy = offscreen.height / 2;
@@ -159,13 +174,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (ascendingSpark.active) {
                             ascendingSpark.y += ascendingSpark.vy;
                             
-                            // Spark Core Glow
+                            // Spark Core Glow (HD Volumetric)
                             ctx.save();
                             ctx.beginPath();
                             ctx.arc(ascendingSpark.x, ascendingSpark.y, ascendingSpark.radius, 0, Math.PI * 2);
                             ctx.fillStyle = '#FFA500';
-                            ctx.shadowColor = '#FF6B00';
-                            ctx.shadowBlur = 20;
+                            ctx.fill();
+                            
+                            ctx.globalAlpha = 0.35;
+                            ctx.beginPath();
+                            ctx.arc(ascendingSpark.x, ascendingSpark.y, ascendingSpark.radius * 3.5, 0, Math.PI * 2);
+                            ctx.fillStyle = '#FF6B00';
                             ctx.fill();
                             ctx.restore();
 
@@ -248,13 +267,22 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (p.alpha <= 0) continue;
 
                                 ctx.save();
-                                ctx.globalAlpha = p.alpha * (0.6 + Math.random() * 0.4);
+                                const currentAlpha = p.alpha * (0.6 + Math.random() * 0.4);
+                                ctx.globalAlpha = currentAlpha;
+                                
+                                // HD Core Particle
                                 ctx.beginPath();
                                 ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
                                 ctx.fillStyle = p.color;
-                                ctx.shadowColor = p.glowColor;
-                                ctx.shadowBlur = p.stage === 'burn' ? 8 : 2;
                                 ctx.fill();
+                                
+                                // HD Volumetric Glow Aura (significantly faster and sharper than shadowBlur!)
+                                ctx.globalAlpha = currentAlpha * 0.3;
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, p.radius * (p.stage === 'burn' ? 4 : 2), 0, Math.PI * 2);
+                                ctx.fillStyle = p.glowColor;
+                                ctx.fill();
+                                
                                 ctx.restore();
                             }
                         }

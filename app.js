@@ -30,12 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (preloader) {
+        // Configured to run every single time the page is loaded, bypassing session check
         let isSeen = false;
-        try {
-            isSeen = sessionStorage.getItem('intro_seen') === 'true';
-        } catch (e) {
-            console.warn("sessionStorage block:", e);
-        }
 
         if (isSeen) {
             preloader.remove();
@@ -141,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         x: width / 2,
                         y: height,
                         targetY: height / 2,
-                        vy: Math.min(-4, - (height * 0.5) / 72), // reaches target in exactly 1.2s at 60fps (72 frames)
+                        vy: Math.min(-2.5, - (height * 0.5) / 120), // reaches target in exactly 2.0s at 60fps (120 frames)
                         radius: 5,
                         active: true
                     };
@@ -236,8 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                     p.x = p.targetX + (Math.random() - 0.5) * 1.5;
                                     p.y = p.targetY + (Math.random() - 0.5) * 1.5;
                                     
-                                    // Drift away starting at 2.8s (~168 frames)
-                                    if (frame > 168) {
+                                    // Drift away starting at 4.5s (~270 frames total)
+                                    if (frame > 270) {
                                         p.stage = 'drift';
                                         p.vx = (Math.random() - 0.5) * 1.5;
                                         p.vy = Math.random() * 0.6 + 0.4;
@@ -320,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         });
 
-                        // 2.8s: Brand Logo and subtitle emerge
+                        // 4.5s: Brand Logo and subtitle emerge (2.5s delay after collision at 2.0s)
                         setTimeout(() => {
                             const logoWrap = document.getElementById('preloader-logo-wrap');
                             const subtitle = document.getElementById('preloader-subtitle');
@@ -348,15 +344,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                     sweep.style.transform = 'translateX(100%) skewX(-25deg)';
                                 }, 400);
                             }
-                        }, 1600); // 1.2s ascent + 1.6s explosion = 2.8s
+                        }, 2500); // 2.0s ascent + 2.5s explosion = 4.5s
 
-                        // 4.2s: Heat distortion reveal exit sequence
+                        // 6.5s: Heat distortion reveal exit sequence (4.5s delay after collision at 2.0s)
                         setTimeout(() => {
                             if (preloader) {
                                 preloader.classList.add('heat-exit');
                                 preloader.style.pointerEvents = 'none';
                             }
-                        }, 3000); // 1.2s ascent + 3.0s = 4.2s
+                        }, 4500); // 2.0s ascent + 4.5s = 6.5s
                     }
 
                     // Bind animation loop to trigger immediately if DOM is ready
@@ -368,8 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Absolute hard timeout limit at 5.0 seconds
-            setTimeout(endPreloader, 5000);
+            // Absolute hard timeout limit at 8.0 seconds
+            setTimeout(endPreloader, 8000);
         }
     }
     const esLab = document.getElementById('es-label');

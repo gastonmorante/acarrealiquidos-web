@@ -788,6 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             appendUserMessage(text);
             aiChatInput.value = '';
+            aiChatInput.rows = 1; // reset size
 
             setTimeout(() => {
                 generateAIResponse(text);
@@ -795,11 +796,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (aiChatInput) {
+        // Handle enter key to submit chat and shift+enter to add new lines
+        aiChatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                aiChatForm.dispatchEvent(new Event('submit', { cancelable: true }));
+            }
+        });
+
+        // Auto-grow textarea rows depending on content up to 4 lines max
+        aiChatInput.addEventListener('input', () => {
+            const lineCount = aiChatInput.value.split('\n').length;
+            aiChatInput.rows = Math.min(4, Math.max(1, lineCount));
+        });
+    }
+
     function appendUserMessage(text) {
         const msgDiv = document.createElement('div');
-        msgDiv.className = "flex justify-end mb-4";
+        msgDiv.className = "flex justify-end mb-4 animate-fade-in";
+        // Preserve format of multi-line text submissions by using whitespace-pre-wrap style
         msgDiv.innerHTML = `
-            <div class="bg-safety-orange text-white text-xs py-2 px-3 rounded-lg rounded-tr-none max-w-[85%] font-body-md shadow-sm">
+            <div class="bg-safety-orange text-white text-xs py-2.5 px-3.5 rounded-lg rounded-tr-none max-w-[85%] font-body-md shadow-sm whitespace-pre-wrap">
                 ${escapeHTML(text)}
             </div>
         `;
@@ -809,14 +827,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function appendAIMessage(text) {
         const msgDiv = document.createElement('div');
-        msgDiv.className = "flex justify-start mb-4";
+        msgDiv.className = "flex justify-start mb-4 animate-fade-in";
+        // Convert double-newlines to paragraph elements and preserve formatting
+        const formattedText = text.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
         msgDiv.innerHTML = `
             <div class="flex items-start gap-2 max-w-[85%]">
                 <div class="w-6 h-6 rounded-full bg-deep-navy border border-safety-orange/50 flex items-center justify-center shrink-0">
                     <span class="material-symbols-outlined text-[14px] text-safety-orange">support_agent</span>
                 </div>
-                <div class="bg-gray-100 text-deep-navy text-xs py-2 px-3 rounded-lg rounded-tl-none font-body-md shadow-sm">
-                    ${text}
+                <div class="bg-gray-100 text-deep-navy text-xs py-2.5 px-3.5 rounded-lg rounded-tl-none font-body-md shadow-sm leading-relaxed whitespace-normal">
+                    ${formattedText}
                 </div>
             </div>
         `;
@@ -825,7 +845,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function scrollToBottom() {
-        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        setTimeout(() => {
+            if (aiChatMessages) {
+                aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+                if (aiChatMessages.lastElementChild) {
+                    aiChatMessages.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
+        }, 50);
     }
 
     function escapeHTML(str) {

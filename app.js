@@ -15,10 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         sessionStorage.setItem('intro_seen', 'true');
         body.style.overflow = '';
         if (preloader) {
-            preloader.classList.add('heat-exit');
-            setTimeout(() => {
+            if (preloader.classList.contains('heat-exit')) {
                 preloader.remove();
-            }, 820);
+            } else {
+                preloader.classList.add('heat-exit');
+                setTimeout(() => {
+                    preloader.remove();
+                }, 820);
+            }
         }
     }
 
@@ -307,8 +311,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 3000); // 1.2s ascent + 3.0s = 4.2s
             }
 
-            // Bind animation loop to load trigger
-            if (document.readyState === 'complete') {
+            // Bind animation loop to trigger immediately if DOM is ready
+            if (document.readyState !== 'loading') {
                 animate();
             } else {
                 window.addEventListener('load', animate);
@@ -317,7 +321,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // Absolute hard timeout limit at 5.0 seconds
             setTimeout(endPreloader, 5000);
         }
-    }
     }
     const esLab = document.getElementById('es-label');
     const enLab = document.getElementById('en-label');

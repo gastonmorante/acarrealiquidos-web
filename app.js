@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
           .to('#preloader-ripple', { opacity: 0, duration: 0.2 }, 1.6)
           .to('#preloader-droplet', { scale: 0, opacity: 0, duration: 0.15 }, 1.4)
           
-          // 1.0s - 2.5s: "45" numbers fade and scale up with pulse aura
+          // 1.0s - 2.5s: "25" numbers fade and scale up with pulse aura
           .to('#preloader-anniversary-num', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1.4)
           .to('#preloader-aura', { opacity: 1, duration: 0.8 }, 1.4)
           
@@ -84,10 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
           // Digital counter container fades in
           .to('#preloader-counter-container', { opacity: 1, duration: 0.4 }, 1.8);
 
-        // Fast counter tick (1984 -> 2029)
-        const countData = { year: 1984 };
+        // Fast counter tick (2001 -> 2026)
+        const countData = { year: 2001 };
         tl.to(countData, {
-            year: 2029,
+            year: 2026,
             duration: 1.2,
             ease: 'power1.out',
             onUpdate: () => {
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 1.8)
 
-          // 2.5s - 3.5s: Morph 45 into Acarrealíquidos logo
+          // 2.5s - 3.5s: Morph 25 into Acarrealíquidos logo
           .to('#preloader-anniversary-num', { scale: 0.5, opacity: 0, filter: 'blur(10px)', duration: 0.5, ease: 'power2.inOut' }, 2.6)
           .to('#preloader-anniversary-label', { opacity: 0, y: -10, duration: 0.4, ease: 'power2.in' }, 2.6)
           .to('#preloader-logo-morph', { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.2)' }, 2.8)
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Translate head title, desc, lang
             document.title = "Acarrealíquidos | Leaders in Specialized Freight & Liquid Transport";
             const metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc) metaDesc.setAttribute('content', 'Liquid logistics leaders with 42 years of experience. Transport of hydrocarbons, oils, and chemicals from Veracruz to all of Mexico. SCT certified safety.');
+            if (metaDesc) metaDesc.setAttribute('content', 'Liquid logistics leaders with 25 years of experience. Transport of hydrocarbons, oils, and chemicals from Veracruz to all of Mexico. SCT certified safety.');
             document.documentElement.setAttribute('lang', 'en');
 
             if (esLab) esLab.classList.replace('text-white', 'text-white/50');
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Translate head title, desc, lang
             document.title = "Acarrealíquidos | Líderes en Transporte Especializado de Carga y Líquidos";
             const metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc) metaDesc.setAttribute('content', 'Líderes en logística de líquidos con 42 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT.');
+            if (metaDesc) metaDesc.setAttribute('content', 'Líderes en logística de líquidos con 25 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT.');
             document.documentElement.setAttribute('lang', 'es');
 
             if (esLab) esLab.classList.replace('text-white/50', 'text-white');
@@ -746,10 +746,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // 2. Identity & Experience
-        if (textLower.includes('quien eres') || textLower.includes('who are you') || textLower.includes('experiencia') || textLower.includes('years') || textLower.includes('experience') || textLower.includes('trayectoria') || textLower.includes('fundad') || textLower.includes('años')) {
+        if (textLower.includes('quien eres') || textLower.includes('who are you') || textLower.includes('experiencia') || textLower.includes('years') || textLower.includes('experience') || textLower.includes('trayectoria') || textLower.includes('fundad') || textLower.includes('años') || textLower.includes('desde cuando') || textLower.includes('desde cuándo') || textLower.includes('since when')) {
+            if (textLower.includes('desde cuando') || textLower.includes('desde cuándo') || textLower.includes('since when')) {
+                return lang === 'en'
+                    ? 'We operate since 2001.'
+                    : 'Operamos desde el año 2001.';
+            }
             return lang === 'en'
-                ? 'I am the Senior Logistics Advisor for Acarrealíquidos S.A. de C.V. We have 42 years of experience (founded in 1984) providing certified, secure transportation of liquids across Mexico.'
-                : 'Soy el Asesor Principal de Logística de Acarrealíquidos S.A. de C.V. Contamos con 42 años de experiencia (fundada en 1984) liderando el autotransporte de líquidos especializados en México.';
+                ? 'I am the Senior Logistics Advisor for Acarrealíquidos S.A. de C.V. We have 25 years of experience (founded in 2001) providing certified, secure transportation of liquids across Mexico.'
+                : 'Soy el Asesor Principal de Logística de Acarrealíquidos S.A. de C.V. Contamos con 25 años de experiencia (fundada en 2001) liderando el autotransporte de líquidos especializados en México.';
         }
 
         // 3. Products carried & protocols
@@ -792,8 +797,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lastUserMsg) {
             if (lastUserMsg === 'experience' && (textLower.includes('how many') || textLower.includes('cuantos') || textLower.includes('cual'))) {
                 return lang === 'en'
-                    ? 'We have 42 years of experience, operating continuously since 1984.'
-                    : 'Tenemos 42 años de experiencia operativa ininterrumpida desde nuestra fundación en 1984.';
+                    ? 'We have 25 years of experience, operating continuously since 2001.'
+                    : 'Tenemos 25 años de experiencia operativa ininterrumpida desde nuestra fundación en 2001.';
             }
             if (lastUserMsg === 'fleet' && (textLower.includes('stainless') || textLower.includes('inoxidable') || textLower.includes('acero'))) {
                 return lang === 'en'

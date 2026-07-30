@@ -166,8 +166,9 @@
 
     <!-- Scripts & Fonts -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@800;900&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <script id="tailwind-config">
         tailwind.config = {
@@ -203,84 +204,95 @@
             bottom: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            background-color: #051024 !important;
             z-index: 99999 !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             justify-content: center !important;
             overflow: hidden !important;
-            transition: opacity 1s ease-out !important;
+            background-color: transparent !important;
         }
-        .preloader-inner-container {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            position: relative !important;
-            width: 100% !important;
+        .shimmer-text {
+            background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,215,0,1) 50%, rgba(255,255,255,0.85) 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: textShimmer 2.5s linear infinite;
         }
-        #preloader-logo-wrap {
-            position: relative !important;
-            width: 85vw !important;
-            max-width: 310px !important;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: all 1s ease-out !important;
-            z-index: 10 !important;
-        }
-        @media (min-width: 768px) {
-            #preloader-logo-wrap {
-                max-width: 480px !important;
-            }
-        }
-        #preloader-logo-wrap img {
-            width: 100% !important;
-            height: auto !important;
-            display: block !important;
-            object-fit: contain !important;
-        }
-        .preloader-bar-bg {
-            width: 128px !important;
-            height: 1px !important;
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            margin-top: 32px !important;
-            border-radius: 9999px !important;
-            overflow: hidden !important;
-            position: relative !important;
-            z-index: 10 !important;
-        }
-        #preloader-bar {
-            position: absolute !important;
-            top: 0 !important;
-            left: 0 !important;
-            height: 100% !important;
-            width: 0;
-            background-color: #FF6B00 !important;
-            transition: width 4.8s cubic-bezier(0.1, 0.8, 0.2, 1) !important;
+        @keyframes textShimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: -200% center; }
         }
     </style>
 </head>
 
 <body class="bg-background text-deep-navy font-body-md antialiased overflow-x-hidden selection:bg-safety-orange selection:text-white">
 
-    <!-- Preloader / Splash Intro -->
-    <div id="preloader">
-        <div class="grain-overlay"></div>
-        <div class="preloader-inner-container">
-            <!-- Glowing background aura -->
-            <div class="absolute w-64 h-64 bg-safety-orange/10 rounded-full blur-3xl animate-pulse"></div>
-            
-            <!-- Logo container -->
-            <div id="preloader-logo-wrap">
-                <img src="./assets/logo.webp" alt="Acarrealíquidos Logo Reveal" data-es-alt="Animación del Logo de Acarrealíquidos" data-en-alt="Acarrealíquidos Logo Animation" class="select-none pointer-events-none filter drop-shadow-[0_0_15px_rgba(255,107,0,0.25)]">
-                <!-- Particle burst/splash emitter reference point -->
-                <div id="splash-emitter" class="absolute w-2 h-2" style="right: 13.5%; top: 41.5%;"></div>
+    <!-- SVG gooey filter for liquid morphing/droplet effect -->
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+        <defs>
+            <filter id="goo-filter">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Cinematic 45th Anniversary Preloader -->
+    <div id="preloader" style="perspective: 1000px; backface-visibility: hidden;">
+        <div class="grain-overlay z-[20]"></div>
+        
+        <!-- Left & Right Gates for Vertical Split Exit -->
+        <div id="preloader-gate-left" class="absolute top-0 left-0 w-1/2 h-full bg-[#020817] z-[10] border-r border-white/5"></div>
+        <div id="preloader-gate-right" class="absolute top-0 right-0 w-1/2 h-full bg-[#020817] z-[10] border-l border-white/5"></div>
+
+        <!-- Skip Intro Button -->
+        <button id="skip-intro-btn" class="absolute top-6 right-6 z-[100] px-4 py-2 border border-white/20 rounded-full text-xs font-label-sm tracking-wider text-white/70 hover:text-white hover:bg-white/10 hover:border-white/40 active:scale-95 transition-all duration-300 pointer-events-auto select-none opacity-0">
+            <span data-es="Saltar Intro" data-en="Skip Intro">Saltar Intro</span>
+        </button>
+
+        <!-- Inner Container containing the elements -->
+        <div class="preloader-inner-container flex flex-col items-center justify-center relative w-full h-full max-w-[800px] px-6 select-none pointer-events-none z-[30]">
+            <!-- Glowing heartbeat aura -->
+            <div id="preloader-aura" class="absolute w-72 h-72 bg-safety-orange/10 rounded-full blur-3xl filter drop-shadow-[0_0_50px_rgba(255,107,0,0.3)] opacity-0 transition-opacity duration-1000"></div>
+
+            <!-- Liquid/Drop & Morphing Area -->
+            <div class="relative w-full h-[240px] flex items-center justify-center" style="filter: url('#goo-filter');">
+                <!-- Golden/Orange Droplet -->
+                <div id="preloader-droplet" class="absolute w-8 h-8 bg-gradient-to-b from-[#FFB800] to-[#FF6B00] rounded-full opacity-0" style="top: -220px;"></div>
+                
+                <!-- Ripples/Splash Target -->
+                <div id="preloader-ripple" class="absolute w-4 h-4 rounded-full border border-[#FFB800] opacity-0 scale-0"></div>
+
+                <!-- Number 45 Splash -->
+                <div id="preloader-anniversary-num" class="absolute text-7xl md:text-8xl font-black font-headline-display tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#FF8C00] to-[#FFD700] opacity-0 scale-75 select-none" style="filter: drop-shadow(0 0 20px rgba(255,107,0,0.4)); font-family: 'Outfit', sans-serif;">
+                    45
+                </div>
+
+                <!-- Acarrealíquidos Logo (morphs from the 45) -->
+                <div id="preloader-logo-morph" class="absolute w-[280px] md:w-[380px] opacity-0 scale-90">
+                    <img src="./assets/logo.webp" alt="Acarrealíquidos Logo" class="w-full h-auto object-contain filter drop-shadow-[0_0_15px_rgba(255,107,0,0.25)]">
+                </div>
             </div>
 
-            <!-- Minimalist line loader -->
-            <div class="preloader-bar-bg">
-                <div id="preloader-bar"></div>
+            <!-- Kinetic Typography Reveal -->
+            <div id="preloader-anniversary-label" class="text-xl md:text-2xl font-bold font-headline-display tracking-[0.15em] text-white/90 uppercase opacity-0 mt-2 select-none relative overflow-hidden" style="font-family: 'Outfit', sans-serif;">
+                <span class="shimmer-text block" data-es="45 AÑOS" data-en="45 YEARS">45 AÑOS</span>
+            </div>
+
+            <!-- Rapid Digital Years Counter -->
+            <div id="preloader-counter-container" class="mt-6 flex flex-col items-center justify-center opacity-0">
+                <span id="preloader-year-counter" class="text-3xl md:text-4xl font-black text-[#FFB800] tracking-wider" style="font-family: monospace;">1984</span>
+                <span id="preloader-tagline" class="text-xs md:text-sm font-label-sm tracking-[0.2em] text-white/50 uppercase mt-4 text-center">
+                    <span data-es="Liderando la ruta del mañana" data-en="Leading the route of tomorrow">Liderando la ruta del mañana</span>
+                </span>
+            </div>
+
+            <!-- Progress Line Indicator at the bottom -->
+            <div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-[240px] h-[2px] bg-white/10 rounded-full overflow-hidden">
+                <div id="preloader-progress-bar" class="w-0 h-full bg-gradient-to-r from-[#FFB800] to-[#FF6B00] rounded-full"></div>
             </div>
         </div>
     </div>

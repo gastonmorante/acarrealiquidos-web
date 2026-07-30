@@ -8,77 +8,104 @@ document.addEventListener('DOMContentLoaded', () => {
     body.style.overflow = 'hidden';
 
     const preloader = document.getElementById('preloader');
-    const preloaderBar = document.getElementById('preloader-bar');
-    const preloaderLogo = document.getElementById('preloader-logo-wrap');
-    const emitter = document.getElementById('splash-emitter');
+    const skipBtn = document.getElementById('skip-intro-btn');
+    const isEnglish = body.classList.contains('lang-en');
+
+    // Handle Skip Intro
+    function endPreloader() {
+        sessionStorage.setItem('intro_seen', 'true');
+        
+        const gateLeft = document.getElementById('preloader-gate-left');
+        const gateRight = document.getElementById('preloader-gate-right');
+        const innerContainer = document.querySelector('.preloader-inner-container');
+        
+        // Safety check to prevent running animations after cleanup
+        gsap.killTweensOf([gateLeft, gateRight, innerContainer, preloader, skipBtn]);
+        
+        const tl = gsap.timeline({
+            onComplete: () => {
+                body.style.overflow = '';
+                if (preloader) preloader.remove();
+            }
+        });
+
+        tl.to(skipBtn, { opacity: 0, duration: 0.2 }, 0)
+          .to(innerContainer, { opacity: 0, filter: 'blur(15px)', scale: 0.95, duration: 0.6, ease: 'power2.inOut' }, 0)
+          .to(gateLeft, { xPercent: -100, duration: 0.8, ease: 'power3.inOut' }, 0.1)
+          .to(gateRight, { xPercent: 100, duration: 0.8, ease: 'power3.inOut' }, 0.1)
+          .to(preloader, { opacity: 0, duration: 0.3 }, 0.6);
+    }
 
     if (preloader) {
-        // Step 1: Start loading line loader
-        setTimeout(() => {
-            if (preloaderBar) preloaderBar.style.width = '100%';
-        }, 100);
+        const isRecurring = sessionStorage.getItem('intro_seen') === 'true';
+        
+        // Show Skip button immediately for recurring users, otherwise delay it
+        if (isRecurring && skipBtn) {
+            skipBtn.style.display = 'block';
+            gsap.to(skipBtn, { opacity: 1, duration: 0.4, delay: 0.2 });
+        } else if (skipBtn) {
+            skipBtn.style.display = 'block';
+            gsap.to(skipBtn, { opacity: 0.6, duration: 0.4, delay: 1.5 });
+        }
 
-        // Step 2: Fade-in and scale up the logo elegantly
-        setTimeout(() => {
-            if (preloaderLogo) {
-                preloaderLogo.style.opacity = '1';
-                preloaderLogo.style.transform = 'scale(1)';
+        if (skipBtn) {
+            skipBtn.addEventListener('click', endPreloader);
+        }
+
+        // Dynamically translate preloader subtitle text
+        const labelSpan = document.querySelector('#preloader-anniversary-label span');
+        if (labelSpan) {
+            labelSpan.textContent = isEnglish ? labelSpan.getAttribute('data-en') : labelSpan.getAttribute('data-es');
+        }
+        
+        // Set up main timeline (not exceeding 4 seconds total)
+        const tl = gsap.timeline({
+            onComplete: endPreloader
+        });
+
+        // 0.0s - 1.0s: Progress line draws at bottom
+        tl.to('#preloader-progress-bar', { width: '100%', duration: 1.0, ease: 'power1.inOut' })
+          
+          // 1.0s - 1.8s: Droplet falls and hits target
+          .to('#preloader-droplet', { opacity: 1, y: 320, duration: 0.6, ease: 'power2.in' }, 0.8)
+          
+          // 1.8s: Ripple splash target triggers
+          .to('#preloader-ripple', { scale: 18, opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.4)
+          .to('#preloader-ripple', { opacity: 0, duration: 0.2 }, 1.6)
+          .to('#preloader-droplet', { scale: 0, opacity: 0, duration: 0.15 }, 1.4)
+          
+          // 1.0s - 2.5s: "45" numbers fade and scale up with pulse aura
+          .to('#preloader-anniversary-num', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1.4)
+          .to('#preloader-aura', { opacity: 1, duration: 0.8 }, 1.4)
+          
+          // Kinetic label slide-up
+          .to('#preloader-anniversary-label', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 1.6)
+          
+          // Digital counter container fades in
+          .to('#preloader-counter-container', { opacity: 1, duration: 0.4 }, 1.8);
+
+        // Fast counter tick (1984 -> 2029)
+        const countData = { year: 1984 };
+        tl.to(countData, {
+            year: 2029,
+            duration: 1.2,
+            ease: 'power1.out',
+            onUpdate: () => {
+                const yearEl = document.getElementById('preloader-year-counter');
+                if (yearEl) yearEl.textContent = Math.floor(countData.year);
             }
-        }, 1200);
+        }, 1.8)
 
-        // Step 3: Trigger the splash particle reveal (salpicadura)
-        setTimeout(() => {
-            const emitter = document.getElementById('splash-emitter');
-            if (emitter) {
-                // Emitting particles directly inside the absolute emitter element
-                // This ensures they align with the visual drop 100% of the time, regardless of parent height or zoom.
-                const colors = ['#FF6B00', '#051024', '#ff8533', '#25D366', '#00d2ff'];
-                const count = 38; // High particle count for detailed salpicadura
-
-                for (let i = 0; i < count; i++) {
-                    const particle = document.createElement('div');
-                    const size = Math.random() * 5 + 3; // Smaller, more elegant size: 3px to 8px
-                    const isOrange = Math.random() > 0.35; // mostly brand safety orange
-                    
-                    particle.className = 'splash-droplet';
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.backgroundColor = isOrange ? '#FF6B00' : colors[Math.floor(Math.random() * colors.length)];
-                    
-                    // Position at the exact center of the absolute emitter div
-                    particle.style.left = '50%';
-                    particle.style.top = '50%';
-                    
-                    // Controlled elegant velocity (lower spread distance to look centered and not scattered)
-                    const angle = Math.random() * Math.PI * 2;
-                    const velocity = Math.random() * 55 + 15; // travel distance
-                    const dx = Math.cos(angle) * velocity;
-                    const dy = Math.sin(angle) * velocity;
-
-                    emitter.appendChild(particle);
-
-                    // Trigger animation
-                    requestAnimationFrame(() => {
-                        setTimeout(() => {
-                            particle.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0)`;
-                            particle.style.opacity = '0';
-                        }, 50);
-                    });
-                }
-            }
-        }, 4900); // Trigger right as logo is fully revealed and bar is 100%
-
-        // Step 4: Fade out preloader and enable scrolling
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            preloader.style.pointerEvents = 'none';
-            body.style.overflow = '';
-        }, 5800);
-
-        // Step 5: Completely remove preloader from DOM
-        setTimeout(() => {
-            preloader.remove();
-        }, 6800);
+          // 2.5s - 3.5s: Morph 45 into Acarrealíquidos logo
+          .to('#preloader-anniversary-num', { scale: 0.5, opacity: 0, filter: 'blur(10px)', duration: 0.5, ease: 'power2.inOut' }, 2.6)
+          .to('#preloader-anniversary-label', { opacity: 0, y: -10, duration: 0.4, ease: 'power2.in' }, 2.6)
+          .to('#preloader-logo-morph', { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.2)' }, 2.8)
+          
+          // 3.5s - 4.0s: Powerful tagline fade-in
+          .to('#preloader-tagline', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 3.2)
+          
+          // Subtle pulse heartbeat to morph logo
+          .to('#preloader-logo-morph', { scale: 1.03, duration: 0.15, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 3.5);
     }
     const esLab = document.getElementById('es-label');
     const enLab = document.getElementById('en-label');

@@ -4,12 +4,12 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
 
 ## Features & Refactoring Logs
 
-### 1. 25th Anniversary Pyrotechnic Preloader (5.0s Cinematic Experience, 2001-2026)
-* **The Ascent (0.0s - 1.2s)**: Set up a full-screen HTML5 `<canvas>` on `z-index: 10000` with a deep midnight navy background. The animation starts with a high-velocity orange spark ascending from the bottom center, leaving a glowing trail with natural canvas motion blur (created using alpha clears).
-* **The Pyrotechnic Blast (1.2s - 2.8s)**: Upon hitting the center, the spark explodes into a massive burst. Sparks scatter outwards, and inside the core, a dense constellation of flickering, incandescent white/gold/orange particles forms the number **"25"** (created by reading pixel coordinates from an offscreen text renderer).
-* **Branding & Legacy (2.8s - 4.2s)**: As the embers start to float and settle downwards, the official logo emerges with a dynamic CSS gradient sheen Light Sweep effect. Elegant trajectory subtitle `"25 AÑOS MOVIENDO EL FUTURO"` (Spanish) or `"25 YEARS MOVING THE FUTURE"` (English) fades in.
-* **The Reveal (4.2s - 5.0s)**: The preloader triggers a GPU-accelerated Heat Distortion scale and blur transition (`.heat-exit`) to blend smoothly into the Hero section without flicker.
-* **Execution & Skips**: The sequence runs on `window.onload` to hide background assets during loading. It uses `sessionStorage` to play only once per tab. A "Skip Intro" button displays after a 1.5s delay to allow immediate bypass.
+### 1. 25th Anniversary Pyrotechnic Preloader (8.0s Cinematic Experience, 2001-2026)
+* **The Ascent (0.0s - 2.0s)**: Set up a full-screen HTML5 `<canvas>` on `z-index: 10000` with a deep midnight navy background. The animation starts with a slower, more anticipation-rich orange spark ascending from the bottom center, leaving a glowing trail.
+* **The Pyrotechnic Blast (2.0s - 4.5s)**: Upon hitting the center, the spark explodes into a massive burst. Embers scatter outwards, and inside the core, a dense constellation of flickering, incandescent white/gold/orange particles forms the number **"25"** (created by reading pixel coordinates from an offscreen text renderer).
+* **Branding & Legacy (4.5s - 6.5s)**: As the embers start to float and settle downwards, the official logo emerges with a dynamic CSS gradient sheen Light Sweep effect. Elegant trajectory subtitle `"25 AÑOS MOVIENDO EL FUTURO"` (Spanish) or `"25 YEARS MOVING THE FUTURE"` (English) fades in.
+* **The Reveal (6.5s - 8.0s)**: The preloader triggers a GPU-accelerated Heat Distortion scale and blur transition (`.heat-exit`) to blend smoothly into the Hero section.
+* **Execution & Skips**: The sequence runs on page load and plays every single time the page is loaded (with storage checks bypassed as requested). A "Skip Intro" button displays after a 1.5s delay to allow immediate bypass.
 
 ### 2. Global Trajectory Alignment (25 Years, Est. 2001)
 * **Hero Content**: Updated Hero text badges and H1 headers to `"25 Años de Excelencia en Logística de Líquidos" / "25 Years of Excellence in Liquid Logistics"`.

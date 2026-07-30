@@ -430,6 +430,19 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             if (aiChatInput) aiChatInput.focus();
         }, 350);
+
+        // Populate dynamic welcome message on open if messages list is empty/default
+        if (aiChatMessages && (aiChatMessages.children.length <= 1 || chatHistory.length === 0)) {
+            aiChatMessages.innerHTML = '';
+            chatHistory.length = 0; // reset memory buffer on clean open
+            const isEnglish = body.classList.contains('lang-en');
+            const welcomeText = isEnglish 
+                ? "Welcome to the Acarrealíquidos Operations Center. I am your expert logistics assistant. Do you wish to check our routes from Veracruz, verify SCT certifications, or request a technical quote?"
+                : "Bienvenido a la Central de Operaciones de Acarrealíquidos. Soy su asistente experto en logística especializada. ¿Desea consultar nuestras rutas desde Veracruz, verificar certificaciones SCT o solicitar una cotización técnica?";
+            
+            chatHistory.push({ role: 'assistant', content: welcomeText });
+            appendAIMessage(welcomeText);
+        }
     }
 
     window.closeAIDrawer = function() {
@@ -505,42 +518,218 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     }
 
-    // Intelligent responses
-    function generateAIResponse(userInput) {
-        const isEnglish = body.classList.contains('lang-en');
-        const cleanInput = userInput.toLowerCase();
-        let reply = '';
+    // Stateful Memory Buffer & Lead Gen State Machine for AI Logistics Concierge
+    const chatHistory = [];
+    let leadGenState = 'idle'; // 'idle', 'waiting_product', 'waiting_route', 'waiting_volume'
+    let leadData = {
+        product: '',
+        route: '',
+        volume: ''
+    };
 
-        if (isEnglish) {
-            if (cleanInput.includes('certif') || cleanInput.includes('sct') || cleanInput.includes('iso')) {
-                reply = "Acarrealíquidos is fully certified by the <strong>SCT</strong> (Secretaría de Infraestructura, Comunicaciones y Transportes) for HazMat transport (Class 3, 8, and 9). We operate under <strong>ISO 9001:2015</strong> quality guidelines and follow strict safety procedures.";
-            } else if (cleanInput.includes('quote') || cleanInput.includes('cost') || cleanInput.includes('price') || cleanInput.includes('cotiz')) {
-                reply = "To receive a formal technical quote, please submit the quote request form at the bottom of this page. Our logistics dispatch team will contact you within the next 2 hours. You can also click the WhatsApp button in the footer to chat directly with us!";
-            } else if (cleanInput.includes('fleet') || cleanInput.includes('truck') || cleanInput.includes('capacity') || cleanInput.includes('tank')) {
-                reply = "Our fleet contains carbon steel, stainless steel (316L), and insulated food-grade tankers. Capacities range from 25,000 to 45,000 Liters, with modern double-trailer (full) and single configurations monitored 24/7 via GPS.";
-            } else if (cleanInput.includes('time') || cleanInput.includes('speed') || cleanInput.includes('urgent')) {
-                reply = "For standard routes (e.g., Veracruz to Central Mexico), transit time is 12 to 24 hours. All deliveries feature double drivers (on request) and real-time tracking checkpoints for safety and efficiency.";
-            } else if (cleanInput.includes('maintenance') || cleanInput.includes('workshop') || cleanInput.includes('safety') || cleanInput.includes('accident')) {
-                reply = "Our operations are backed by strict preventive maintenance in our own workshops and full broad-coverage insurance policies (including environmental coverage). Our operators go through rigorous checks, maintaining a zero accident record.";
-            } else {
-                reply = "Thank you for contacting Acarrealíquidos dispatcher. We specialize in specialized logistics for hydrocarbons, chemicals, and food-grade liquids. How can I help you today? You can ask about our fleet, SCT certifications, or transit times.";
-            }
-        } else {
-            // Spanish
-            if (cleanInput.includes('certif') || cleanInput.includes('sct') || cleanInput.includes('iso') || cleanInput.includes('permis')) {
-                reply = "Acarrealíquidos cuenta con todas las certificaciones de la <strong>SCT</strong> (Secretaría de Infraestructura, Comunicaciones y Transportes) para el transporte de materiales peligrosos (HazMat clases 3, 8 y 9). Operamos bajo directrices de calidad <strong>ISO 9001:2015</strong>.";
-            } else if (cleanInput.includes('cotiz') || cleanInput.includes('costo') || cleanInput.includes('precio') || cleanInput.includes('presupuesto')) {
-                reply = "Para recibir una cotización técnica formal, le sugerimos completar el formulario de solicitud al final de esta página. Nuestro equipo de tráfico le responderá en menos de 2 horas con una propuesta formal. También puede contactar directamente a ventas por WhatsApp usando el botón en el footer.";
-            } else if (cleanInput.includes('flota') || cleanInput.includes('tanque') || cleanInput.includes('capacidad') || cleanInput.includes('camion')) {
-                reply = "Contamos con autotanques de acero inoxidable (316L), grado alimenticio térmico y acero al carbón. Capacidades desde 25,000 hasta 45,000 Litros, configurados en sencillo y full, monitoreados 24/7 mediante satélite.";
-            } else if (cleanInput.includes('tiempo') || cleanInput.includes('entrega') || cleanInput.includes('urgente') || cleanInput.includes('ruta')) {
-                reply = "Para rutas recurrentes (ej. Veracruz a la Ciudad de México y zona del Bajío), el tiempo estimado es de 12 a 24 horas. Todos los servicios incluyen operador certificado y reporte de posición en tiempo real.";
-            } else if (cleanInput.includes('mantenimiento') || cleanInput.includes('taller') || cleanInput.includes('seguridad') || cleanInput.includes('siniestr')) {
-                reply = "Nuestras operaciones se respaldan en un riguroso programa de mantenimiento preventivo en talleres propios y pólizas de cobertura amplia con responsabilidad ecológica. La rigurosa selección de operadores nos permite mantener un récord de siniestralidad casi nulo.";
-            } else {
-                reply = "Gracias por escribir al despacho automatizado de Acarrealíquidos. Nos especializamos en la logística segura de hidrocarburos, aceites y químicos. ¿En qué puedo ayudarle? Puede preguntar por nuestra flota, permisos SCT o tiempos de entrega.";
+    function detectLanguage(text) {
+        const textLower = text.toLowerCase();
+        const enWords = ['hi', 'hello', 'how', 'what', 'where', 'who', 'experience', 'years', 'fleet', 'quote', 'carry', 'yes', 'no', 'thanks', 'thank you', 'acid', 'fuel', 'oil', 'chemical', 'route', 'destination', 'origin', 'please', 'certif', 'sct', 'cofepris'];
+        const esWords = ['hola', 'como', 'que', 'donde', 'quien', 'experiencia', 'años', 'flota', 'cotiz', 'lleva', 'transpor', 'si', 'no', 'gracias', 'acido', 'combust', 'aceite', 'quimic', 'ruta', 'destino', 'origen', 'por favor', 'certif', 'sct', 'cofepris'];
+        let enCount = 0;
+        let esCount = 0;
+        enWords.forEach(w => {
+            if (textLower.includes(w)) enCount++;
+        });
+        esWords.forEach(w => {
+            if (textLower.includes(w)) esCount++;
+        });
+        if (enCount > esCount) return 'en';
+        if (esCount > enCount) return 'es';
+        return body.classList.contains('lang-en') ? 'en' : 'es';
+    }
+
+    function detectSeparateIntent(textLower) {
+        if (textLower.includes('certif') || textLower.includes('sct') || textLower.includes('cre')) return 'certifications';
+        if (textLower.includes('flota') || textLower.includes('fleet') || textLower.includes('tanque')) return 'fleet';
+        if (textLower.includes('ruta') || textLower.includes('route') || textLower.includes('veracruz')) return 'routes';
+        return null;
+    }
+
+    function getSeparateIntentAnswer(intent, lang) {
+        if (intent === 'certifications') {
+            return lang === 'en'
+                ? 'We hold full SCT HazMat certifications, CRE approvals for fuels, and COFEPRIS wash records for food grade.'
+                : 'Contamos con permisos SCT para HazMat, CRE para hidrocarburos y certificación COFEPRIS de sanitización de tanques.';
+        }
+        if (intent === 'fleet') {
+            return lang === 'en'
+                ? 'Our fleet averages 5 years of age, featuring 316L stainless steel and food-grade thermal tankers.'
+                : 'Nuestra flota tiene una edad promedio de 5 años, con autotanques de acero inoxidable 316L y térmicos grado alimenticio.';
+        }
+        if (intent === 'routes') {
+            return lang === 'en'
+                ? 'We cover national routes departing from our Veracruz hub to CDMX, Bajío, and Monterrey.'
+                : 'Cubrimos rutas a nivel nacional desde Amatlán de los Reyes, Veracruz, hacia CDMX, Bajío y Monterrey.';
+        }
+        return '';
+    }
+
+    function getLeadGenPrompt(state, lang) {
+        if (state === 'waiting_product') {
+            return lang === 'en' ? 'What type of liquid product do you need to transport?' : '¿Qué tipo de producto líquido desea mover?';
+        }
+        if (state === 'waiting_route') {
+            return lang === 'en' ? 'What is the transport route (Origin and Destination)?' : '¿Cuál es la ruta de transporte (Origen y Destino)?';
+        }
+        if (state === 'waiting_volume') {
+            return lang === 'en' ? 'What volume or travel frequency do you estimate?' : '¿Qué volumen o frecuencia de viajes estima?';
+        }
+        return '';
+    }
+
+    function getLastUserMessageSubject() {
+        for (let i = chatHistory.length - 1; i >= 0; i--) {
+            const msg = chatHistory[i];
+            if (msg.role === 'user') {
+                const content = msg.content.toLowerCase();
+                if (content.includes('experi') || content.includes('años') || content.includes('trayector') || content.includes('years') || content.includes('who are you')) return 'experience';
+                if (content.includes('flota') || content.includes('fleet') || content.includes('tanque') || content.includes('capacidad')) return 'fleet';
+                if (content.includes('certif') || content.includes('sct') || content.includes('cre') || content.includes('cofepris')) return 'certifications';
             }
         }
+        return null;
+    }
+
+    function computeNLPResponse(userInput, lang) {
+        const textLower = userInput.toLowerCase();
+
+        // Check if user is in the middle of lead-gen
+        if (leadGenState !== 'idle') {
+            const separateIntent = detectSeparateIntent(textLower);
+            if (separateIntent) {
+                const answer = getSeparateIntentAnswer(separateIntent, lang);
+                const reminder = getLeadGenPrompt(leadGenState, lang);
+                return `${answer}\n\n${lang === 'en' ? 'Continuing with your quote: ' : 'Continuando con su cotización: '}${reminder}`;
+            }
+
+            if (leadGenState === 'waiting_product') {
+                leadData.product = userInput;
+                leadGenState = 'waiting_route';
+                return lang === 'en' 
+                    ? 'Got it. What is the transport route? Please specify both Origin and Destination cities.'
+                    : 'Perfecto. ¿Cuál es la ruta de transporte? Por favor especifique la ciudad de Origen y de Destino.';
+            } else if (leadGenState === 'waiting_route') {
+                leadData.route = userInput;
+                leadGenState = 'waiting_volume';
+                return lang === 'en'
+                    ? 'Understood. Finally, what volume (e.g., 30,000 liters) or travel frequency do you estimate?'
+                    : 'Entendido. Por último, ¿qué volumen aproximado (ej. 30,000 litros) o frecuencia de viajes estima?';
+            } else if (leadGenState === 'waiting_volume') {
+                leadData.volume = userInput;
+                leadGenState = 'idle';
+                const p = leadData.product;
+                const r = leadData.route;
+                const v = leadData.volume;
+                leadData = { product: '', route: '', volume: '' };
+                return lang === 'en'
+                    ? `Excellent! I have recorded your requirements:\n- **Liquid Product**: ${p}\n- **Route**: ${r}\n- **Volume/Frequency**: ${v}\n\nOur logistics team in Veracruz will analyze this. Please submit the contact form at the bottom of the page or click WhatsApp so we can send you the official commercial proposal!`
+                    : `¡Excelente! He registrado los detalles de su cotización:\n- **Producto**: ${p}\n- **Ruta**: ${r}\n- **Volumen/Frecuencia**: ${v}\n\nNuestro equipo comercial de Veracruz analizará la viabilidad operativa. Por favor complete el formulario de contacto al final de la página o presione el botón de WhatsApp para enviarle la cotización formal.`;
+            }
+        }
+
+        // Check main intents
+        
+        // 1. Quote intent
+        if (textLower.includes('cotiz') || textLower.includes('quote') || textLower.includes('precio') || textLower.includes('costo') || textLower.includes('price') || textLower.includes('tarifa') || textLower.includes('presupuesto')) {
+            leadGenState = 'waiting_product';
+            return lang === 'en'
+                ? 'I can help you build a technical quote immediately. First: What type of liquid product do you need to transport?'
+                : 'Con gusto le ayudo a generar una cotización. Primero: ¿Qué tipo de producto líquido desea mover?';
+        }
+
+        // 2. Identity & Experience
+        if (textLower.includes('quien eres') || textLower.includes('who are you') || textLower.includes('experiencia') || textLower.includes('years') || textLower.includes('experience') || textLower.includes('trayectoria') || textLower.includes('fundad') || textLower.includes('años')) {
+            return lang === 'en'
+                ? 'I am the Senior Logistics Advisor for Acarrealíquidos S.A. de C.V. We have 42 years of experience (founded in 1984) providing certified, secure transportation of liquids across Mexico.'
+                : 'Soy el Asesor Principal de Logística de Acarrealíquidos S.A. de C.V. Contamos con 42 años de experiencia (fundada en 1984) liderando el autotransporte de líquidos especializados en México.';
+        }
+
+        // 3. Products carried & protocols
+        if (textLower.includes('que llevan') || textLower.includes('que transportan') || contentContainsAny(textLower, ['load', 'carry', 'productos', 'servicio', 'combust', 'quimic', 'aliment'])) {
+            return lang === 'en'
+                ? 'We transport specialized liquids under rigorous safety protocols:\n- **Hydrocarbons/Fuels**: Transported under SCT and CRE permits using Betts pressure-relief safety valves and HazMat certified operators.\n- **Food Grade**: Vegetable oils, lard, and glucose in thermal tanks with COFEPRIS-certified sanitary washing.\n- **Chemicals/Acids**: Safely transported in 316L stainless steel tankers with internal lining for corrosive substances.'
+                : 'Transportamos líquidos especializados bajo estrictas medidas de seguridad:\n- **Hidrocarburos y Combustibles**: Operados bajo permisos de SCT y CRE con autotanques equipados con válvulas Betts y operadores con licencia federal HazMat.\n- **Grado Alimenticio**: Aceites vegetales y glucosa en tanques térmicos aislados con lavado sanitario certificado por COFEPRIS.\n- **Químicos Peligrosos**: Ácidos y corrosivos manejados en autotanques de acero inoxidable 316L con recubrimiento protector interno.';
+        }
+
+        // 4. Certifications & Permits
+        if (textLower.includes('certif') || textLower.includes('permis') || textLower.includes('sct') || textLower.includes('cre') || textLower.includes('cofepris') || textLower.includes('iso') || textLower.includes('norma')) {
+            return lang === 'en'
+                ? 'We hold complete certifications to guarantee regulatory compliance:\n- **SCT permits** for HazMat classes 3, 8, and 9.\n- **CRE authorization** for oil and fuel shipping.\n- **COFEPRIS sanitization certs** for food-grade carriers.\n- Operational compliance under NOM-012 (weights) and NOM-035 (technical safety conditions).'
+                : 'Contamos con certificaciones oficiales completas:\n- **Permisos SCT** para materiales peligrosos Clase 3, 8 y 9.\n- **Autorizaciones de la CRE** para transporte de hidrocarburos.\n- **Certificado COFEPRIS** de lavado y sanitización sanitaria para grado alimenticio.\n- Cumplimiento estricto con las normas oficiales NOM-012 y NOM-035.';
+        }
+
+        // 5. Fleet / Tankers
+        if (textLower.includes('flota') || textLower.includes('flotilla') || textLower.includes('capacidad') || textLower.includes('tanque') || textLower.includes('fleet') || textLower.includes('truck') || textLower.includes('tank')) {
+            return lang === 'en'
+                ? 'Our modern fleet has an average age of 5 years. It features tractor trucks with GPS tracking and SAF telemetry, pulling single or full (double-trailer) stainless steel (316L) or thermal food-grade tankers. Capacities range from 25,000 to 45,000 liters.'
+                : 'Nuestra flota moderna tiene una edad promedio de 5 años. Contamos con tractocamiones con GPS 24/7 y telemetría SAF, operando configuraciones sencillas o full (doble remolque). Los autotanques son de acero inoxidable 316L o grado alimenticio térmico, con capacidades de 25,000 a 45,000 litros.';
+        }
+
+        // 6. Routes & Veracruz
+        if (textLower.includes('ruta') || textLower.includes('veracruz') || textLower.includes('cobertura') || textLower.includes('coverage') || textLower.includes('route') || textLower.includes('amatlan') || textLower.includes('monterrey')) {
+            return lang === 'en'
+                ? 'Our headquarters and main dispatch yard are in Amatlán de los Reyes, Veracruz, the premier cargo hub in southeast Mexico. We provide national coverage, delivering loads to Mexico City, the Bajío area, Guadalajara, and Monterrey.'
+                : 'Nuestra base operativa central está en Amatlán de los Reyes, Veracruz, el nodo de autotransporte más importante del sureste de México. Ofrecemos cobertura nacional completa a destinos como CDMX, Bajío, Guadalajara y Monterrey.';
+        }
+
+        // 7. Greet
+        if (textLower.includes('hola') || textLower.includes('hello') || textLower.includes('hi') || textLower.includes('buenos') || textLower.includes('buenas') || textLower.includes('tardes') || textLower.includes('dias')) {
+            return lang === 'en'
+                ? 'Hello! How can I assist you with your liquid transport logistics today?'
+                : '¡Hola! ¿En qué puedo ayudarle hoy con la logística de sus transportes de líquidos?';
+        }
+
+        // 8. Follow-up heuristics based on chat history
+        const lastUserMsg = getLastUserMessageSubject();
+        if (lastUserMsg) {
+            if (lastUserMsg === 'experience' && (textLower.includes('how many') || textLower.includes('cuantos') || textLower.includes('cual'))) {
+                return lang === 'en'
+                    ? 'We have 42 years of experience, operating continuously since 1984.'
+                    : 'Tenemos 42 años de experiencia operativa ininterrumpida desde nuestra fundación en 1984.';
+            }
+            if (lastUserMsg === 'fleet' && (textLower.includes('stainless') || textLower.includes('inoxidable') || textLower.includes('acero'))) {
+                return lang === 'en'
+                    ? 'Yes, our chemical and hydrocarbon fleet is built from high-grade 316L stainless steel.'
+                    : 'Es correcto. Toda nuestra flota de químicos e hidrocarburos está construida en acero inoxidable de grado 316L.';
+            }
+            if (lastUserMsg === 'certifications' && (textLower.includes('hazmat') || textLower.includes('peligros'))) {
+                return lang === 'en'
+                    ? 'Yes, our operators hold federal licenses and we are fully certified for HazMat Class 3 (fuels), Class 8 (corrosives), and Class 9.'
+                    : 'Sí, contamos con licencias federales de conductor y certificación SCT para residuos y materiales peligrosos Clase 3 (combustibles), Clase 8 (corrosivos) y Clase 9.';
+            }
+        }
+
+        // Default fallback
+        return lang === 'en'
+            ? 'Thank you for your message. As your Logistics Advisor, I can provide details on our fleet capacities, SCT/COFEPRIS certifications, routes from Veracruz, or prepare a quote. What would you like to verify?'
+            : 'Gracias por su consulta. Como su Asesor de Logística, puedo brindarle detalles sobre nuestras capacidades de flota, certificaciones SCT y COFEPRIS, rutas desde Veracruz o iniciar una cotización técnica. ¿Qué desea consultar?';
+    }
+
+    function contentContainsAny(str, words) {
+        return words.some(w => str.includes(w));
+    }
+
+    // Intelligent responses
+    function generateAIResponse(userInput) {
+        const cleanInput = userInput.trim();
+        if (!cleanInput) return;
+
+        const lang = detectLanguage(cleanInput);
+        
+        // Push user message to history buffer
+        chatHistory.push({ role: 'user', content: cleanInput });
+
+        // Get computed response from NLP State Machine
+        const reply = computeNLPResponse(cleanInput, lang);
+
+        // Push assistant response to history buffer
+        chatHistory.push({ role: 'assistant', content: reply });
 
         appendAIMessage(reply);
     }

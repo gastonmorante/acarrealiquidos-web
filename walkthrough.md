@@ -19,7 +19,7 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
 * **Structured Data**: Configured `foundingDate` to `"2001-01-01"` in the LocalBusiness JSON-LD block.
 
 ### 3. AI Concierge Re-training (25 Years, Est. 2001)
-* **System Prompt training**: Configured both server-side (`server.js`) system instruction parameters and client-side (`app.js`) offline fallback rules to define Acarrealíquidos as a company founded in 2001 with 25 years of experience.
+* **System Prompt training**: Configured both server-side (`server.js`) system instruction parameters (Supreme System Instruction) and client-side (`app.js`) offline fallback rules to define Acarrealíquidos as a company founded in 2001 with 25 years of experience.
 * **Direct Answer Hook**: Trained the bot to answer exactly `"Desde el año 2001"` (or `"We operate since 2001"` in English context) when queried *"Since when do you operate?"* / *"¿Desde cuándo operan?"*.
 
 ### 4. Node.js Express Backend Setup
@@ -30,12 +30,14 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
 * **GitHub Push Protection Safety**: Ensured no API keys are hardcoded in the committed files, fully satisfying GitHub Code Scanning and Secret Detection push rules.
 
 ### 5. Generative AI Chatbot Integration (AI Logistics Concierge)
-* **Active Model Verification**: Verified the available Gemini model lineup via test scripts. Configured the Express backend to use `gemini-3.5-flash` (confirmed active and functional with Google API key credentials).
-* **Conversational Session Memory**: Maintained via a persistent `chatHistory` array that captures and submits user/model context history. The bot now retains contextual knowledge across subsequent responses.
-* **Smart Offline NLP Fallback**: To ensure a flawless client-side demonstration, the chat features a robust fallback parser in `app.js`. If the backend `/api/chat` route is unavailable, the fallback engine utilizes regular expressions and semantic parsing to extract product types and route destinations (e.g. "melaza a Yucatán") dynamically.
-* **Thinking Indicator Bubble**: Renders a pulsing typing animation bubble while processing the prompt to improve UX.
-* **Auto-Scroll Behavior**: Automatically aligns the view to the bottom of the chat container upon message addition.
-* **Dynamic Welcome Greeting**: Detects the browser's active page language upon drawer opening and triggers a localized dispatcher welcome prompt.
+* **Active Model Verification**: Refactored the Express backend to query the industry-standard **`gemini-1.5-flash`** model with the new **"Supreme" System Instruction** outlining Acarrealíquidos' identity, tone (professional/human-like operations assistant), SCT/COFEPRIS certifications, and strategic Hub in Veracruz.
+* **Conversational Session Memory (`startChat`)**: Upgraded to a pure generative flow utilizing the Gemini SDK's `model.startChat({ history })` method. The backend keeps an active window of the last 14 messages (7 user/assistant exchanges) in the context memory, enabling complex follow-up routing (e.g. asking "Quiero mover melaza" and later asking "¿Tienen permisos?" works with perfect coherence).
+* **General Knowledge Linking**: Instructed the agent to support open-ended chats (e.g. asking for the history of Veracruz) but to subtly and intelligently link the conversation back to Acarrealíquidos' operations at the port of Veracruz.
+* **Smart Offline NLP Fallback**: In case the API key or server is offline, the chat uses a robust fallback parser in `app.js` that extracts product types and route destinations ("melaza a Yucatán") dynamically.
+* **UI/UX Upgrades**:
+  * Replaced the text input field with a dynamically-growing **`<textarea>`** supporting multi-line entries (Shift+Enter adds newlines, Enter submits, auto-grows up to 4 lines maximum).
+  * Volumetric **"Thinking..." indicator** bubble to show active processing.
+  * Bulletproof **Auto-Scroll** which triggers in a `setTimeout` frame and leverages `scrollIntoView` for pixel-perfect viewport alignment.
 
 ---
 

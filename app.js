@@ -825,17 +825,64 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollToBottom();
     }
 
+    function escapeHTML(str) {
+        return str.replace(/[&<>'"]/g, 
+            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+        );
+    }
+
+    function parseMarkdown(text) {
+        let html = escapeHTML(text);
+        
+        // Bold: **text** or __text__
+        html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
+        
+        // Italic: *text* or _text_
+        html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        html = html.replace(/_(.*?)_/g, '<em>$1</em>');
+        
+        // Bullet list: start lines with - or *
+        const lines = html.split('\n');
+        let inList = false;
+        const parsedLines = lines.map(line => {
+            const trimmed = line.trim();
+            const listMatch = trimmed.match(/^[-*]\s+(.+)/);
+            if (listMatch) {
+                let prefix = '';
+                if (!inList) {
+                    inList = true;
+                    prefix = '<ul class="list-disc pl-5 space-y-1 my-1.5">';
+                }
+                return prefix + `<li>${listMatch[1]}</li>`;
+            } else {
+                let suffix = '';
+                if (inList) {
+                    inList = false;
+                    suffix = '</ul>';
+                }
+                return suffix + line;
+            }
+        });
+        if (inList) {
+            parsedLines.push('</ul>');
+        }
+        
+        html = parsedLines.join('\n');
+        html = html.replace(/\n/g, '<br>');
+        return html;
+    }
+
     function appendAIMessage(text) {
         const msgDiv = document.createElement('div');
         msgDiv.className = "flex justify-start mb-4 animate-fade-in";
-        // Convert double-newlines to paragraph elements and preserve formatting
-        const formattedText = text.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+        const formattedText = parseMarkdown(text);
         msgDiv.innerHTML = `
             <div class="flex items-start gap-2 max-w-[85%]">
                 <div class="w-6 h-6 rounded-full bg-deep-navy border border-safety-orange/50 flex items-center justify-center shrink-0">
                     <span class="material-symbols-outlined text-[14px] text-safety-orange">support_agent</span>
                 </div>
-                <div class="bg-gray-100 text-deep-navy text-xs py-2.5 px-3.5 rounded-lg rounded-tl-none font-body-md shadow-sm leading-relaxed whitespace-normal">
+                <div class="bg-gray-100 text-deep-navy text-xs py-2.5 px-3.5 rounded-lg rounded-tl-none font-body-md shadow-sm leading-relaxed whitespace-normal markdown-body">
                     ${formattedText}
                 </div>
             </div>
@@ -855,12 +902,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
     }
 
-    function escapeHTML(str) {
-        return str.replace(/[&<>'"]/g, 
-            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-        );
-    }
-
     // Stateful Memory Buffer & Lead Gen State Machine for AI Logistics Concierge
     const chatHistory = [];
     let leadGenState = 'idle'; // 'idle', 'waiting_product', 'waiting_route', 'waiting_volume'
@@ -871,6 +912,15 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     function showTypingIndicator() {
+        const thoughts = [
+            "Analizando viabilidad de ruta...",
+            "Consultando base de datos operativa...",
+            "Verificando disponibilidad de unidades...",
+            "Calculando distancias y accesos...",
+            "Validando certificaciones de HazMat/Alimentario..."
+        ];
+        const randomThought = thoughts[Math.floor(Math.random() * thoughts.length)];
+
         const msgDiv = document.createElement('div');
         msgDiv.id = "ai-typing-indicator";
         msgDiv.className = "flex justify-start mb-4 animate-fade-in";
@@ -879,10 +929,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="w-6 h-6 rounded-full bg-deep-navy border border-safety-orange/50 flex items-center justify-center shrink-0">
                     <span class="material-symbols-outlined text-[14px] text-safety-orange">support_agent</span>
                 </div>
-                <div class="bg-gray-100 text-deep-navy text-xs py-3 px-4 rounded-lg rounded-tl-none font-body-md shadow-sm flex items-center gap-1.5">
-                    <span class="w-1.5 h-1.5 bg-slate-gray rounded-full animate-bounce" style="animation-duration: 0.6s; animation-delay: 0ms"></span>
-                    <span class="w-1.5 h-1.5 bg-slate-gray rounded-full animate-bounce" style="animation-duration: 0.6s; animation-delay: 150ms"></span>
-                    <span class="w-1.5 h-1.5 bg-slate-gray rounded-full animate-bounce" style="animation-duration: 0.6s; animation-delay: 300ms"></span>
+                <div class="bg-gray-100 text-deep-navy text-xs py-3 px-4 rounded-lg rounded-tl-none font-body-md shadow-sm flex flex-col gap-1.5">
+                    <div class="text-[10px] text-slate-gray italic font-mono flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[12px] animate-spin">sync</span>
+                        <span>${randomThought}</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 pt-0.5">
+                        <span class="w-1.5 h-1.5 bg-slate-gray rounded-full animate-bounce" style="animation-duration: 0.6s; animation-delay: 0ms"></span>
+                        <span class="w-1.5 h-1.5 bg-slate-gray rounded-full animate-bounce" style="animation-duration: 0.6s; animation-delay: 150ms"></span>
+                        <span class="w-1.5 h-1.5 bg-slate-gray rounded-full animate-bounce" style="animation-duration: 0.6s; animation-delay: 300ms"></span>
+                    </div>
                 </div>
             </div>
         `;
@@ -914,231 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return body.classList.contains('lang-en') ? 'en' : 'es';
     }
 
-    function detectSeparateIntent(textLower) {
-        if (textLower.includes('certif') || textLower.includes('sct') || textLower.includes('cre')) return 'certifications';
-        if (textLower.includes('flota') || textLower.includes('fleet') || textLower.includes('tanque')) return 'fleet';
-        if (textLower.includes('ruta') || textLower.includes('route') || textLower.includes('veracruz')) return 'routes';
-        return null;
-    }
-
-    function getSeparateIntentAnswer(intent, lang) {
-        if (intent === 'certifications') {
-            return lang === 'en'
-                ? 'We hold full SCT HazMat certifications, CRE approvals for fuels, and COFEPRIS wash records for food grade.'
-                : 'Contamos con permisos SCT para HazMat, CRE para hidrocarburos y certificación COFEPRIS de sanitización de tanques.';
-        }
-        if (intent === 'fleet') {
-            return lang === 'en'
-                ? 'Our fleet averages 5 years of age, featuring 316L stainless steel and food-grade thermal tankers.'
-                : 'Nuestra flota tiene una edad promedio de 5 años, con autotanques de acero inoxidable 316L y térmicos grado alimenticio.';
-        }
-        if (intent === 'routes') {
-            return lang === 'en'
-                ? 'We cover national routes departing from our Veracruz hub to CDMX, Bajío, and Monterrey.'
-                : 'Cubrimos rutas a nivel nacional desde Amatlán de los Reyes, Veracruz, hacia CDMX, Bajío y Monterrey.';
-        }
-        return '';
-    }
-
-    function getLeadGenPrompt(state, lang) {
-        if (state === 'waiting_product') {
-            return lang === 'en' ? 'What type of liquid product do you need to transport?' : '¿Qué tipo de producto líquido desea mover?';
-        }
-        if (state === 'waiting_route') {
-            return lang === 'en' ? 'What is the transport route (Origin and Destination)?' : '¿Cuál es la ruta de transporte (Origen y Destino)?';
-        }
-        if (state === 'waiting_volume') {
-            return lang === 'en' ? 'What volume or travel frequency do you estimate?' : '¿Qué volumen o frecuencia de viajes estima?';
-        }
-        return '';
-    }
-
-    function getLastUserMessageSubject() {
-        for (let i = chatHistory.length - 1; i >= 0; i--) {
-            const msg = chatHistory[i];
-            if (msg.role === 'user') {
-                const content = msg.content.toLowerCase();
-                if (content.includes('experi') || content.includes('años') || content.includes('trayector') || content.includes('years') || content.includes('who are you')) return 'experience';
-                if (content.includes('flota') || content.includes('fleet') || content.includes('tanque') || content.includes('capacidad')) return 'fleet';
-                if (content.includes('certif') || content.includes('sct') || content.includes('cre') || content.includes('cofepris')) return 'certifications';
-            }
-        }
-        return null;
-    }
-
-    function computeNLPResponse(userInput, lang) {
-        const textLower = userInput.toLowerCase();
-
-        // 1. Dynamic intent extraction for product and destination
-        let extractedProduct = null;
-        let extractedDestination = null;
-
-        // Try Spanish patterns:
-        // "mover [product] a [destination]"
-        // "llevar [product] a [destination]"
-        // "transportar [product] a [destination]"
-        // "flete de [product] a [destination]"
-        // "enviar [product] a [destination]"
-        const patternEs1 = /(?:mover|llevar|transportar|flete de|enviar)\s+([a-zA-Záéíóúñ\s]+?)\s+(?:a|hacia|en)\s+([a-zA-Záéíóúñ\s]+)/i;
-        const matchEs1 = userInput.match(patternEs1);
-        if (matchEs1) {
-            extractedProduct = matchEs1[1].trim();
-            extractedDestination = matchEs1[2].trim();
-        } else {
-            // General keywords
-            const products = ['melaza', 'fructosa', 'glucosa', 'aceite', 'acido', 'quimic', 'sosa', 'combust', 'diesel', 'gasolina', 'turbosina', 'molasses', 'oils', 'chemical', 'acid', 'fuel'];
-            const foundProduct = products.find(p => textLower.includes(p));
-            if (foundProduct) {
-                extractedProduct = foundProduct;
-            }
-            // Check for potential destination
-            if (textLower.includes(' a ') || textLower.includes(' hacia ')) {
-                const parts = textLower.split(/\s(?:a|hacia)\s/);
-                if (parts.length > 1) {
-                    extractedDestination = parts[1].replace(/[?.!]/g, '').trim();
-                }
-            }
-        }
-
-        // If we found a product and a destination (like melaza to Yucatan)
-        if (extractedProduct && extractedDestination) {
-            leadGenState = 'waiting_volume';
-            leadData.product = extractedProduct;
-            leadData.route = `Veracruz - ${extractedDestination}`;
-            
-            // Clean up name for presentation
-            const formattedProd = extractedProduct.charAt(0).toUpperCase() + extractedProduct.slice(1);
-            const formattedDest = extractedDestination.charAt(0).toUpperCase() + extractedDestination.slice(1);
-
-            if (lang === 'en') {
-                return `Excellent, to move ${formattedProd} to ${formattedDest} we use our food-grade stainless steel tankers. What volume do you need to transport?`;
-            } else {
-                return `Excelente, para mover ${extractedProduct} a ${formattedDest} usamos nuestras pipas de acero inoxidable con grado alimenticio. ¿Qué volumen necesita transportar?`;
-            }
-        }
-
-        // Check if user is in the middle of lead-gen
-        if (leadGenState !== 'idle') {
-            const separateIntent = detectSeparateIntent(textLower);
-            if (separateIntent) {
-                const answer = getSeparateIntentAnswer(separateIntent, lang);
-                const reminder = getLeadGenPrompt(leadGenState, lang);
-                return `${answer}\n\n${lang === 'en' ? 'Continuing with your quote: ' : 'Continuando con su cotización: '}${reminder}`;
-            }
-
-            if (leadGenState === 'waiting_product') {
-                leadData.product = userInput;
-                leadGenState = 'waiting_route';
-                return lang === 'en' 
-                    ? 'Got it. What is the transport route? Please specify both Origin and Destination cities.'
-                    : 'Perfecto. ¿Cuál es la ruta de transporte? Por favor especifique la ciudad de Origen y de Destino.';
-            } else if (leadGenState === 'waiting_route') {
-                leadData.route = userInput;
-                leadGenState = 'waiting_volume';
-                return lang === 'en'
-                    ? 'Understood. Finally, what volume (e.g., 30,000 liters) or travel frequency do you estimate?'
-                    : 'Entendido. Por último, ¿qué volumen aproximado (ej. 30,000 litros) o frecuencia de viajes estima?';
-            } else if (leadGenState === 'waiting_volume') {
-                leadData.volume = userInput;
-                leadGenState = 'idle';
-                const p = leadData.product;
-                const r = leadData.route;
-                const v = leadData.volume;
-                leadData = { product: '', route: '', volume: '' };
-                return lang === 'en'
-                    ? `Excellent! I have recorded your requirements:\n- **Liquid Product**: ${p}\n- **Route**: ${r}\n- **Volume/Frequency**: ${v}\n\nOur logistics team in Veracruz will analyze this. Please submit the contact form at the bottom of the page or click WhatsApp so we can send you the official commercial proposal!`
-                    : `¡Excelente! He registrado los detalles de su cotización:\n- **Producto**: ${p}\n- **Ruta**: ${r}\n- **Volumen/Frecuencia**: ${v}\n\nNuestro equipo comercial de Veracruz analizará la viabilidad operativa. Por favor complete el formulario de contacto al final de la página o presione el botón de WhatsApp para enviarle la cotización formal.`;
-            }
-        }
-
-        // Check main intents
-        
-        // 1. Quote intent
-        if (textLower.includes('cotiz') || textLower.includes('quote') || textLower.includes('precio') || textLower.includes('costo') || textLower.includes('price') || textLower.includes('tarifa') || textLower.includes('presupuesto')) {
-            leadGenState = 'waiting_product';
-            return lang === 'en'
-                ? 'I can help you build a technical quote immediately. First: What type of liquid product do you need to transport?'
-                : 'Con gusto le ayudo a generar una cotización. Primero: ¿Qué tipo de producto líquido desea mover?';
-        }
-
-        // 2. Identity & Experience
-        if (textLower.includes('quien eres') || textLower.includes('who are you') || textLower.includes('experiencia') || textLower.includes('years') || textLower.includes('experience') || textLower.includes('trayectoria') || textLower.includes('fundad') || textLower.includes('años') || textLower.includes('desde cuando') || textLower.includes('desde cuándo') || textLower.includes('since when')) {
-            if (textLower.includes('desde cuando') || textLower.includes('desde cuándo') || textLower.includes('since when')) {
-                return lang === 'en'
-                    ? 'We operate since 2001.'
-                    : 'Operamos desde el año 2001.';
-            }
-            return lang === 'en'
-                ? 'I am the Senior Logistics Advisor for Acarrealíquidos S.A. de C.V. We have 25 years of experience (founded in 2001) providing certified, secure transportation of liquids across Mexico.'
-                : 'Soy el Asesor Principal de Logística de Acarrealíquidos S.A. de C.V. Contamos con 25 años de experiencia (fundada en 2001) liderando el autotransporte de líquidos especializados en México.';
-        }
-
-        // 3. Products carried & protocols
-        if (textLower.includes('que llevan') || textLower.includes('que transportan') || contentContainsAny(textLower, ['load', 'carry', 'productos', 'servicio', 'combust', 'quimic', 'aliment'])) {
-            return lang === 'en'
-                ? 'We transport specialized liquids under rigorous safety protocols:\n- **Hydrocarbons/Fuels**: Transported under SCT and CRE permits using Betts pressure-relief safety valves and HazMat certified operators.\n- **Food Grade**: Vegetable oils, lard, and glucose (such as molasses) in thermal tanks with COFEPRIS-certified sanitary washing.\n- **Chemicals/Acids**: Safely transported in 316L stainless steel tankers with internal lining for corrosive substances.'
-                : 'Transportamos líquidos especializados bajo estrictas medidas de seguridad:\n- **Hidrocarburos y Combustibles**: Operados bajo permisos de SCT y CRE con autotanques equipados con válvulas Betts y operadores con licencia federal HazMat.\n- **Grado Alimenticio**: Aceites vegetales, glucosa y melaza en tanques térmicos aislados con lavado sanitario certificado por COFEPRIS.\n- **Químicos Peligrosos**: Ácidos y corrosivos manejados en autotanques de acero inoxidable 316L con recubrimiento protector interno.';
-        }
-
-        // 4. Certifications & Permits
-        if (textLower.includes('certif') || textLower.includes('permis') || textLower.includes('sct') || textLower.includes('cre') || textLower.includes('cofepris') || textLower.includes('iso') || textLower.includes('norma')) {
-            return lang === 'en'
-                ? 'We hold complete certifications to guarantee regulatory compliance:\n- **SCT permits** for HazMat classes 3, 8, and 9.\n- **CRE authorization** for oil and fuel shipping.\n- **COFEPRIS sanitization certs** for food-grade carriers.\n- Operational compliance under NOM-012 (weights) and NOM-035 (technical safety conditions).'
-                : 'Contamos con certificaciones oficiales completas:\n- **Permisos SCT** para materiales peligrosos Clase 3, 8 y 9.\n- **Autorizaciones de la CRE** para transporte de hidrocarburos.\n- **Certificado COFEPRIS** de lavado y sanitización sanitaria para grado alimenticio.\n- Cumplimiento estricto con las normas oficiales NOM-012 y NOM-035.';
-        }
-
-        // 5. Fleet / Tankers
-        if (textLower.includes('flota') || textLower.includes('flotilla') || textLower.includes('capacidad') || textLower.includes('tanque') || textLower.includes('fleet') || textLower.includes('truck') || textLower.includes('tank')) {
-            return lang === 'en'
-                ? 'Our modern fleet has an average age of 5 years. It features tractor trucks with GPS tracking and SAF telemetry, pulling single or full (double-trailer) stainless steel (316L) or thermal food-grade tankers. Capacities range from 25,000 to 45,000 liters.'
-                : 'Nuestra flota moderna tiene una edad promedio de 5 años. Contamos con tractocamiones con GPS 24/7 y telemetría SAF, operando configuraciones sencillas o full (doble remolque). Los autotanques son de acero inoxidable 316L o grado alimenticio térmico, con capacidades de 25,000 a 45,000 litros.';
-        }
-
-        // 6. Routes & Veracruz
-        if (textLower.includes('ruta') || textLower.includes('veracruz') || textLower.includes('cobertura') || textLower.includes('coverage') || textLower.includes('route') || textLower.includes('amatlan') || textLower.includes('monterrey')) {
-            return lang === 'en'
-                ? 'Our headquarters and main dispatch yard are in Amatlán de los Reyes, Veracruz, the premier cargo hub in southeast Mexico. We provide national coverage, delivering loads to Mexico City, the Bajío area, Guadalajara, and Monterrey.'
-                : 'Nuestra base operativa central está en Amatlán de los Reyes, Veracruz, el nodo de autotransporte más importante del sureste de México. Ofrecemos cobertura nacional completa a destinos como CDMX, Bajío, Guadalajara y Monterrey.';
-        }
-
-        // 7. Greet
-        if (textLower.includes('hola') || textLower.includes('hello') || textLower.includes('hi') || textLower.includes('buenos') || textLower.includes('buenas') || textLower.includes('tardes') || textLower.includes('dias')) {
-            return lang === 'en'
-                ? 'Hello! How can I assist you with your liquid transport logistics today?'
-                : '¡Hola! ¿En qué puedo ayudarle hoy con la logística de sus transportes de líquidos?';
-        }
-
-        // 8. Follow-up heuristics based on chat history
-        const lastUserMsg = getLastUserMessageSubject();
-        if (lastUserMsg) {
-            if (lastUserMsg === 'experience' && (textLower.includes('how many') || textLower.includes('cuantos') || textLower.includes('cual'))) {
-                return lang === 'en'
-                    ? 'We have 25 years of experience, operating continuously since 2001.'
-                    : 'Tenemos 25 años de experiencia operativa ininterrumpida desde nuestra fundación en 2001.';
-            }
-            if (lastUserMsg === 'fleet' && (textLower.includes('stainless') || textLower.includes('inoxidable') || textLower.includes('acero'))) {
-                return lang === 'en'
-                    ? 'Yes, our chemical and hydrocarbon fleet is built from high-grade 316L stainless steel.'
-                    : 'Es correcto. Toda nuestra flota de químicos e hidrocarburos está construida en acero inoxidable de grado 316L.';
-            }
-            if (lastUserMsg === 'certifications' && (textLower.includes('hazmat') || textLower.includes('peligros'))) {
-                return lang === 'en'
-                    ? 'Yes, our operators hold federal licenses and we are fully certified for HazMat Class 3 (fuels), Class 8 (corrosives), and Class 9.'
-                    : 'Sí, contamos con licencias federales de conductor y certificación SCT para residuos y materiales peligrosos Clase 3 (combustibles), Clase 8 (corrosivos) y Clase 9.';
-            }
-        }
-
-        // Default fallback
-        return lang === 'en'
-            ? 'Thank you for your message. As your Logistics Advisor, I can provide details on our fleet capacities, SCT/COFEPRIS certifications, routes from Veracruz, or prepare a quote. What would you like to verify?'
-            : 'Gracias por su consulta. Como su Asesor de Logística, puedo brindarle detalles sobre nuestras capacidades de flota, certificaciones SCT y COFEPRIS, rutas desde Veracruz o iniciar una cotización técnica. ¿Qué desea consultar?';
-    }
-
-    function contentContainsAny(str, words) {
-        return words.some(w => str.includes(w));
-    }
-
-    // Intelligent responses
+    // Pure Generative AI Response Router (Sends context memory directly to Gemini)
     function generateAIResponse(userInput) {
         const cleanInput = userInput.trim();
         if (!cleanInput) return;
@@ -1180,13 +1012,15 @@ document.addEventListener('DOMContentLoaded', () => {
             chatHistory.push({ role: 'assistant', content: replyText });
         })
         .catch(err => {
-            // Graceful offline fallback to advanced NLP client-side engine (passes all user test intent cases)
+            console.error("AI Communication error: ", err);
             setTimeout(() => {
                 removeTypingIndicator();
-                const reply = computeNLPResponse(cleanInput, lang);
-                appendAIMessage(reply);
-                chatHistory.push({ role: 'assistant', content: reply });
-            }, 1200); // 1.2s delay to simulate thinking time realistically
+                const errorReply = lang === 'en'
+                    ? "We apologize, but we are currently experiencing connection issues with our AI Operations desk. Please try again in a few moments, or reach out to us directly via the contact form below or WhatsApp."
+                    : "Lo sentimos, en este momento el puente de comunicación con nuestra Central de Operaciones está experimentando dificultades de conexión. Por favor intente de nuevo en unos momentos o contáctenos directamente a través del formulario de contacto o WhatsApp.";
+                appendAIMessage(errorReply);
+                chatHistory.push({ role: 'assistant', content: errorReply });
+            }, 1200);
         });
     }
 

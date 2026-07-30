@@ -30,14 +30,15 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
 * **GitHub Push Protection Safety**: Ensured no API keys are hardcoded in the committed files, fully satisfying GitHub Code Scanning and Secret Detection push rules.
 
 ### 5. Generative AI Chatbot Integration (AI Logistics Concierge)
-* **Active Model Verification**: Refactored the Express backend to query the industry-standard **`gemini-1.5-flash`** model with the new **"Supreme" System Instruction** outlining Acarrealíquidos' identity, tone (professional/human-like operations assistant), SCT/COFEPRIS certifications, and strategic Hub in Veracruz.
+* **Active Model Verification**: Refactored the Express backend to query the industry-standard **`gemini-1.5-flash`** model with the new **"God-Mode" System Instruction** outlining Acarrealíquidos' identity, tone (professional/human-like logistics consultant), SCT/COFEPRIS certifications, and strategic Veracruz hub.
 * **Conversational Session Memory (`startChat`)**: Upgraded to a pure generative flow utilizing the Gemini SDK's `model.startChat({ history })` method. The backend keeps an active window of the last 14 messages (7 user/assistant exchanges) in the context memory, enabling complex follow-up routing (e.g. asking "Quiero mover melaza" and later asking "¿Tienen permisos?" works with perfect coherence).
-* **General Knowledge Linking**: Instructed the agent to support open-ended chats (e.g. asking for the history of Veracruz) but to subtly and intelligently link the conversation back to Acarrealíquidos' operations at the port of Veracruz.
-* **Smart Offline NLP Fallback**: In case the API key or server is offline, the chat uses a robust fallback parser in `app.js` that extracts product types and route destinations ("melaza a Yucatán") dynamically.
+* **General Knowledge Linking & Company Anchor**: Instructed the agent to support open-ended chats (e.g. asking for the history of Veracruz or distances like Veracruz to Mérida) using its full general knowledge, and sutil y coherentemente linking the conversation back to Acarrealíquidos' operations (e.g., "De Veracruz a Mérida son 950 km. En Acarrealíquidos cubrimos esa ruta...").
+* **Eradicated Keyword Matching Fallbacks**: Wiped out the local offline NLP parser in `app.js` completely. The client code acts strictly as a lightweight bridge routing all requests to Gemini, avoiding rigid checks. In case of API failure, it displays a professional connectivity error prompt.
 * **UI/UX Upgrades**:
   * Replaced the text input field with a dynamically-growing **`<textarea>`** supporting multi-line entries (Shift+Enter adds newlines, Enter submits, auto-grows up to 4 lines maximum).
-  * Volumetric **"Thinking..." indicator** bubble to show active processing.
-  * Bulletproof **Auto-Scroll** which triggers in a `setTimeout` frame and leverages `scrollIntoView` for pixel-perfect viewport alignment.
+  * **Markdown Support**: Added client-side parsing utility `parseMarkdown` to render bold text (`**bold**`), italics, and bullet lists (`- item`), combined with CSS overrides in `index.html` to guarantee bold text and clean lists render correctly inside chat bubbles.
+  * **Dynamic "Thinking" Thought Logs**: The preloader indicator bubble selects a random, realistic thought log (e.g. "Analizando viabilidad de ruta...", "Consultando base de datos operativa...") and renders it alongside a spinning sync icon, making the thinking state feel incredibly smart and organic.
+  * **Auto-Scroll**: Triggers on a `setTimeout` window using `scrollIntoView` for pixel-perfect viewport alignment.
 
 ---
 

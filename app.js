@@ -9,103 +9,315 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const preloader = document.getElementById('preloader');
     const skipBtn = document.getElementById('skip-intro-btn');
-    const isEnglish = body.classList.contains('lang-en');
 
     // Handle Skip Intro
     function endPreloader() {
         sessionStorage.setItem('intro_seen', 'true');
-        
-        const gateLeft = document.getElementById('preloader-gate-left');
-        const gateRight = document.getElementById('preloader-gate-right');
-        const innerContainer = document.querySelector('.preloader-inner-container');
-        
-        // Safety check to prevent running animations after cleanup
-        gsap.killTweensOf([gateLeft, gateRight, innerContainer, preloader, skipBtn]);
-        
-        const tl = gsap.timeline({
-            onComplete: () => {
-                body.style.overflow = '';
-                if (preloader) preloader.remove();
-            }
-        });
-
-        tl.to(skipBtn, { opacity: 0, duration: 0.2 }, 0)
-          .to(innerContainer, { opacity: 0, filter: 'blur(15px)', scale: 0.95, duration: 0.6, ease: 'power2.inOut' }, 0)
-          .to(gateLeft, { xPercent: -100, duration: 0.8, ease: 'power3.inOut' }, 0.1)
-          .to(gateRight, { xPercent: 100, duration: 0.8, ease: 'power3.inOut' }, 0.1)
-          .to(preloader, { opacity: 0, duration: 0.3 }, 0.6);
+        body.style.overflow = '';
+        if (preloader) {
+            preloader.classList.add('heat-exit');
+            setTimeout(() => {
+                preloader.remove();
+            }, 820);
+        }
     }
 
     if (preloader) {
-        const isRecurring = sessionStorage.getItem('intro_seen') === 'true';
-        
-        // Show Skip button immediately for recurring users, otherwise delay it
-        if (isRecurring && skipBtn) {
-            skipBtn.style.display = 'block';
-            gsap.to(skipBtn, { opacity: 1, duration: 0.4, delay: 0.2 });
-        } else if (skipBtn) {
-            skipBtn.style.display = 'block';
-            gsap.to(skipBtn, { opacity: 0.6, duration: 0.4, delay: 1.5 });
-        }
-
-        if (skipBtn) {
-            skipBtn.addEventListener('click', endPreloader);
-        }
-
-        // Dynamically translate preloader subtitle text
-        const labelSpan = document.querySelector('#preloader-anniversary-label span');
-        if (labelSpan) {
-            labelSpan.textContent = isEnglish ? labelSpan.getAttribute('data-en') : labelSpan.getAttribute('data-es');
-        }
-        
-        // Set up main timeline (not exceeding 4 seconds total)
-        const tl = gsap.timeline({
-            onComplete: endPreloader
-        });
-
-        // 0.0s - 1.0s: Progress line draws at bottom
-        tl.to('#preloader-progress-bar', { width: '100%', duration: 1.0, ease: 'power1.inOut' })
-          
-          // 1.0s - 1.8s: Droplet falls and hits target
-          .to('#preloader-droplet', { opacity: 1, y: 320, duration: 0.6, ease: 'power2.in' }, 0.8)
-          
-          // 1.8s: Ripple splash target triggers
-          .to('#preloader-ripple', { scale: 18, opacity: 1, duration: 0.4, ease: 'power2.out' }, 1.4)
-          .to('#preloader-ripple', { opacity: 0, duration: 0.2 }, 1.6)
-          .to('#preloader-droplet', { scale: 0, opacity: 0, duration: 0.15 }, 1.4)
-          
-          // 1.0s - 2.5s: "25" numbers fade and scale up with pulse aura
-          .to('#preloader-anniversary-num', { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1.4)
-          .to('#preloader-aura', { opacity: 1, duration: 0.8 }, 1.4)
-          
-          // Kinetic label slide-up
-          .to('#preloader-anniversary-label', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 1.6)
-          
-          // Digital counter container fades in
-          .to('#preloader-counter-container', { opacity: 1, duration: 0.4 }, 1.8);
-
-        // Fast counter tick (2001 -> 2026)
-        const countData = { year: 2001 };
-        tl.to(countData, {
-            year: 2026,
-            duration: 1.2,
-            ease: 'power1.out',
-            onUpdate: () => {
-                const yearEl = document.getElementById('preloader-year-counter');
-                if (yearEl) yearEl.textContent = Math.floor(countData.year);
+        const isSeen = sessionStorage.getItem('intro_seen') === 'true';
+        if (isSeen) {
+            preloader.remove();
+            body.style.overflow = '';
+        } else {
+            // Show Skip button after a short delay
+            if (skipBtn) {
+                skipBtn.addEventListener('click', endPreloader);
+                gsap.to(skipBtn, { opacity: 0.7, duration: 0.5, delay: 1.5 });
             }
-        }, 1.8)
 
-          // 2.5s - 3.5s: Morph 25 into Acarrealíquidos logo
-          .to('#preloader-anniversary-num', { scale: 0.5, opacity: 0, filter: 'blur(10px)', duration: 0.5, ease: 'power2.inOut' }, 2.6)
-          .to('#preloader-anniversary-label', { opacity: 0, y: -10, duration: 0.4, ease: 'power2.in' }, 2.6)
-          .to('#preloader-logo-morph', { opacity: 1, scale: 1, duration: 0.7, ease: 'back.out(1.2)' }, 2.8)
-          
-          // 3.5s - 4.0s: Powerful tagline fade-in
-          .to('#preloader-tagline', { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 3.2)
-          
-          // Subtle pulse heartbeat to morph logo
-          .to('#preloader-logo-morph', { scale: 1.03, duration: 0.15, yoyo: true, repeat: 1, ease: 'power1.inOut' }, 3.5);
+            // Determine language for intro subtitle
+            const subtitleSpan = document.querySelector('#preloader-subtitle span');
+            if (subtitleSpan) {
+                const currentLang = localStorage.getItem('lang') || 'es';
+                subtitleSpan.textContent = currentLang === 'en' ? subtitleSpan.getAttribute('data-en') : subtitleSpan.getAttribute('data-es');
+            }
+
+            const canvas = document.getElementById('preloader-canvas');
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                if (canvas.parentNode) {
+                    width = canvas.width = window.innerWidth;
+                    height = canvas.height = window.innerHeight;
+                }
+            });
+
+            // Grid coordinates points forming number '25'
+            const points = [];
+            
+            function precomputePoints(w, h) {
+                const offscreen = document.createElement('canvas');
+                const ctxOff = offscreen.getContext('2d');
+                // Responsive multiplier for font sizing
+                const scale = Math.min(w, h) * 0.0025;
+                offscreen.width = 300 * scale;
+                offscreen.height = 150 * scale;
+                
+                ctxOff.fillStyle = '#ffffff';
+                ctxOff.font = `900 ${Math.floor(110 * scale)}px "Outfit", "Montserrat", "Arial Black", sans-serif`;
+                ctxOff.textAlign = 'center';
+                ctxOff.textBaseline = 'middle';
+                ctxOff.fillText('25', offscreen.width / 2, offscreen.height / 2);
+                
+                const imgData = ctxOff.getImageData(0, 0, offscreen.width, offscreen.height);
+                
+                // Reduce particle count on mobile for target 60fps performance
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                const step = isMobile ? 8 : 4;
+                
+                const cx = offscreen.width / 2;
+                const cy = offscreen.height / 2;
+                
+                for (let y = 0; y < offscreen.height; y += step) {
+                    for (let x = 0; x < offscreen.width; x += step) {
+                        const index = (y * offscreen.width + x) * 4;
+                        if (imgData.data[index + 3] > 128) {
+                            points.push({
+                                targetX: x - cx,
+                                targetY: y - cy
+                            });
+                        }
+                    }
+                }
+            }
+
+            precomputePoints(width, height);
+
+            const blastParticles = [];
+            const textParticles = [];
+            let ascendingSpark = {
+                x: width / 2,
+                y: height,
+                targetY: height / 2,
+                vy: - (height * 0.5) / 72, // reaches target in exactly 1.2s at 60fps (72 frames)
+                radius: 5,
+                active: true
+            };
+
+            let frame = 0;
+            let exploded = false;
+
+            function animate() {
+                if (!preloader.parentNode) return;
+
+                // Deep Midnight Navy trailing clear (creates WebGL style motion blur trail)
+                ctx.fillStyle = 'rgba(2, 6, 23, 0.16)';
+                ctx.fillRect(0, 0, width, height);
+
+                const cx = width / 2;
+                const cy = height / 2;
+
+                // 1. Ascending Spark (0s - 1.2s)
+                if (ascendingSpark.active) {
+                    ascendingSpark.y += ascendingSpark.vy;
+                    
+                    // Spark Core Glow
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(ascendingSpark.x, ascendingSpark.y, ascendingSpark.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = '#FFA500';
+                    ctx.shadowColor = '#FF6B00';
+                    ctx.shadowBlur = 20;
+                    ctx.fill();
+                    ctx.restore();
+
+                    // Emit spark tail particles
+                    if (Math.random() > 0.2) {
+                        blastParticles.push({
+                            x: ascendingSpark.x + (Math.random() - 0.5) * 6,
+                            y: ascendingSpark.y + 10,
+                            vx: (Math.random() - 0.5) * 2,
+                            vy: Math.random() * 2 + 1,
+                            alpha: 1.0,
+                            decay: Math.random() * 0.05 + 0.03,
+                            color: '#FF6B00',
+                            radius: Math.random() * 2 + 1
+                        });
+                    }
+
+                    // Check for center hit
+                    if (ascendingSpark.y <= ascendingSpark.targetY) {
+                        ascendingSpark.active = false;
+                        exploded = true;
+                        triggerExplosion(cx, cy);
+                    }
+                }
+
+                // 2. Pyrotechnic Blast sparks
+                for (let i = blastParticles.length - 1; i >= 0; i--) {
+                    const p = blastParticles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.06; // gravity
+                    p.vx *= 0.98; // air friction
+                    p.alpha -= p.decay;
+
+                    if (p.alpha <= 0) {
+                        blastParticles.splice(i, 1);
+                        continue;
+                    }
+
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    ctx.restore();
+                }
+
+                // 3. Text constellation particles (1.2s - 4.2s)
+                if (exploded) {
+                    for (let i = 0; i < textParticles.length; i++) {
+                        const p = textParticles[i];
+                        
+                        if (p.stage === 'fly') {
+                            p.x += (p.targetX - p.x) * 0.07;
+                            p.y += (p.targetY - p.y) * 0.07;
+                            
+                            const dist = Math.hypot(p.targetX - p.x, p.targetY - p.y);
+                            if (dist < 2) {
+                                p.stage = 'burn';
+                            }
+                        } else if (p.stage === 'burn') {
+                            // Flicker vibration
+                            p.x = p.targetX + (Math.random() - 0.5) * 1.5;
+                            p.y = p.targetY + (Math.random() - 0.5) * 1.5;
+                            
+                            // Drift away starting at 2.8s (~168 frames)
+                            if (frame > 168) {
+                                p.stage = 'drift';
+                                p.vx = (Math.random() - 0.5) * 1.5;
+                                p.vy = Math.random() * 0.6 + 0.4;
+                            }
+                        } else if (p.stage === 'drift') {
+                            p.x += p.vx;
+                            p.y += p.vy;
+                            p.vy += 0.03;
+                            p.alpha -= 0.015;
+                        }
+
+                        if (p.alpha <= 0) continue;
+
+                        ctx.save();
+                        ctx.globalAlpha = p.alpha * (0.6 + Math.random() * 0.4);
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.shadowColor = p.glowColor;
+                        ctx.shadowBlur = p.stage === 'burn' ? 8 : 2;
+                        ctx.fill();
+                        ctx.restore();
+                    }
+                }
+
+                frame++;
+                requestAnimationFrame(animate);
+            }
+
+            function triggerExplosion(cx, cy) {
+                // Spawn outward blast particles
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                const blastCount = isMobile ? 60 : 160;
+                const colors = ['#FF6B00', '#FFD700', '#FFA500', '#FFFFFF', '#FF8C00'];
+
+                for (let i = 0; i < blastCount; i++) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 9 + 4;
+                    blastParticles.push({
+                        x: cx,
+                        y: cy,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        alpha: 1.0,
+                        decay: Math.random() * 0.02 + 0.012,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        radius: Math.random() * 3 + 1
+                    });
+                }
+
+                // Spawn text coordinates particles
+                points.forEach(pt => {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 15 + 5;
+                    
+                    const rand = Math.random();
+                    let color = '#FFFFFF';
+                    let glowColor = '#FFD700';
+                    if (rand > 0.25) {
+                        color = '#FFD700'; // gold
+                        glowColor = '#FF8C00';
+                    }
+                    if (rand > 0.7) {
+                        color = '#FF6B00'; // orange
+                        glowColor = '#FF3300';
+                    }
+
+                    textParticles.push({
+                        x: cx + Math.cos(angle) * speed * 2.5,
+                        y: cy + Math.sin(angle) * speed * 2.5,
+                        targetX: cx + pt.targetX,
+                        targetY: cy + pt.targetY,
+                        vx: 0,
+                        vy: 0,
+                        alpha: 1.0,
+                        stage: 'fly',
+                        color: color,
+                        glowColor: glowColor,
+                        radius: Math.random() * 1.5 + 1.2
+                    });
+                });
+
+                // 2.8s: Brand Logo and subtitle emerge
+                setTimeout(() => {
+                    const logoWrap = document.getElementById('preloader-logo-wrap');
+                    const subtitle = document.getElementById('preloader-subtitle');
+                    const sweep = document.getElementById('logo-sweep');
+
+                    if (logoWrap) {
+                        gsap.to(logoWrap, { opacity: 1, scale: 1, duration: 1.0, ease: 'power2.out' });
+                    }
+                    if (subtitle) {
+                        gsap.to(subtitle, { opacity: 1, duration: 0.8, delay: 0.3 });
+                    }
+                    if (sweep) {
+                        setTimeout(() => {
+                            sweep.style.transform = 'translateX(100%) skewX(-25deg)';
+                        }, 400);
+                    }
+                }, 1600); // 1.2s ascent + 1.6s explosion = 2.8s
+
+                // 4.2s: Heat distortion reveal exit sequence
+                setTimeout(() => {
+                    if (preloader) {
+                        preloader.classList.add('heat-exit');
+                    }
+                }, 3000); // 1.2s ascent + 3.0s = 4.2s
+            }
+
+            // Bind animation loop to load trigger
+            if (document.readyState === 'complete') {
+                animate();
+            } else {
+                window.addEventListener('load', animate);
+            }
+
+            // Absolute hard timeout limit at 5.0 seconds
+            setTimeout(endPreloader, 5000);
+        }
+    }
     }
     const esLab = document.getElementById('es-label');
     const enLab = document.getElementById('en-label');
@@ -135,7 +347,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (toggleMobile) toggleMobile.classList.add('lang-en-active');
 
             // Translate head title, desc, lang
-            document.title = "Acarrealíquidos | Leaders in Specialized Freight & Liquid Transport";
+            document.title = "Acarrealíquidos | 25 Aniversario (2001-2026)";
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) metaDesc.setAttribute('content', 'Liquid logistics leaders with 25 years of experience. Transport of hydrocarbons, oils, and chemicals from Veracruz to all of Mexico. SCT certified safety.');
             document.documentElement.setAttribute('lang', 'en');
@@ -162,7 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (toggleMobile) toggleMobile.classList.remove('lang-en-active');
 
             // Translate head title, desc, lang
-            document.title = "Acarrealíquidos | Líderes en Transporte Especializado de Carga y Líquidos";
+            document.title = "Acarrealíquidos | 25 Aniversario (2001-2026)";
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) metaDesc.setAttribute('content', 'Líderes en logística de líquidos con 25 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT.');
             document.documentElement.setAttribute('lang', 'es');

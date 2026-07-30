@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Acarrealíquidos | Líderes en Transporte Especializado de Carga y Líquidos</title>
+    <title>Acarrealíquidos | 25 Aniversario (2001-2026)</title>
     <meta content="Líderes en logística de líquidos con 25 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT." name="description"/>
     
     <!-- Open Graph (Facebook/Meta / LinkedIn) -->
@@ -205,95 +205,63 @@
             bottom: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            z-index: 99999 !important;
+            z-index: 10000 !important;
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
             justify-content: center !important;
             overflow: hidden !important;
-            background-color: transparent !important;
+            background-color: #020617 !important;
         }
-        .shimmer-text {
-            background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(255,215,0,1) 50%, rgba(255,255,255,0.85) 100%);
-            background-size: 200% auto;
-            color: transparent;
-            -webkit-background-clip: text;
-            background-clip: text;
-            animation: textShimmer 2.5s linear infinite;
+        @keyframes heatDistortion {
+            0% {
+                filter: blur(0px) contrast(1.0);
+                transform: scale(1);
+            }
+            30% {
+                filter: blur(2px) contrast(1.1);
+                transform: scale(1.02) skewX(1deg);
+            }
+            60% {
+                filter: blur(4px) contrast(1.25);
+                transform: scale(1.05) skewX(-1.5deg) skewY(0.5deg);
+            }
+            100% {
+                filter: blur(12px) contrast(1.5);
+                transform: scale(1.12);
+                opacity: 0;
+            }
         }
-        @keyframes textShimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: -200% center; }
+        .heat-exit {
+            animation: heatDistortion 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
         }
     </style>
 </head>
 
 <body class="bg-background text-deep-navy font-body-md antialiased overflow-x-hidden selection:bg-safety-orange selection:text-white">
 
-    <!-- SVG gooey filter for liquid morphing/droplet effect -->
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
-        <defs>
-            <filter id="goo-filter">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-            </filter>
-        </defs>
-    </svg>
-
-    <!-- Cinematic 45th Anniversary Preloader -->
+    <!-- Cinematic 25th Anniversary Pyrotechnic Preloader -->
     <div id="preloader" style="perspective: 1000px; backface-visibility: hidden;">
         <div class="grain-overlay z-[20]"></div>
         
-        <!-- Left & Right Gates for Vertical Split Exit -->
-        <div id="preloader-gate-left" class="absolute top-0 left-0 w-1/2 h-full bg-[#020817] z-[10] border-r border-white/5"></div>
-        <div id="preloader-gate-right" class="absolute top-0 right-0 w-1/2 h-full bg-[#020817] z-[10] border-l border-white/5"></div>
+        <!-- Fullscreen Canvas for WebGL-style Particle System -->
+        <canvas id="preloader-canvas" class="absolute inset-0 w-full h-full z-[15]"></canvas>
 
         <!-- Skip Intro Button -->
         <button id="skip-intro-btn" class="absolute top-6 right-6 z-[100] px-4 py-2 border border-white/20 rounded-full text-xs font-label-sm tracking-wider text-white/70 hover:text-white hover:bg-white/10 hover:border-white/40 active:scale-95 transition-all duration-300 pointer-events-auto select-none opacity-0">
             <span data-es="Saltar Intro" data-en="Skip Intro">Saltar Intro</span>
         </button>
 
-        <!-- Inner Container containing the elements -->
-        <div class="preloader-inner-container flex flex-col items-center justify-center relative w-full h-full max-w-[800px] px-6 select-none pointer-events-none z-[30]">
-            <!-- Glowing heartbeat aura -->
-            <div id="preloader-aura" class="absolute w-72 h-72 bg-safety-orange/10 rounded-full blur-3xl filter drop-shadow-[0_0_50px_rgba(255,107,0,0.3)] opacity-0 transition-opacity duration-1000"></div>
-
-            <!-- Liquid/Drop & Morphing Area -->
-            <div class="relative w-full h-[240px] flex items-center justify-center" style="filter: url('#goo-filter');">
-                <!-- Golden/Orange Droplet -->
-                <div id="preloader-droplet" class="absolute w-8 h-8 bg-gradient-to-b from-[#FFB800] to-[#FF6B00] rounded-full opacity-0" style="top: -220px;"></div>
-                
-                <!-- Ripples/Splash Target -->
-                <div id="preloader-ripple" class="absolute w-4 h-4 rounded-full border border-[#FFB800] opacity-0 scale-0"></div>
-
-                <!-- Number 25 Splash -->
-                <div id="preloader-anniversary-num" class="absolute text-7xl md:text-8xl font-black font-headline-display tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-[#D1D5DB] via-[#F9FAFB] via-[#9CA3AF] via-[#F9FAFB] to-[#D1D5DB] opacity-0 scale-75 select-none" style="filter: drop-shadow(0 0 20px rgba(255,255,255,0.45)); font-family: 'Outfit', sans-serif;">
-                    25
-                </div>
-
-                <!-- Acarrealíquidos Logo (morphs from the 25) -->
-                <div id="preloader-logo-morph" class="absolute w-[280px] md:w-[380px] opacity-0 scale-90">
-                    <img src="./assets/logo.webp" alt="Acarrealíquidos Logo" class="w-full h-auto object-contain filter drop-shadow-[0_0_15px_rgba(255,107,0,0.25)]">
-                </div>
+        <!-- Branding Logo & Legacy Subtitle Wrapper -->
+        <div id="preloader-logo-wrap" class="absolute w-[280px] md:w-[380px] opacity-0 scale-90 z-[30] pointer-events-none flex flex-col items-center justify-center">
+            <div class="relative w-full overflow-hidden rounded-lg">
+                <img src="./assets/logo.webp" alt="Acarrealíquidos Logo" class="w-full h-auto object-contain filter drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+                <!-- Sheen overlay for Light Sweep -->
+                <div id="logo-sweep" class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full" style="transform: skewX(-25deg); transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);"></div>
             </div>
-
-            <!-- Kinetic Typography Reveal -->
-            <div id="preloader-anniversary-label" class="text-xl md:text-2xl font-bold font-headline-display tracking-[0.15em] text-white/90 uppercase opacity-0 mt-2 select-none relative overflow-hidden" style="font-family: 'Outfit', sans-serif;">
-                <span class="shimmer-text block" data-es="25 AÑOS" data-en="25 YEARS">25 AÑOS</span>
-            </div>
-
-            <!-- Rapid Digital Years Counter -->
-            <div id="preloader-counter-container" class="mt-6 flex flex-col items-center justify-center opacity-0">
-                <span id="preloader-year-counter" class="text-3xl md:text-4xl font-black text-[#FFB800] tracking-wider" style="font-family: monospace;">2001</span>
-                <span id="preloader-tagline" class="text-xs md:text-sm font-label-sm tracking-[0.2em] text-white/50 uppercase mt-4 text-center">
-                    <span data-es="Celebrando 25 años de confianza" data-en="Celebrating 25 years of trust">Celebrando 25 años de confianza</span>
-                </span>
-            </div>
-
-            <!-- Progress Line Indicator at the bottom -->
-            <div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-[240px] h-[2px] bg-white/10 rounded-full overflow-hidden">
-                <div id="preloader-progress-bar" class="w-0 h-full bg-gradient-to-r from-[#FFB800] to-[#FF6B00] rounded-full"></div>
+            <!-- Elegant Trajectory Subtitle -->
+            <div id="preloader-subtitle" class="text-xs md:text-sm font-label-sm tracking-[0.25em] text-white/95 uppercase mt-6 text-center whitespace-nowrap opacity-0 transition-opacity duration-800" style="font-family: 'Outfit', sans-serif;">
+                <span class="block" data-es="25 AÑOS MOVIENDO EL FUTURO" data-en="25 YEARS MOVING THE FUTURE">25 AÑOS MOVIENDO EL FUTURO</span>
             </div>
         </div>
     </div>

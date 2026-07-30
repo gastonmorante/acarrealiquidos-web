@@ -25,7 +25,7 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
 ### 4. Node.js Express Backend Setup
 * **Express Server (`server.js`)**: Added a Node.js Express server to host the static files and expose the `POST /api/chat` route on Render. This enables the client-side `app.js` chatbot fetch call to route directly to a server-side endpoint.
 * **Gemini API Key Integration**: Designed `/api/chat` to load `process.env.GEMINI_API_KEY` to query Google Generative AI securely from the server side without exposing keys in client-side code.
-* **Dependency Declarations**: Configured `package.json` with ESM (`type: "module"`) and scripts to launch the application. Installed `@google/generative-ai`, `express`, `cors`, and `dotenv`.
+* **Dependency Declarations**: Configured `package.json` with ESM (`type: "module"`) and scripts to launch the application. Installed `@google/generative-ai` (upgraded to version `0.24.1` for native `systemInstruction` support on older/newer keys), `express`, `cors`, and `dotenv`.
 * **Repository Safety (.gitignore)**: Added rules to ignore node modules, local environment files (`.env`), and logs to keep the repository clean and secure. Included `.env.example` as a setup template.
 * **GitHub Push Protection Safety**: Ensured no API keys are hardcoded in the committed files, fully satisfying GitHub Code Scanning and Secret Detection push rules.
 

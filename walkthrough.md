@@ -4,14 +4,12 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
 
 ## Features & Refactoring Logs
 
-### 1. 25th Anniversary Cinematic Preloader ("Silver Edition", 2001-2026)
-* **Drop & Splash Mechanics**: Implemented an SVG gooey filter (`#goo-filter`) which dynamically renders a simulated silver liquid droplet falling from the top. When it hits the center, it triggers a custom radial ripple (`#preloader-ripple`) and reveals a glowing, silver-shadowed anniversary number `25` (`#preloader-anniversary-num`).
-* **Silver/Metallic Aesthetic**: Replaced the golden styling with a high-end chrome-silver linear gradient (`bg-gradient-to-r from-[#D1D5DB] via-[#F9FAFB] via-[#9CA3AF] via-[#F9FAFB] to-[#D1D5DB]`) and matching metallic dropdown glow shadow (`drop-shadow-[0_0_20px_rgba(255,255,255,0.45)]`).
-* **Digital Timeline Counter**: Synchronized a rapid years counter using a numeric GSAP tween. When the droplet strikes, the years tick sequentially starting at foundation year `2001` and accelerating to target year `2026`.
-* **Dynamic Language Reveal**: Leveraged kinetic typography slide-ups. The subtitle reveals `"25 AÑOS"` (Spanish) o `"25 YEARS"` (English) based on the browser's active page language context.
-* **Liquid Morphing & Morphing Logo**: The silver `25` liquid-morphs into the official Acarrealíquidos logo, followed by a tagline fade-in and a subtle heartbeat pulsing animation.
-* **Vertical Split Exit (Gates)**: Left and right panels (`#preloader-gate-left`, `#preloader-gate-right`) slide in opposite directions while the inner container blurs out (`filter: blur(15px)`), resolving into the Hero section.
-* **Performance & Skip Controls**: The entire sequence plays in under 4 seconds. Uses `sessionStorage` visits tracking: recurring users receive an immediate "Skip Intro" option, while new visits trigger the button after a slight delay.
+### 1. 25th Anniversary Pyrotechnic Preloader (5.0s Cinematic Experience, 2001-2026)
+* **The Ascent (0.0s - 1.2s)**: Set up a full-screen HTML5 `<canvas>` on `z-index: 10000` with a deep midnight navy background. The animation starts with a high-velocity orange spark ascending from the bottom center, leaving a glowing trail with natural canvas motion blur (created using alpha clears).
+* **The Pyrotechnic Blast (1.2s - 2.8s)**: Upon hitting the center, the spark explodes into a massive burst. Sparks scatter outwards, and inside the core, a dense constellation of flickering, incandescent white/gold/orange particles forms the number **"25"** (created by reading pixel coordinates from an offscreen text renderer).
+* **Branding & Legacy (2.8s - 4.2s)**: As the embers start to float and settle downwards, the official logo emerges with a dynamic CSS gradient sheen Light Sweep effect. Elegant trajectory subtitle `"25 AÑOS MOVIENDO EL FUTURO"` (Spanish) or `"25 YEARS MOVING THE FUTURE"` (English) fades in.
+* **The Reveal (4.2s - 5.0s)**: The preloader triggers a GPU-accelerated Heat Distortion scale and blur transition (`.heat-exit`) to blend smoothly into the Hero section without flicker.
+* **Execution & Skips**: The sequence runs on `window.onload` to hide background assets during loading. It uses `sessionStorage` to play only once per tab. A "Skip Intro" button displays after a 1.5s delay to allow immediate bypass.
 
 ### 2. Global Trajectory Alignment (25 Years, Est. 2001)
 * **Hero Content**: Updated Hero text badges and H1 headers to `"25 Años de Excelencia en Logística de Líquidos" / "25 Years of Excellence in Liquid Logistics"`.
@@ -47,11 +45,13 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
    * Run `npm.cmd install` to download dependencies.
    * Copy `.env.example` to `.env` and fill in your `GEMINI_API_KEY`.
    * Start the server with `node server.js` and open `http://localhost:3000` in your browser.
-2. Observe the **25th Anniversary Preloader**:
-   * Silver drop falls and splashes on impact.
-   * Digital years climb rapidly from `2001` to `2026`.
-   * Double panel gates slide split-vertically to reveal the main page.
+2. Observe the **25th Anniversary Pyrotechnic Preloader**:
+   * Rocket spark ascends and explodes into orange/gold embers.
+   * Incandescent particles form the number `"25"` at the center.
+   * Brand logo fades in with light sweep, revealing tagline.
+   * Preloader does a heat wave distortion exit and fades out.
 3. Test **Skip Intro** logic:
-   * Play the intro once, reload, and verify that the "Skip Intro" option is displayed instantly. Clicking it must immediately split the gates and clear the overlay.
+   * Reload the page in a new tab to see the intro. Press the skip button to verify immediate exit.
+   * Refresh the page in the same tab and verify it skips the intro instantly based on `sessionStorage` flag.
 4. Verify that the chatbot is focused and responsive when checking quotes or routes.
 5. In the chat, ask: **`¿Desde cuándo operan?`** or **`Since when do you operate?`** and verify that it answers **`Operamos desde el año 2001.`** or **`We operate since 2001.`**.

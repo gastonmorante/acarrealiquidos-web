@@ -1,26 +1,27 @@
-# Project Walkthrough - Acarrealíquidos Refactor & AI Concierge Integration
+# Project Walkthrough - Acarrealíquidos Refactor & AI Concierge Integration (45th Edition)
 
 This walkthrough details the optimizations, bug fixes, and AI integrations deployed on the Acarrealíquidos platform.
 
 ## Features & Refactoring Logs
 
-### 1. 25th Anniversary Pyrotechnic Preloader (8.0s Cinematic Experience, 2001-2026)
+### 1. 45th Anniversary Pyrotechnic Preloader (8.0s Cinematic Experience, 1981-2026)
 * **The Ascent (0.0s - 2.0s)**: Set up a full-screen HTML5 `<canvas>` on `z-index: 10000` with a deep midnight navy background. The animation starts with a slower, more anticipation-rich orange spark ascending from the bottom center, leaving a glowing trail.
-* **The Pyrotechnic Blast (2.0s - 4.5s)**: Upon hitting the center, the spark explodes into a massive burst. Embers scatter outwards, and inside the core, a dense constellation of flickering, incandescent white/gold/orange particles forms the number **"25"** (created by reading pixel coordinates from an offscreen text renderer).
-* **Branding & Legacy (4.5s - 6.5s)**: As the embers start to float and settle downwards, the official logo emerges with a dynamic CSS gradient sheen Light Sweep effect. Elegant trajectory subtitle `"25 AÑOS MOVIENDO EL FUTURO"` (Spanish) or `"25 YEARS MOVING THE FUTURE"` (English) fades in.
+* **The Pyrotechnic Blast (2.0s - 4.5s)**: Upon hitting the center, the spark explodes into a massive burst. Embers scatter outwards, and inside the core, a dense constellation of flickering, incandescent white/gold/orange particles forms the number **"45"** (created by reading pixel coordinates from an offscreen text renderer).
+* **Digital Year Counter (2.0s - 3.5s)**: A digital fast-counter container fades in at the bottom of the screen, counting rapidly from **1981** up to **2026** during the particle burning stage.
+* **Branding & Legacy (4.5s - 6.5s)**: As the embers start to float and settle downwards, the official logo emerges with a dynamic CSS gradient sheen Light Sweep effect. Elegant trajectory subtitle `"CELEBRANDO 45 AÑOS DE LIDERAZGO"` (Spanish) or `"CELEBRATING 45 YEARS OF LEADERSHIP"` (English) fades in, while the year counter fades out.
 * **The Reveal (6.5s - 8.0s)**: The preloader triggers a GPU-accelerated Heat Distortion scale and blur transition (`.heat-exit`) to blend smoothly into the Hero section.
 * **Execution & Skips**: The sequence runs on page load and plays every single time the page is loaded (with storage checks bypassed as requested). A "Skip Intro" button displays after a 1.5s delay to allow immediate bypass.
 
-### 2. Global Trajectory Alignment (25 Years, Est. 2001)
-* **Hero Content**: Updated Hero text badges and H1 headers to `"25 Años de Excelencia en Logística de Líquidos" / "25 Years of Excellence in Liquid Logistics"`.
-* **Dynamic Stats Counter**: Aligned the Trust Section counters. The experience stat counter counts up from `0` to exactly `25+` via the intersection observer.
-* **About Us Copy**: Updated all trajectory explanations to "Con 25 años de trayectoria impecable..." / "With 25 years of flawless trajectory...".
-* **Metadata & SEO**: Adjusted the meta tags `<meta name="description">` (English & Spanish), canonical headers, and document titles to reflect 25 years.
-* **Structured Data**: Configured `foundingDate` to `"2001-01-01"` in the LocalBusiness JSON-LD block.
+### 2. Global Trajectory Alignment (45 Years, Est. 1981)
+* **Hero Content**: Updated Hero text badges and H1 headers to `"45 Años de Excelencia en Logística de Líquidos" / "45 Years of Excellence in Liquid Logistics"`.
+* **Dynamic Stats Counter**: Aligned the Trust Section counters. The experience stat counter counts up from `0` to exactly `45+` via the intersection observer.
+* **About Us Copy**: Updated all trajectory explanations to "Con 45 años de trayectoria impecable..." / "With 45 years of flawless trajectory...".
+* **Metadata & SEO**: Adjusted the meta tags `<meta name="description">` (English & Spanish), canonical headers, and document titles to reflect 45 years.
+* **Structured Data**: Configured `foundingDate` to `"1981-01-01"` in the LocalBusiness JSON-LD block.
 
-### 3. AI Concierge Re-training (25 Years, Est. 2001)
-* **System Prompt training**: Configured both server-side (`server.js`) system instruction parameters (Supreme System Instruction) and client-side (`app.js`) offline fallback rules to define Acarrealíquidos as a company founded in 2001 with 25 years of experience.
-* **Direct Answer Hook**: Trained the bot to answer exactly `"Desde el año 2001"` (or `"We operate since 2001"` in English context) when queried *"Since when do you operate?"* / *"¿Desde cuándo operan?"*.
+### 3. AI Concierge Re-training (45 Years, Est. 1981)
+* **System Prompt training**: Configured both server-side (`server.js`) system instruction parameters (Supreme System Instruction) and client-side (`app.js`) offline fallback rules to define Acarrealíquidos as a company founded in 1981 with 45 years of experience.
+* **Direct Answer Hook**: Trained the bot to answer exactly `"Desde el año 1981"` (or `"We operate since 1981"` in English context) when queried *"Since when do you operate?"* / *"¿Desde cuándo operan?"*.
 
 ### 4. Node.js Express Backend Setup
 * **Express Server (`server.js`)**: Added a Node.js Express server to host the static files and expose the `POST /api/chat` route on Render. This enables the client-side `app.js` chatbot fetch call to route directly to a server-side endpoint.
@@ -48,13 +49,13 @@ This walkthrough details the optimizations, bug fixes, and AI integrations deplo
    * Run `npm.cmd install` to download dependencies.
    * Copy `.env.example` to `.env` and fill in your `GEMINI_API_KEY`.
    * Start the server with `node server.js` and open `http://localhost:3000` in your browser.
-2. Observe the **25th Anniversary Pyrotechnic Preloader**:
+2. Observe the **45th Anniversary Pyrotechnic Preloader**:
    * Rocket spark ascends and explodes into orange/gold embers.
-   * Incandescent particles form the number `"25"` at the center.
+   * Incandescent particles form the number `"45"` at the center.
+   * Digital ticker climbs from 1981 to 2026.
    * Brand logo fades in with light sweep, revealing tagline.
    * Preloader does a heat wave distortion exit and fades out.
 3. Test **Skip Intro** logic:
    * Reload the page in a new tab to see the intro. Press the skip button to verify immediate exit.
-   * Refresh the page in the same tab and verify it skips the intro instantly based on `sessionStorage` flag.
 4. Verify that the chatbot is focused and responsive when checking quotes or routes.
-5. In the chat, ask: **`¿Desde cuándo operan?`** or **`Since when do you operate?`** and verify that it answers **`Operamos desde el año 2001.`** or **`We operate since 2001.`**.
+5. In the chat, ask: **`¿Desde cuándo operan?`** or **`Since when do you operate?`** and verify that it answers **`Operamos desde el año 1981.`** or **`We operate since 1981.`**.

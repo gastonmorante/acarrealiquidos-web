@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ctxOff.font = `900 ${Math.floor(110 * scale)}px "Outfit", "Montserrat", "Arial Black", sans-serif`;
                             ctxOff.textAlign = 'center';
                             ctxOff.textBaseline = 'middle';
-                            ctxOff.fillText('25', offscreen.width / 2, offscreen.height / 2);
+                            ctxOff.fillText('45', offscreen.width / 2, offscreen.height / 2);
                             
                             const imgData = ctxOff.getImageData(0, 0, offscreen.width, offscreen.height);
                             
@@ -135,11 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             console.error("precomputePoints failed, falling back to clean slate:", err);
                         }
                         
-                        // Fallback grid of points for 25 if offscreen rendering failed or is empty
+                        // Fallback grid of points for 45 if offscreen rendering failed or is empty
                         if (points.length === 0) {
                             for (let i = -40; i <= 40; i += 6) {
-                                points.push({ targetX: i, targetY: -25 });
-                                points.push({ targetX: i, targetY: 25 });
+                                points.push({ targetX: i, targetY: -45 });
+                                points.push({ targetX: i, targetY: 45 });
                             }
                         }
                     }
@@ -344,6 +344,42 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
                         });
 
+                        // Fast digital counter tick (1981 -> 2026)
+                        const counterContainer = document.getElementById('preloader-counter-container');
+                        const yearCounter = document.getElementById('preloader-year-counter');
+                        if (counterContainer && yearCounter) {
+                            if (window.gsap) {
+                                gsap.to(counterContainer, { opacity: 1, duration: 0.4 });
+                                const countObj = { val: 1981 };
+                                gsap.to(countObj, {
+                                    val: 2026,
+                                    duration: 1.5,
+                                    ease: 'power1.out',
+                                    onUpdate: () => {
+                                        yearCounter.textContent = Math.floor(countObj.val);
+                                    }
+                                });
+                                // Fade out counter when logo emerges (2.5s delay after collision)
+                                gsap.to(counterContainer, { opacity: 0, duration: 0.4, delay: 2.3 });
+                            } else {
+                                counterContainer.style.opacity = '1';
+                                counterContainer.style.transition = 'opacity 0.4s ease-out';
+                                
+                                let currentYear = 1981;
+                                const interval = setInterval(() => {
+                                    currentYear += 1;
+                                    if (currentYear > 2026) {
+                                        currentYear = 2026;
+                                        clearInterval(interval);
+                                        setTimeout(() => {
+                                            counterContainer.style.opacity = '0';
+                                        }, 800);
+                                    }
+                                    yearCounter.textContent = currentYear;
+                                }, 30);
+                            }
+                        }
+
                         // 4.5s: Brand Logo and subtitle emerge (2.5s delay after collision at 2.0s)
                         setTimeout(() => {
                             const logoWrap = document.getElementById('preloader-logo-wrap');
@@ -424,9 +460,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (toggleMobile) toggleMobile.classList.add('lang-en-active');
 
             // Translate head title, desc, lang
-            document.title = "Acarrealíquidos | 25 Aniversario (2001-2026)";
+            document.title = "Acarrealíquidos | 45 Aniversario (1981-2026)";
             const metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc) metaDesc.setAttribute('content', 'Liquid logistics leaders with 25 years of experience. Transport of hydrocarbons, oils, and chemicals from Veracruz to all of Mexico. SCT certified safety.');
+            if (metaDesc) metaDesc.setAttribute('content', 'Liquid logistics leaders with 45 years of experience. Transport of hydrocarbons, oils, and chemicals from Veracruz to all of Mexico. SCT certified safety.');
             document.documentElement.setAttribute('lang', 'en');
 
             if (esLab) esLab.classList.replace('text-white', 'text-white/50');
@@ -451,9 +487,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (toggleMobile) toggleMobile.classList.remove('lang-en-active');
 
             // Translate head title, desc, lang
-            document.title = "Acarrealíquidos | 25 Aniversario (2001-2026)";
+            document.title = "Acarrealíquidos | 45 Aniversario (1981-2026)";
             const metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc) metaDesc.setAttribute('content', 'Líderes en logística de líquidos con 25 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT.');
+            if (metaDesc) metaDesc.setAttribute('content', 'Líderes en logística de líquidos con 45 años de trayectoria. Transporte de hidrocarburos, aceites y químicos desde Veracruz a todo México. Seguridad certificada SCT.');
             document.documentElement.setAttribute('lang', 'es');
 
             if (esLab) esLab.classList.replace('text-white/50', 'text-white');

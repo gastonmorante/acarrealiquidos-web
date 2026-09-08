@@ -11,9 +11,9 @@ import {
   Send, 
   PhoneCall,
   ShieldCheck,
-  Flame,
   Droplet,
   FlaskConical,
+  Layers,
   Compass
 } from "lucide-react";
 import { Slider } from "@/components/atoms/Slider";
@@ -47,17 +47,21 @@ export const QuoteCalculator: React.FC = () => {
   const estimatedHours = Math.round(estimatedKm / 65);
 
   const pricing = useMemo(() => {
-    const ratePerKm = category === "hazmat" ? 58 : category === "corrosive" ? 64 : 48;
+    const ratePerKm = 
+      category === "hazmat_solvents" ? 58 : 
+      category === "dry_bulk_multimodal" ? 46 : 
+      category === "industrial_water" ? 38 : 50;
+    
     const baseRate = estimatedKm * ratePerKm * (tankerType === "full" ? 1.45 : 1.0);
-    const fuelSurcharge = Math.round(baseRate * 0.18);
+    const operationalSurcharge = Math.round(baseRate * 0.18);
     const tolls = Math.round(estimatedKm * 3.8);
-    const subtotal = Math.round(baseRate + fuelSurcharge + tolls);
+    const subtotal = Math.round(baseRate + operationalSurcharge + tolls);
     const iva = Math.round(subtotal * 0.16);
     const total = subtotal + iva;
 
     return {
       baseRate,
-      fuelSurcharge,
+      operationalSurcharge,
       tolls,
       subtotal,
       iva,
@@ -76,13 +80,13 @@ export const QuoteCalculator: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-space-2xl">
           <span className="font-label-badge text-label-badge text-secondary uppercase font-bold tracking-widest block mb-space-2xs">
-            SIMULADOR INDUSTRIAL EN VIVO
+            SIMULADOR TÉCNICO EN VIVO
           </span>
           <h2 className="font-headline-lg text-2xl sm:text-headline-lg font-bold text-primary tracking-tight">
             Calcula tu Ruta Carretera y <span className="text-secondary">Cubicaje de Autotanque</span>
           </h2>
           <p className="mt-space-xs text-on-surface-variant font-body-md text-body-md leading-relaxed">
-            Selecciona el tipo de carga líquida, ajusta el volumen requerido y obtén una estimación basada en distancias oficiales SCT y configuración física del autotanque.
+            Selecciona el tipo de carga especializada, ajusta el volumen requerido y obtén una estimación técnica basada en distancias oficiales SICT y configuración física del equipo.
           </p>
         </div>
 
@@ -93,7 +97,7 @@ export const QuoteCalculator: React.FC = () => {
             {/* Step 1: Liquid Category Selector */}
             <div className="space-y-space-xs">
               <label className="text-xs font-headline-sm font-bold text-primary uppercase tracking-wider block">
-                1. Tipo de Fluido o Carga Líquida
+                1. Tipo de Carga Especializada
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-space-xs">
                 <button
@@ -101,46 +105,46 @@ export const QuoteCalculator: React.FC = () => {
                   onClick={() => setCategory("food_grade")}
                   className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
                     category === "food_grade"
-                      ? "bg-amber-50 border-amber-500 text-amber-950 shadow-sm"
+                      ? "bg-amber-50 border-secondary text-primary shadow-sm"
                       : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <Droplet className={`w-5 h-5 ${category === "food_grade" ? "text-amber-600" : "text-primary"}`} />
+                  <Droplet className={`w-5 h-5 ${category === "food_grade" ? "text-secondary" : "text-primary"}`} />
                   <div>
-                    <div className="text-xs font-bold">Alimenticio</div>
-                    <div className="text-[10px] text-on-surface-variant">Melaza / Aceites</div>
+                    <div className="text-xs font-bold">Grado Alimenticio</div>
+                    <div className="text-[10px] text-on-surface-variant">Aceites y Grasas</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => setCategory("hazmat")}
+                  onClick={() => setCategory("hazmat_solvents")}
                   className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
-                    category === "hazmat"
-                      ? "bg-rose-50 border-secondary text-secondary shadow-sm"
+                    category === "hazmat_solvents"
+                      ? "bg-orange-50 border-secondary text-primary shadow-sm"
                       : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <Flame className={`w-5 h-5 ${category === "hazmat" ? "text-secondary" : "text-primary"}`} />
+                  <FlaskConical className={`w-5 h-5 ${category === "hazmat_solvents" ? "text-secondary" : "text-primary"}`} />
                   <div>
-                    <div className="text-xs font-bold">Hidrocarburos</div>
-                    <div className="text-[10px] text-on-surface-variant">Combustibles HazMat</div>
+                    <div className="text-xs font-bold">Alcoholes y Solventes</div>
+                    <div className="text-[10px] text-on-surface-variant">Mat. Peligrosos SICT</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
-                  onClick={() => setCategory("corrosive")}
+                  onClick={() => setCategory("dry_bulk_multimodal")}
                   className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
-                    category === "corrosive"
-                      ? "bg-blue-50 border-primary text-primary shadow-sm"
+                    category === "dry_bulk_multimodal"
+                      ? "bg-slate-100 border-primary text-primary shadow-sm"
                       : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <FlaskConical className={`w-5 h-5 ${category === "corrosive" ? "text-primary" : "text-on-surface-variant"}`} />
+                  <Layers className={`w-5 h-5 ${category === "dry_bulk_multimodal" ? "text-primary" : "text-on-surface-variant"}`} />
                   <div>
-                    <div className="text-xs font-bold">Químicos</div>
-                    <div className="text-[10px] text-on-surface-variant">Ácidos Corrosivos</div>
+                    <div className="text-xs font-bold">Plataformas / Melaza</div>
+                    <div className="text-[10px] text-on-surface-variant">40ft &bull; Carga General</div>
                   </div>
                 </button>
 
@@ -184,7 +188,7 @@ export const QuoteCalculator: React.FC = () => {
             {/* Step 3: Route Origin & Destination */}
             <div className="space-y-space-xs pt-space-xs">
               <label className="text-xs font-headline-sm font-bold text-primary uppercase tracking-wider block">
-                3. Ruta Carretera Oficial SCT
+                3. Ruta Carretera Oficial SICT
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                 <div className="space-y-1">
@@ -258,11 +262,11 @@ export const QuoteCalculator: React.FC = () => {
                 <span className="font-bold text-primary">${pricing.baseRate.toLocaleString()} MXN</span>
               </div>
               <div className="flex justify-between">
-                <span>Ajuste Diésel Normativo:</span>
-                <span>${pricing.fuelSurcharge.toLocaleString()} MXN</span>
+                <span>Ajuste Operativo Carretero:</span>
+                <span>${pricing.operationalSurcharge.toLocaleString()} MXN</span>
               </div>
               <div className="flex justify-between">
-                <span>Casetas SCT Estimadas:</span>
+                <span>Casetas y Peajes SICT:</span>
                 <span>${pricing.tolls.toLocaleString()} MXN</span>
               </div>
               <div className="flex justify-between text-on-surface-variant/80">
@@ -318,7 +322,7 @@ export const QuoteCalculator: React.FC = () => {
                   className="w-full flex items-center justify-center gap-2 rounded-xl bg-secondary hover:bg-secondary-container py-3 px-4 text-on-secondary font-button-text text-sm font-bold shadow-md transition-all hover:shadow-lg mt-2"
                 >
                   <Send className="w-4 h-4" />
-                  <span>Confirmar y Solicitar Asignación de Autotanque</span>
+                  <span>Confirmar y Solicitar Asignación de Unidad</span>
                 </button>
               </form>
             ) : (
@@ -332,10 +336,10 @@ export const QuoteCalculator: React.FC = () => {
                   ¡Solicitud Registrada en Torre de Control!
                 </h4>
                 <p className="text-xs text-emerald-800 leading-relaxed">
-                  Un despachador senior de la central en Amatlán verificará la disponibilidad de autotanques grado <strong>{category}</strong> y te contactará en menos de 15 minutos.
+                  Un despachador técnico de la base en Amatlán de los Reyes verificará la disponibilidad de unidades y te contactará en breve.
                 </p>
                 <a
-                  href={`https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion%20de%20${liters}%20litros%20de%20${category}%20para%20la%20ruta%20${origin}%20a%20${destination}.`}
+                  href={`https://wa.me/522717128316?text=Hola,%20estoy%20interesado%20en%20un%20servicio%20de%20transporte%20especializado.%20Ruta:%20${encodeURIComponent(origin)}%20a%20${encodeURIComponent(destination)},%20Volumen:%20${liters}%20litros.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors mt-2"
@@ -348,7 +352,7 @@ export const QuoteCalculator: React.FC = () => {
 
             <div className="flex items-center justify-center gap-1.5 text-[11px] text-on-surface-variant pt-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Sujeto a verificación física de compatibilidad y NOM-068-SCT.</span>
+              <span>Sujeto a verificación de compatibilidad física y NOM-068-SCT.</span>
             </div>
           </div>
         </div>

@@ -110,7 +110,7 @@ export const ActiveOrderCard: React.FC<ActiveOrderCardProps> = ({
             78 <span className="text-xs font-normal text-slate-400">km/h</span>
           </div>
           <span className="text-[10px] font-mono text-emerald-400 mt-1">
-            Dentro de límite SCT (80 km/h)
+            Dentro de límite SICT (80 km/h)
           </span>
         </div>
 

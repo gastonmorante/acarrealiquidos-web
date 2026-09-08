@@ -1,17 +1,17 @@
 export type LiquidCategory = 
-  | "hazmat"          // Hidrocarburos y Químicos Peligrosos (SCT Clase 3, 8, 9)
-  | "food_grade"      // Melaza, Aceites Vegetales, Jarabes (COFEPRIS)
-  | "corrosive"       // Ácido Sulfúrico, Sosa Cáustica (Acero Inoxidable 316L)
-  | "industrial_water";// Agua tratada, residual o de proceso industrial
+  | "food_grade"          // Aceites y Grasas Vegetales (Kosher OU, Cofepris, Acero Inoxidable Térmico)
+  | "hazmat_solvents"     // Alcoholes y Solventes (Materiales y Residuos Peligrosos SICT, Acero Inox)
+  | "dry_bulk_multimodal" // Plataformas 40ft, Portacontenedores, Cajas Secas y Melaza
+  | "industrial_water";   // Agua tratada o de proceso industrial
 
 export interface LiquidProduct {
   id: string;
   name: string;
   category: LiquidCategory;
-  density: number; // kg/L (e.g., 1.4 for molasses, 0.85 for diesel)
+  density: number; // kg/L (e.g., 0.92 for vegetable oil, 1.4 for molasses)
   requiresInsulatedTank: boolean;
   hazmatClass?: string;
-  recommendedMaterial: "Acero Inoxidable 316L" | "Acero Inoxidable 304" | "Acero al Carbón Grado SCT";
+  recommendedMaterial: "Acero Inoxidable 316L" | "Acero Inoxidable 304" | "Plataforma / Chasis 40ft";
 }
 
 export type TankerConfiguration = 
@@ -69,7 +69,7 @@ export interface DriverInfo {
   id: string;
   name: string;
   licenseNumber: string;
-  licenseType: "SCT Tipo E (Materiales Peligrosos)" | "SCT Tipo B";
+  licenseType: "SICT Tipo E (Materiales Peligrosos)" | "SICT Tipo B";
   yearsExperience: number;
   phoneNumber: string;
   photoUrl: string;

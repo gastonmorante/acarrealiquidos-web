@@ -34,7 +34,7 @@ export const InfrastructureSection: React.FC = () => {
               <span className="font-label-badge text-xs font-bold uppercase">Talleres Certificados Propios</span>
             </div>
             <h3 className="font-headline-sm text-headline-sm text-primary font-bold">
-              Mantenimiento Preventivo NOM-068-SCT
+              Mantenimiento Preventivo NOM-068-SICT
             </h3>
             <p className="mt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
               Operamos centros de servicio propios en Veracruz con técnicos mecánicos certificados. Mantenemos inventario de refacciones críticas al 100% y convenios directos con fabricantes para erradicar retrasos por fallas electromecánicas.

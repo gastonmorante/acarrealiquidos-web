@@ -28,7 +28,7 @@ export const AiConciergeDrawer: React.FC = () => {
     {
       role: "assistant",
       content:
-        "Hola, soy el Consultor de Estrategia Logística de Acarrealíquidos S.A. de C.V. (45 años de liderazgo en autotransporte de líquidos, fundada en 1981). ¿En qué puedo apoyarte hoy? Puedes consultarme sobre nuestras rutas, flota de autotanques 304/316L, certificaciones SCT/COFEPRIS o solicitar una cotización inmediata.",
+        "Hola, soy el Consultor Técnico de Acarrea Líquidos S.A. de C.V. (45 años de trayectoria en el transporte especializado, fundada en 1981). ¿En qué puedo apoyarte hoy? Puedes consultarme sobre transporte de grado alimenticio (Kosher/Cofepris), alcoholes y solventes en acero inoxidable, o solicitar una cotización técnica inmediata.",
     },
   ]);
 
@@ -95,9 +95,9 @@ export const AiConciergeDrawer: React.FC = () => {
   };
 
   const quickQuestions = [
-    "¿Qué capacidad tienen sus autotanques?",
-    "¿Tienen permisos SCT para materiales peligrosos?",
-    "¿Cómo transportan melaza y aceites comestibles?",
+    "¿Qué certificaciones tienen para transporte grado alimenticio?",
+    "¿Cómo transportan alcoholes y solventes en acero inoxidable?",
+    "¿Cuál es la cobertura desde Amatlán de los Reyes, Veracruz?",
   ];
 
   return (

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { BrandLogo } from "@/components/atoms/BrandLogo";
 import { 
   ArrowLeft, 
   Radio, 
@@ -43,15 +44,7 @@ export default function DashboardPage() {
             <ArrowLeft className="w-5 h-5" />
           </Link>
           <div className="flex items-center gap-3">
-            <div className="relative w-32 h-8">
-              <Image
-                src="/assets/logo.webp"
-                alt="Acarrealíquidos"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+            <BrandLogo variant="light" size="sm" showTagline={false} />
             <span className="hidden sm:inline text-slate-600">|</span>
             <div className="hidden sm:flex items-center gap-2">
               <span className="text-xs font-mono font-bold text-white">
@@ -118,7 +111,7 @@ export default function DashboardPage() {
 
           <div className="glass-panel p-4 rounded-2xl border border-white/10">
             <div className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5 uppercase">
-              <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> Estatus Normativo SCT
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> Estatus Normativo SICT
             </div>
             <div className="text-2xl font-mono font-black text-emerald-400 mt-1">Auditado</div>
             <div className="text-[10px] font-mono text-slate-400 mt-0.5">NOM-068 Vigente</div>

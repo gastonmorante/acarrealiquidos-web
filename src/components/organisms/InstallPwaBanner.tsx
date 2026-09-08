@@ -64,7 +64,7 @@ export const InstallPwaBanner: React.FC = () => {
             </div>
             <div>
               <h4 className="text-sm font-bold text-white font-sans">
-                Instalar Acarrealíquidos App
+                Instalar Acarrea Líquidos App
               </h4>
               <p className="text-[11px] font-sans text-slate-300">
                 Rastreo satelital y cotizador con experiencia nativa

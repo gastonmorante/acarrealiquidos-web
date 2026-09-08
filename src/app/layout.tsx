@@ -33,9 +33,22 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://acarrealiquidos.com.mx"),
-  title: "Acarrealíquidos | 45 Años de Excelencia en Logística de Líquidos y HazMat (1981-2026)",
+  title: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
   description:
-    "Autoridad y máxima seguridad en el transporte especializado de HazMat, grado alimenticio y químicos corrosivos. Conectando a la industria mexicana con telemetría satelital, talleres propios y 45 años de liderazgo.",
+    "Transporte grado alimenticio Veracruz y transporte de alcoholes y solventes México. Acarrea Líquidos Amatlán: Solución confiable y máxima seguridad en el transporte para el sector industrial bajo normas SICT, Kosher y Cofepris.",
+  keywords: [
+    "Transporte grado alimenticio Veracruz",
+    "Transporte de alcoholes y solventes México",
+    "Acarrea Líquidos Amatlán",
+    "Acarrea Líquidos",
+    "Transporte de aceites y grasas vegetales",
+    "Certificación Kosher Orthodox Union",
+    "Lavado sanitario certificado Cofepris",
+    "Plataformas 40 pies",
+    "Transporte de melaza",
+    "Normas SICT NOM-012 NOM-068 NOM-035",
+    "Amatlán de los Reyes Veracruz",
+  ],
   manifest: "/manifest.webmanifest",
   icons: {
     icon: "/favicon.ico",
@@ -45,24 +58,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: "https://acarrealiquidos.com.mx/",
-    title: "Acarrealíquidos | Logística Especializada de Líquidos y HazMat",
+    title: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
     description:
-      "45 años de excelencia en transporte terrestre de líquidos industriales, químicos y grado alimenticio. Cobertura nacional con monitoreo satelital 24/7.",
-    siteName: "Acarrealíquidos",
+      "Transporte grado alimenticio Veracruz y transporte de alcoholes y solventes México. Operando desde Amatlán de los Reyes, Veracruz, con cobertura en territorio nacional.",
+    siteName: "Acarrea Líquidos",
     images: [
       {
         url: "/assets/hero_tanker.webp",
         width: 1200,
         height: 630,
-        alt: "Autotanque Acarrealíquidos",
+        alt: "Acarrea Líquidos - Equipo Especializado",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acarrealíquidos | Logística Especializada de Líquidos y HazMat",
+    title: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
     description:
-      "45 años de excelencia en transporte terrestre de líquidos industriales, químicos y grado alimenticio.",
+      "Solución confiable y máxima seguridad en el transporte para el sector industrial. Grado alimenticio, alcoholes y solventes.",
     images: ["/assets/hero_tanker.webp"],
   },
 };

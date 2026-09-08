@@ -20,8 +20,8 @@ export const OrdersTable: React.FC = () => {
     },
     {
       id: "ACQ-8109-MX",
-      product: "Diésel Ultra Bajo Azufre (UBA)",
-      route: "Minatitlán, Ver. → Puebla, Pue.",
+      product: "Aceite de Girasol Grado Alimenticio",
+      route: "Amatlán, Ver. → Puebla, Pue.",
       volume: "30,000 L",
       date: "04 Sep 2026",
       status: "delivered",
@@ -29,8 +29,8 @@ export const OrdersTable: React.FC = () => {
     },
     {
       id: "ACQ-8082-MX",
-      product: "Sosa Cáustica al 50%",
-      route: "Coatzacoalcos, Ver. → CDMX",
+      product: "Alcohol Etílico Desnaturalizado (Solvente)",
+      route: "Amatlán, Ver. → CDMX",
       volume: "28,000 L",
       date: "29 Ago 2026",
       status: "delivered",

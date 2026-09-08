@@ -21,36 +21,36 @@ export const VolumeDisplay: React.FC<VolumeDisplayProps> = ({
   const fillPercentage = Math.min(100, Math.max(10, (liters / maxCapacity) * 100));
 
   // Liquid styling according to category
-  const liquidStyles = {
-    hazmat: {
-      color: "from-amber-600 via-orange-500 to-amber-400",
-      waveColor: "rgba(255, 107, 0, 0.4)",
-      label: "Hidrocarburos / Grado Combustible",
-    },
+  const liquidStyles: Record<LiquidCategory, { color: string; waveColor: string; label: string }> = {
     food_grade: {
       color: "from-amber-800 via-amber-600 to-yellow-500",
       waveColor: "rgba(217, 119, 6, 0.4)",
-      label: "Melaza / Aceites Grado Alimenticio",
+      label: "Aceites y Grasas Vegetales (Kosher OU)",
     },
-    corrosive: {
-      color: "from-sky-700 via-cyan-500 to-teal-400",
-      waveColor: "rgba(6, 182, 212, 0.4)",
-      label: "Químicos Corrosivos / Ácidos",
+    hazmat_solvents: {
+      color: "from-orange-700 via-orange-500 to-amber-400",
+      waveColor: "rgba(249, 115, 22, 0.4)",
+      label: "Alcoholes y Solventes (Acero Inox SICT)",
+    },
+    dry_bulk_multimodal: {
+      color: "from-stone-700 via-amber-900 to-amber-950",
+      waveColor: "rgba(120, 53, 15, 0.4)",
+      label: "Melaza / Plataformas 40ft Carga General",
     },
     industrial_water: {
       color: "from-blue-700 via-blue-500 to-cyan-400",
       waveColor: "rgba(59, 130, 246, 0.4)",
-      label: "Agua Industrial Tratada",
+      label: "Agua Industrial Tratada / Proceso",
     },
   };
 
-  const currentLiquid = liquidStyles[category];
+  const currentLiquid = liquidStyles[category] || liquidStyles.food_grade;
 
   return (
     <div className="w-full bg-slate-900/90 border border-white/10 rounded-2xl p-5 backdrop-blur-xl space-y-4">
       <div className="flex justify-between items-center text-xs font-mono">
         <span className="text-slate-400 flex items-center gap-1.5">
-          <Gauge className="w-4 h-4 text-safety-orange" />
+          <Gauge className="w-4 h-4 text-secondary" />
           Nivel de Carga Proyectado
         </span>
         <span className="font-bold text-white">
@@ -92,13 +92,13 @@ export const VolumeDisplay: React.FC<VolumeDisplayProps> = ({
       {/* Equipment Configuration Callout */}
       <div className="flex items-center justify-between text-xs font-mono pt-1">
         <div className="flex items-center gap-1.5 text-slate-300">
-          <Info className="w-3.5 h-3.5 text-safety-orange" />
+          <Info className="w-3.5 h-3.5 text-secondary" />
           <span>Unidad Requerida:</span>
         </div>
         <span className="font-bold text-white px-2.5 py-1 rounded-md bg-white/5 border border-white/10">
           {tankerType === "full"
-            ? "Tractocamión con Doble Semirremolque (Full 45k L)"
-            : "Tractocamión Sencillo (25k-30k L)"}
+            ? "Tractocamión con Doble Semirremolque (Full 45,000 L)"
+            : "Tractocamión Sencillo (25,000 - 30,000 L)"}
         </span>
       </div>
     </div>

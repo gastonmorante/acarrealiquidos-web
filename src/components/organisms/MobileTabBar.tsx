@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Calculator, Activity, PhoneCall } from "lucide-react";
+import { Home, Calculator, Activity, MessageCircle } from "lucide-react";
 
 export const MobileTabBar: React.FC = () => {
   const pathname = usePathname();
@@ -25,14 +25,14 @@ export const MobileTabBar: React.FC = () => {
 
       {/* Quote Tab */}
       <Link
-        href="/#cotizacion"
+        href="/#contacto"
         className="flex flex-col items-center gap-1 py-1 px-3 text-on-surface-variant hover:text-secondary transition-all"
       >
         <Calculator className="w-5 h-5" />
         <span className="text-[10px] font-label-badge tracking-tight">Cotizar</span>
       </Link>
 
-      {/* Active GPS Dashboard Tab (Highlighted with radar beacon) */}
+      {/* Active GPS Dashboard Tab */}
       <Link
         href="/dashboard"
         className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition-all relative ${
@@ -53,12 +53,12 @@ export const MobileTabBar: React.FC = () => {
 
       {/* WhatsApp Dispatch Call Tab */}
       <a
-        href="https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20atencion%20inmediata%20de%20despacho."
+        href="https://wa.me/522717128316?text=Hola,%20estoy%20interesado%20en%20un%20servicio%20de%20transporte%20especializado."
         target="_blank"
         rel="noopener noreferrer"
         className="flex flex-col items-center gap-1 py-1 px-3 text-on-surface-variant hover:text-emerald-600 transition-all"
       >
-        <PhoneCall className="w-5 h-5 text-emerald-600" />
+        <MessageCircle className="w-5 h-5 text-emerald-600" />
         <span className="text-[10px] font-label-badge tracking-tight">Despacho</span>
       </a>
     </div>

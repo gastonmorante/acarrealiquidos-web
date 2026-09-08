@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Globe, Activity, ArrowRight, FileText } from "lucide-react";
+import { Menu, X, Globe, Activity, ArrowRight } from "lucide-react";
+import { BrandLogo } from "@/components/atoms/BrandLogo";
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -20,40 +21,25 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: lang === "es" ? "Inicio" : "Home", href: "#" },
-    { name: lang === "es" ? "Nosotros" : "About", href: "#nosotros" },
-    { name: lang === "es" ? "Especialidades" : "Specialties", href: "#especialidades" },
-    { name: lang === "es" ? "Flota" : "Fleet", href: "#flota" },
-    { name: lang === "es" ? "Infraestructura" : "Infrastructure", href: "#infraestructura" },
-    { name: lang === "es" ? "Testimonios" : "Testimonials", href: "#testimonios" },
+    { name: lang === "es" ? "Servicios" : "Services", href: "#servicios" },
+    { name: lang === "es" ? "Equipo Especializado" : "Fleet", href: "#equipo" },
+    { name: lang === "es" ? "Cumplimiento SICT" : "Compliance", href: "#cumplimiento" },
+    { name: lang === "es" ? "Contacto" : "Contact", href: "#contacto" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/30">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/30 transition-all duration-200">
       <div className="h-20 max-w-[80rem] mx-auto px-gutter-desktop flex items-center justify-between gap-space-md">
-        {/* Brand Monogram & Title */}
-        <div className="flex items-center gap-space-sm">
-          <Link href="/" className="flex items-center gap-space-xs group">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary text-on-primary font-headline-sm text-headline-sm font-bold tracking-tight shadow-sm transition-transform duration-200 group-hover:scale-105">
-              AL
-            </div>
-            <div className="flex flex-col">
-              <span className="font-headline-sm text-headline-sm leading-none text-primary font-bold tracking-tight">
-                ACARREALÍQUIDOS
-              </span>
-              <span className="font-label-badge text-[10px] text-on-surface-variant uppercase tracking-wider mt-space-2xs">
-                Logística Especializada · Est. 1981
-              </span>
-            </div>
-          </Link>
-        </div>
+        {/* Brand Logo & Name */}
+        <BrandLogo />
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden xl:flex items-center gap-space-xs">
+        <nav className="hidden lg:flex items-center gap-space-xs">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="px-space-sm py-space-xs font-button-text text-button-text text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors rounded-lg text-sm"
+              className="px-space-sm py-space-xs font-button-text text-button-text text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors rounded-lg text-sm font-semibold"
             >
               {link.name}
             </Link>
@@ -63,11 +49,11 @@ export const Navbar: React.FC = () => {
         {/* Language & Actions */}
         <div className="flex items-center gap-space-sm">
           {/* Language Switcher Pill */}
-          <div className="hidden sm:flex items-center bg-surface-container-low p-space-2xs rounded-full">
+          <div className="hidden sm:flex items-center bg-surface-container-low p-1 rounded-full border border-outline-variant/30">
             <button
               type="button"
               onClick={() => setLang("es")}
-              className={`px-space-xs py-space-2xs rounded-full font-label-badge text-[11px] transition-all ${
+              className={`px-space-xs py-1 rounded-full font-label-badge text-[11px] transition-all ${
                 lang === "es"
                   ? "bg-surface-container-lowest text-primary shadow-sm font-bold"
                   : "text-on-surface-variant hover:text-on-surface"
@@ -78,7 +64,7 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setLang("en")}
-              className={`px-space-xs py-space-2xs rounded-full font-label-badge text-[11px] transition-all ${
+              className={`px-space-xs py-1 rounded-full font-label-badge text-[11px] transition-all ${
                 lang === "en"
                   ? "bg-surface-container-lowest text-primary shadow-sm font-bold"
                   : "text-on-surface-variant hover:text-on-surface"
@@ -91,7 +77,7 @@ export const Navbar: React.FC = () => {
           {/* Telemetry / GPS Live Link */}
           <Link
             href="/dashboard"
-            className="hidden md:inline-flex items-center gap-space-2xs px-space-sm py-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-button-text text-xs transition-colors"
+            className="hidden md:inline-flex items-center gap-1.5 px-space-sm py-space-xs rounded-lg bg-surface-container-low hover:bg-surface-container text-primary font-button-text text-xs transition-colors font-semibold border border-outline-variant/20"
           >
             <Activity className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
             <span>Rastreo GPS</span>
@@ -99,7 +85,7 @@ export const Navbar: React.FC = () => {
 
           {/* Cotizar CTA Button */}
           <Link
-            href="#cotizacion"
+            href="#contacto"
             className="inline-flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-secondary hover:bg-secondary-container text-on-secondary font-button-text text-button-text shadow-sm transition-all"
           >
             <span className="material-symbols-outlined text-lg leading-none">request_quote</span>
@@ -111,8 +97,8 @@ export const Navbar: React.FC = () => {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-lg bg-surface-container-low text-primary hover:bg-surface-container transition-colors"
-            aria-label="Toggle menu"
+            className="lg:hidden p-2 rounded-lg bg-surface-container-low text-primary hover:bg-surface-container transition-colors"
+            aria-label="Abrir menú"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -126,13 +112,13 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="xl:hidden bg-surface-container-lowest border-b border-outline-variant/30 px-6 py-5 shadow-lg"
+            className="lg:hidden bg-surface-container-lowest border-b border-outline-variant/30 px-6 py-5 shadow-lg"
           >
             <div className="flex justify-between items-center pb-3 border-b border-surface-container">
               <span className="font-label-badge text-xs uppercase font-bold text-secondary">
-                ⭐ 45 Años de Liderazgo (1981-2026)
+                ⭐ 45 años de trayectoria en el transporte especializado
               </span>
-              <div className="flex items-center bg-surface-container-low p-1 rounded-full">
+              <div className="flex items-center bg-surface-container-low p-1 rounded-full border border-outline-variant/30">
                 <button
                   type="button"
                   onClick={() => setLang("es")}
@@ -177,7 +163,7 @@ export const Navbar: React.FC = () => {
                 <span>Rastreo GPS</span>
               </Link>
               <Link
-                href="#cotizacion"
+                href="#contacto"
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-secondary text-on-secondary text-xs font-semibold"
               >

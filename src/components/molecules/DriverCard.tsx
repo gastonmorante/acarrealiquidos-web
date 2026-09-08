@@ -14,7 +14,7 @@ export const DriverCard: React.FC = () => {
           Operador y Unidad Asignada
         </div>
         <Badge variant="sct" className="text-[10px]">
-          CERTIFICADO SCT
+          CERTIFICADO SICT
         </Badge>
       </div>
 
@@ -30,7 +30,7 @@ export const DriverCard: React.FC = () => {
             Carlos Mendoza Silva
           </h4>
           <div className="text-xs font-mono text-slate-400 mt-0.5">
-            Licencia Federal SCT: <strong className="text-amber-400">Tipo E (HazMat)</strong>
+            Licencia Federal SICT: <strong className="text-amber-400">Tipo E (Materiales Peligrosos)</strong>
           </div>
           <div className="text-[11px] font-mono text-emerald-400 flex items-center gap-1 mt-1">
             <Award className="w-3.5 h-3.5" /> 14 años de trayectoria sin siniestros
@@ -45,7 +45,7 @@ export const DriverCard: React.FC = () => {
         </div>
         <div className="flex justify-between">
           <span className="text-slate-500">Placas Federales:</span>
-          <span>74-AK-2X (SCT)</span>
+          <span>74-AK-2X (SICT)</span>
         </div>
         <div className="flex justify-between">
           <span className="text-slate-500">Semirremolques:</span>

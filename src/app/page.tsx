@@ -24,7 +24,7 @@ export default function HomePage() {
       {/* 3. Trayectoria y Gobernanza (45 Años de Liderazgo & Tabs) */}
       <AboutGovernance />
 
-      {/* 4. Especialidades (Hidrocarburos, Alimenticio, Químicos, Multimodal) */}
+      {/* 4. Especialidades (Grado Alimenticio, Materiales Peligrosos, Plataformas y Carga General) */}
       <SpecialtiesSection />
 
       {/* 5. Flota y Equipo (Interactive Fleet Inspector) */}

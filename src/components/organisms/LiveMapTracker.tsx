@@ -71,7 +71,7 @@ export const LiveMapTracker: React.FC<LiveMapTrackerProps> = ({
                 : "bg-slate-900/60 border-white/10 text-slate-400 hover:text-white"
             }`}
           >
-            Carretera SCT
+            Carretera SICT
           </button>
           <button
             onClick={() => setMapMode("satellite")}
@@ -182,7 +182,7 @@ export const LiveMapTracker: React.FC<LiveMapTrackerProps> = ({
       <div className="p-4 bg-slate-900/60 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
         <div className="flex items-center gap-1.5 text-slate-400">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
-          <span>Geocerca SCT: <strong>100% en Corredor Seguro</strong></span>
+          <span>Geocerca SICT: <strong>100% en Corredor Seguro</strong></span>
         </div>
 
         <div className="flex items-center gap-3">

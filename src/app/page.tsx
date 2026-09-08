@@ -1,38 +1,54 @@
 import React from "react";
 import { Navbar } from "@/components/organisms/Navbar";
 import { HeroSection } from "@/components/organisms/HeroSection";
-import { BentoGridServices } from "@/components/organisms/BentoGridServices";
-import { QuoteCalculator } from "@/components/organisms/QuoteCalculator";
+import { AboutGovernance } from "@/components/organisms/AboutGovernance";
+import { SpecialtiesSection } from "@/components/organisms/SpecialtiesSection";
 import { FleetShowcase } from "@/components/organisms/FleetShowcase";
-import { TrustSection } from "@/components/organisms/TrustSection";
+import { InfrastructureSection } from "@/components/organisms/InfrastructureSection";
+import { QuoteCalculator } from "@/components/organisms/QuoteCalculator";
+import { TestimonialsSection } from "@/components/organisms/TestimonialsSection";
+import { TechnicalQuoteSection } from "@/components/organisms/TechnicalQuoteSection";
 import { Footer } from "@/components/organisms/Footer";
+import { FloatingWhatsApp } from "@/components/organisms/FloatingWhatsApp";
 import { MobileTabBar } from "@/components/organisms/MobileTabBar";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-deep-navy-950 text-slate-100 relative selection:bg-safety-orange selection:text-white">
-      {/* Top Floating Glassmorphic Navigation */}
+    <main className="min-h-screen bg-background text-on-surface relative selection:bg-secondary selection:text-white pb-16 md:pb-0">
+      {/* 1. Fixed Top Header Navigation */}
       <Navbar />
 
-      {/* Hero Section with Silicon Valley Visuals */}
+      {/* 2. Hero Section with Glow Nodes & Metric KPI Cards */}
       <HeroSection />
 
-      {/* Bento Grid Services */}
-      <BentoGridServices />
+      {/* 3. Trayectoria y Gobernanza (45 Años de Liderazgo & Tabs) */}
+      <AboutGovernance />
 
-      {/* Interactive Liquid Logistics & Truck Calculator */}
-      <QuoteCalculator />
+      {/* 4. Especialidades (Hidrocarburos, Alimenticio, Químicos, Multimodal) */}
+      <SpecialtiesSection />
 
-      {/* Fleet & Tanker Infrastructure Showcase */}
+      {/* 5. Flota y Equipo (Interactive Fleet Inspector) */}
       <FleetShowcase />
 
-      {/* 45 Years Heritage & Trust Credentials */}
-      <TrustSection />
+      {/* 6. Infraestructura Técnica y Control de Rutas (Bento Grid) */}
+      <InfrastructureSection />
 
-      {/* Corporate & Regulatory Footer */}
+      {/* 7. Simulador Interactivo de Cubicaje y Cotización */}
+      <QuoteCalculator />
+
+      {/* 8. La Voz de los Líderes Industriales de México (Testimonios) */}
+      <TestimonialsSection />
+
+      {/* 9. Solicite una Cotización Técnica Formal */}
+      <TechnicalQuoteSection />
+
+      {/* 10. Corporate Footer */}
       <Footer />
 
-      {/* Native App Mobile Bottom Tab Bar */}
+      {/* 11. Floating WhatsApp Tráfico Button */}
+      <FloatingWhatsApp />
+
+      {/* 12. Mobile Bottom Tab Bar */}
       <MobileTabBar />
     </main>
   );

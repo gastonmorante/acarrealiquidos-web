@@ -1,162 +1,143 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { 
-  ShieldCheck, 
-  Truck, 
-  Activity, 
-  MapPin, 
-  Award, 
-  ChevronRight,
-  Sparkles
-} from "lucide-react";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-16 overflow-hidden">
-      {/* Background Tanker Visual with Cinematic Overlays */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/hero_tanker.webp"
-          alt="Acarrealíquidos Autotanque Especializado"
-          fill
-          priority
-          className="object-cover object-center scale-105 opacity-35 filter contrast-125"
-        />
-        {/* Multilayered radial and linear dark gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-deep-navy-950 via-deep-navy-950/80 to-deep-navy-950/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,107,0,0.15),rgba(255,255,255,0))]" />
-        <div className="absolute inset-0 grid-bg-pattern opacity-40" />
-      </div>
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-surface via-surface-bright to-surface-container-low pb-space-3xl pt-28">
+      {/* Atmospheric Glow Nodes */}
+      <div className="pointer-events-none absolute -left-48 top-0 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+      <div className="pointer-events-none absolute -right-48 top-20 h-96 w-96 rounded-full bg-secondary/5 blur-3xl"></div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center text-center">
-        {/* Operational Status Pill */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/80 border border-white/15 backdrop-blur-xl shadow-glass-card mb-8"
-        >
-          <span className="flex h-2 w-2 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-          </span>
-          <span className="text-xs font-mono font-medium text-slate-200">
-            DESPACHO ACTIVO · BASE AMATLÁN DE LOS REYES, VERACRUZ
-          </span>
-          <span className="text-slate-600 hidden sm:inline">|</span>
-          <span className="hidden sm:inline-flex text-xs font-mono text-amber-400 font-semibold">
-            45 AÑOS (1981-2026)
-          </span>
-        </motion.div>
+      <div className="mx-auto max-w-[80rem] px-gutter-desktop">
+        <div className="flex flex-col items-center text-center">
+          {/* Interactive Pill Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-space-xs rounded-full bg-surface-container-lowest px-space-md py-space-2xs shadow-sm transition-all hover:shadow-md border border-outline-variant/30"
+          >
+            <span className="flex h-2.5 w-2.5 relative">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary opacity-75"></span>
+              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-secondary"></span>
+            </span>
+            <span className="font-label-badge text-label-badge text-primary font-bold uppercase tracking-wider">
+              ⭐ 45 Años de Liderazgo Industrial • Certificación SCT &amp; ISO 9001
+            </span>
+          </motion.div>
 
-        {/* H1 Primary Silicon Valley Typography */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-          className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold text-white tracking-tight leading-[1.1] max-w-5xl"
-        >
-          Logística Inteligente de Líquidos a{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-safety-orange via-orange-400 to-amber-300 orange-glow-text">
-            Escala Industrial
-          </span>
-        </motion.h1>
+          {/* Headline & Typography */}
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-space-md max-w-4xl font-display-hero text-3xl sm:text-5xl lg:text-display-hero tracking-tight text-primary font-extrabold"
+          >
+            45 Años de Excelencia en{" "}
+            <span className="bg-gradient-to-r from-primary via-primary-container to-secondary bg-clip-text text-transparent">
+              Logística de Líquidos
+            </span>{" "}
+            y HazMat
+          </motion.h1>
 
-        {/* Subtitle with High-Value Business Copy */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-          className="mt-6 text-base sm:text-xl text-slate-300 max-w-3xl font-sans leading-relaxed"
-        >
-          Autotransporte terrestre especializado en <strong className="text-white font-semibold">hidrocarburos</strong>,{" "}
-          <strong className="text-white font-semibold">grado alimenticio</strong> y{" "}
-          <strong className="text-white font-semibold">químicos corrosivos</strong>. Máxima seguridad certificada{" "}
-          <span className="text-safety-orange font-mono font-semibold">SCT</span> y{" "}
-          <span className="text-emerald-400 font-mono font-semibold">COFEPRIS</span> con telemetría satelital 24/7.
-        </motion.p>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-space-md max-w-2xl font-body-lg text-body-lg text-on-surface-variant leading-relaxed"
+          >
+            Autoridad y máxima seguridad en el transporte especializado de hidrocarburos, químicos y alimentos. Conectando a la industria mexicana con telemetría satelital, talleres propios certificados y puntualidad absoluta.
+          </motion.p>
 
-        {/* Action CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.45, ease: "easeOut" }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4 w-full sm:w-auto"
-        >
-          <Link href="#cotizador" className="w-full sm:w-auto">
-            <Button
-              variant="primary"
-              size="lg"
-              shimmer
-              leftIcon={<Truck className="w-5 h-5" />}
-              rightIcon={<ChevronRight className="w-4 h-4" />}
-              className="w-full sm:w-auto text-sm sm:text-base font-bold shadow-glow"
+          {/* CTA Cluster */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-space-lg flex flex-wrap items-center justify-center gap-space-md"
+          >
+            <Link
+              href="#cotizacion"
+              className="group inline-flex items-center gap-space-xs rounded-lg bg-secondary px-space-xl py-space-sm font-button-text text-button-text text-on-secondary shadow-md transition-all hover:bg-secondary-container hover:shadow-lg"
             >
-              Cotizar Embarque en Tiempo Real
-            </Button>
-          </Link>
+              <span>Solicitar Cotización Inmediata</span>
+              <span className="material-symbols-outlined transition-transform duration-200 group-hover:translate-x-1 text-xl">
+                arrow_forward
+              </span>
+            </Link>
 
-          <Link href="/dashboard" className="w-full sm:w-auto">
-            <Button
-              variant="secondary"
-              size="lg"
-              leftIcon={<Activity className="w-5 h-5 text-emerald-400 animate-pulse" />}
-              className="w-full sm:w-auto text-sm sm:text-base font-semibold"
+            <Link
+              href="#flota"
+              className="inline-flex items-center gap-space-xs rounded-lg bg-surface-container-lowest px-space-lg py-space-sm font-button-text text-button-text text-primary shadow-sm transition-all hover:bg-surface-container hover:shadow border border-outline-variant/30"
             >
-              Rastrear Unidad en Tránsito
-            </Button>
-          </Link>
-        </motion.div>
+              <span className="material-symbols-outlined text-primary text-xl">local_shipping</span>
+              <span>Explorar Flota y Servicios</span>
+            </Link>
 
-        {/* Floating Metrics / Trust Badges Bento Strip */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full max-w-5xl"
-        >
-          <div className="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-            <span className="text-3xl lg:text-4xl font-mono font-extrabold text-white">
-              45<span className="text-safety-orange">+</span>
-            </span>
-            <span className="text-[11px] font-mono text-slate-400 mt-1 uppercase tracking-wider">
-              Años de Experiencia
-            </span>
-          </div>
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center gap-space-xs rounded-lg bg-primary-container px-space-md py-space-sm font-button-text text-button-text text-on-primary shadow-sm transition-all hover:bg-primary"
+            >
+              <span className="material-symbols-outlined text-emerald-400 text-xl">satellite_alt</span>
+              <span>Rastreo en Vivo</span>
+            </Link>
+          </motion.div>
 
-          <div className="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-            <span className="text-3xl lg:text-4xl font-mono font-extrabold text-white">
-              100<span className="text-safety-orange">%</span>
-            </span>
-            <span className="text-[11px] font-mono text-slate-400 mt-1 uppercase tracking-wider">
-              Cobertura Nacional
-            </span>
-          </div>
+          {/* Metric KPI Cards (Layered Elevation) */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="mt-space-2xl grid w-full grid-cols-2 gap-space-md sm:grid-cols-4"
+          >
+            <div className="flex flex-col items-center rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md border border-outline-variant/20">
+              <div className="flex items-center text-primary font-extrabold">
+                <span className="font-metric-display text-4xl sm:text-metric-display">45</span>
+                <span className="font-metric-display text-4xl sm:text-metric-display text-secondary">+</span>
+              </div>
+              <span className="font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider font-semibold">
+                Años de Experiencia
+              </span>
+              <span className="mt-space-2xs text-xs text-primary font-medium">Desde 1981 en Veracruz</span>
+            </div>
 
-          <div className="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-            <span className="text-3xl lg:text-4xl font-mono font-extrabold text-emerald-400">
-              24<span className="text-slate-200">/</span>7
-            </span>
-            <span className="text-[11px] font-mono text-slate-400 mt-1 uppercase tracking-wider">
-              Monitoreo Satelital
-            </span>
-          </div>
+            <div className="flex flex-col items-center rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md border border-outline-variant/20">
+              <div className="flex items-center text-primary font-extrabold">
+                <span className="font-metric-display text-4xl sm:text-metric-display">100</span>
+                <span className="font-metric-display text-4xl sm:text-metric-display text-secondary">%</span>
+              </div>
+              <span className="font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider font-semibold">
+                Cobertura Nacional
+              </span>
+              <span className="mt-space-2xs text-xs text-primary font-medium">Rutas Federales Activas</span>
+            </div>
 
-          <div className="glass-panel p-4 rounded-2xl flex flex-col items-center justify-center text-center">
-            <span className="text-3xl lg:text-4xl font-mono font-extrabold text-safety-orange">
-              SCT
-            </span>
-            <span className="text-[11px] font-mono text-slate-400 mt-1 uppercase tracking-wider">
-              Certificación HazMat
-            </span>
-          </div>
-        </motion.div>
+            <div className="flex flex-col items-center rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md border border-outline-variant/20">
+              <div className="flex items-center text-primary font-extrabold">
+                <span className="font-metric-display text-4xl sm:text-metric-display">24</span>
+                <span className="font-metric-display text-4xl sm:text-metric-display text-secondary">/7</span>
+              </div>
+              <span className="font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider font-semibold">
+                Monitoreo Satelital
+              </span>
+              <span className="mt-space-2xs text-xs text-primary font-medium">SAF &amp; GPS en Tiempo Real</span>
+            </div>
+
+            <div className="flex flex-col items-center rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm transition-transform duration-200 hover:-translate-y-1 hover:shadow-md border border-outline-variant/20">
+              <div className="flex items-center text-secondary font-extrabold">
+                <span className="font-metric-display text-4xl sm:text-metric-display">0</span>
+              </div>
+              <span className="font-label-badge text-label-badge text-on-surface-variant uppercase tracking-wider font-semibold">
+                Récord Siniestralidad
+              </span>
+              <span className="mt-space-2xs text-xs text-primary font-medium">HazMat Clases 3, 8 y 9</span>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

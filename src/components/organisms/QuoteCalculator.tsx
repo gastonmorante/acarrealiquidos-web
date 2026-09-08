@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { 
   Calculator, 
   MapPin, 
@@ -17,9 +17,6 @@ import {
   Compass
 } from "lucide-react";
 import { Slider } from "@/components/atoms/Slider";
-import { Button } from "@/components/atoms/Button";
-import { Badge } from "@/components/atoms/Badge";
-import { Input } from "@/components/atoms/Input";
 import { VolumeDisplay } from "@/components/molecules/VolumeDisplay";
 import { LiquidCategory, TankerConfiguration } from "@/types/logistics";
 
@@ -33,10 +30,8 @@ export const QuoteCalculator: React.FC = () => {
   const [phone, setPhone] = useState<string>("");
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-  // Automatically determine if Full (double trailer) is needed (> 30,000 L)
   const tankerType: TankerConfiguration = liters > 30000 ? "full" : "sencillo";
 
-  // Pre-calculated popular routes from Veracruz base
   const routeDistances: Record<string, number> = {
     "Mérida, Yucatán": 950,
     "Ciudad de México (CDMX)": 320,
@@ -49,9 +44,8 @@ export const QuoteCalculator: React.FC = () => {
   };
 
   const estimatedKm = routeDistances[destination] || 500;
-  const estimatedHours = Math.round(estimatedKm / 65); // Average tanker transit speed in MX highways
+  const estimatedHours = Math.round(estimatedKm / 65);
 
-  // Real-world logistics estimation formula
   const pricing = useMemo(() => {
     const ratePerKm = category === "hazmat" ? 58 : category === "corrosive" ? 64 : 48;
     const baseRate = estimatedKm * ratePerKm * (tankerType === "full" ? 1.45 : 1.0);
@@ -77,107 +71,106 @@ export const QuoteCalculator: React.FC = () => {
   };
 
   return (
-    <section id="cotizador" className="py-24 relative bg-slate-950 border-t border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="cotizador" className="py-space-3xl relative bg-surface-container-low border-t border-b border-outline-variant/30">
+      <div className="max-w-[80rem] mx-auto px-gutter-desktop">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <Badge variant="hazmat" pulse className="mb-4">
-            COTIZADOR INTERACTIVO 2026
-          </Badge>
-          <h2 className="text-3xl sm:text-5xl font-display font-bold text-white tracking-tight">
-            Calcula tu Ruta y{" "}
-            <span className="text-safety-orange">Presupuesto en Vivo</span>
+        <div className="text-center max-w-3xl mx-auto mb-space-2xl">
+          <span className="font-label-badge text-label-badge text-secondary uppercase font-bold tracking-widest block mb-space-2xs">
+            SIMULADOR INDUSTRIAL EN VIVO
+          </span>
+          <h2 className="font-headline-lg text-2xl sm:text-headline-lg font-bold text-primary tracking-tight">
+            Calcula tu Ruta Carretera y <span className="text-secondary">Cubicaje de Autotanque</span>
           </h2>
-          <p className="mt-4 text-slate-400 font-sans text-base sm:text-lg">
-            Selecciona el tipo de carga líquida, ajusta el volumen requerido y obtén una estimación inmediata basada en distancias reales de la red carretera SCT.
+          <p className="mt-space-xs text-on-surface-variant font-body-md text-body-md leading-relaxed">
+            Selecciona el tipo de carga líquida, ajusta el volumen requerido y obtén una estimación basada en distancias oficiales SCT y configuración física del autotanque.
           </p>
         </div>
 
         {/* 2-Column Responsive Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
           {/* Left Column: Interactive Controls */}
-          <div className="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl space-y-8 border border-white/10">
+          <div className="lg:col-span-7 bg-surface-container-lowest p-space-lg sm:p-space-xl rounded-3xl space-y-space-lg shadow-sm border border-outline-variant/20">
             {/* Step 1: Liquid Category Selector */}
-            <div className="space-y-3">
-              <label className="text-xs font-mono font-medium text-slate-300 uppercase tracking-wider block">
-                1. Tipo de Producto Líquido
+            <div className="space-y-space-xs">
+              <label className="text-xs font-headline-sm font-bold text-primary uppercase tracking-wider block">
+                1. Tipo de Fluido o Carga Líquida
               </label>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-space-xs">
                 <button
                   type="button"
                   onClick={() => setCategory("food_grade")}
-                  className={`p-3 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
+                  className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
                     category === "food_grade"
-                      ? "bg-amber-500/15 border-amber-500 text-white shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-                      : "bg-slate-900/60 border-white/10 text-slate-400 hover:border-white/20"
+                      ? "bg-amber-50 border-amber-500 text-amber-950 shadow-sm"
+                      : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <Droplet className={`w-5 h-5 ${category === "food_grade" ? "text-amber-400" : "text-slate-500"}`} />
+                  <Droplet className={`w-5 h-5 ${category === "food_grade" ? "text-amber-600" : "text-primary"}`} />
                   <div>
-                    <div className="text-xs font-bold font-sans">Alimenticio</div>
-                    <div className="text-[10px] font-mono text-slate-400">Melaza / Aceites</div>
+                    <div className="text-xs font-bold">Alimenticio</div>
+                    <div className="text-[10px] text-on-surface-variant">Melaza / Aceites</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setCategory("hazmat")}
-                  className={`p-3 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
+                  className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
                     category === "hazmat"
-                      ? "bg-orange-500/15 border-safety-orange text-white shadow-glow"
-                      : "bg-slate-900/60 border-white/10 text-slate-400 hover:border-white/20"
+                      ? "bg-rose-50 border-secondary text-secondary shadow-sm"
+                      : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <Flame className={`w-5 h-5 ${category === "hazmat" ? "text-safety-orange" : "text-slate-500"}`} />
+                  <Flame className={`w-5 h-5 ${category === "hazmat" ? "text-secondary" : "text-primary"}`} />
                   <div>
-                    <div className="text-xs font-bold font-sans">Hidrocarburos</div>
-                    <div className="text-[10px] font-mono text-slate-400">Diésel / HazMat</div>
+                    <div className="text-xs font-bold">Hidrocarburos</div>
+                    <div className="text-[10px] text-on-surface-variant">Combustibles HazMat</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setCategory("corrosive")}
-                  className={`p-3 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
+                  className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
                     category === "corrosive"
-                      ? "bg-cyan-500/15 border-cyan-500 text-white shadow-[0_0_15px_rgba(6,182,212,0.2)]"
-                      : "bg-slate-900/60 border-white/10 text-slate-400 hover:border-white/20"
+                      ? "bg-blue-50 border-primary text-primary shadow-sm"
+                      : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <FlaskConical className={`w-5 h-5 ${category === "corrosive" ? "text-cyan-400" : "text-slate-500"}`} />
+                  <FlaskConical className={`w-5 h-5 ${category === "corrosive" ? "text-primary" : "text-on-surface-variant"}`} />
                   <div>
-                    <div className="text-xs font-bold font-sans">Químicos</div>
-                    <div className="text-[10px] font-mono text-slate-400">Ácidos / Corrosivos</div>
+                    <div className="text-xs font-bold">Químicos</div>
+                    <div className="text-[10px] text-on-surface-variant">Ácidos Corrosivos</div>
                   </div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setCategory("industrial_water")}
-                  className={`p-3 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
+                  className={`p-space-sm rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between h-24 ${
                     category === "industrial_water"
-                      ? "bg-blue-500/15 border-blue-500 text-white shadow-[0_0_15px_rgba(59,130,246,0.2)]"
-                      : "bg-slate-900/60 border-white/10 text-slate-400 hover:border-white/20"
+                      ? "bg-sky-50 border-sky-600 text-sky-950 shadow-sm"
+                      : "bg-surface-container-low border-outline-variant/30 text-on-surface-variant hover:bg-surface-container"
                   }`}
                 >
-                  <Compass className={`w-5 h-5 ${category === "industrial_water" ? "text-blue-400" : "text-slate-500"}`} />
+                  <Compass className={`w-5 h-5 ${category === "industrial_water" ? "text-sky-600" : "text-on-surface-variant"}`} />
                   <div>
-                    <div className="text-xs font-bold font-sans">Agua Industrial</div>
-                    <div className="text-[10px] font-mono text-slate-400">Tratada / Proceso</div>
+                    <div className="text-xs font-bold">Agua Industrial</div>
+                    <div className="text-[10px] text-on-surface-variant">Tratada / Proceso</div>
                   </div>
                 </button>
               </div>
             </div>
 
             {/* Step 2: Volume Slider */}
-            <div className="space-y-3 pt-2">
+            <div className="space-y-space-xs pt-space-xs">
               <Slider
                 value={liters}
                 min={5000}
                 max={45000}
                 step={1000}
                 onChange={setLiters}
-                label="2. Volumen Requerido de Carga"
+                label="2. Volumen Requerido de Carga (Litros)"
               />
             </div>
 
@@ -189,30 +182,30 @@ export const QuoteCalculator: React.FC = () => {
             />
 
             {/* Step 3: Route Origin & Destination */}
-            <div className="space-y-4 pt-2">
-              <label className="text-xs font-mono font-medium text-slate-300 uppercase tracking-wider block">
-                3. Ruta Carretera SCT
+            <div className="space-y-space-xs pt-space-xs">
+              <label className="text-xs font-headline-sm font-bold text-primary uppercase tracking-wider block">
+                3. Ruta Carretera Oficial SCT
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
                 <div className="space-y-1">
-                  <label className="text-[11px] font-mono text-slate-400">Origen de Carga</label>
+                  <label className="text-xs text-on-surface-variant font-medium">Origen de Carga</label>
                   <div className="relative">
                     <input
                       type="text"
                       value={origin}
                       onChange={(e) => setOrigin(e.target.value)}
-                      className="w-full bg-slate-900 text-white text-xs font-mono rounded-xl border border-white/10 p-3 pl-9 outline-none focus:border-safety-orange"
+                      className="w-full bg-surface-container-low text-on-surface text-xs font-mono rounded-xl border border-outline-variant/20 p-3 pl-9 outline-none focus:ring-2 focus:ring-primary"
                     />
-                    <MapPin className="w-4 h-4 text-safety-orange absolute left-3 top-3.5" />
+                    <MapPin className="w-4 h-4 text-secondary absolute left-3 top-3.5" />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-[11px] font-mono text-slate-400">Destino de Descarga</label>
+                  <label className="text-xs text-on-surface-variant font-medium">Destino de Descarga</label>
                   <select
                     value={destination}
                     onChange={(e) => setDestination(e.target.value)}
-                    className="w-full bg-slate-900 text-white text-xs font-mono rounded-xl border border-white/10 p-3 outline-none focus:border-safety-orange cursor-pointer"
+                    className="w-full bg-surface-container-low text-on-surface text-xs font-mono rounded-xl border border-outline-variant/20 p-3 outline-none focus:ring-2 focus:ring-primary cursor-pointer"
                   >
                     {Object.keys(routeDistances).map((dest) => (
                       <option key={dest} value={dest}>
@@ -226,43 +219,43 @@ export const QuoteCalculator: React.FC = () => {
           </div>
 
           {/* Right Column: Live Cost Estimation & Dispatch Card */}
-          <div className="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
-              <div className="flex items-center gap-2 text-white font-mono font-bold text-sm">
-                <Calculator className="w-4 h-4 text-safety-orange" />
-                Resumen de Cotización
+          <div className="lg:col-span-5 bg-surface-container-lowest p-space-lg sm:p-space-xl rounded-3xl border border-outline-variant/30 space-y-space-md shadow-lg">
+            <div className="flex items-center justify-between pb-space-sm border-b border-surface-container">
+              <div className="flex items-center gap-space-2xs text-primary font-bold text-sm">
+                <Calculator className="w-4 h-4 text-secondary" />
+                <span>Resumen Técnico de Estimación</span>
               </div>
-              <Badge variant="live" pulse>
+              <span className="font-label-badge text-xs px-2 py-0.5 rounded-full bg-surface-container text-primary font-bold">
                 TARIFA 2026
-              </Badge>
+              </span>
             </div>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/5">
-                <div className="text-[10px] font-mono text-slate-400 flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-safety-orange" /> Distancia
+            <div className="grid grid-cols-2 gap-space-xs">
+              <div className="p-space-sm rounded-xl bg-surface-container-low border border-outline-variant/20">
+                <div className="text-[11px] text-on-surface-variant flex items-center gap-1 font-medium">
+                  <MapPin className="w-3 h-3 text-secondary" /> Distancia Ruta
                 </div>
-                <div className="text-lg font-mono font-bold text-white mt-1">
+                <div className="text-lg font-bold text-primary mt-1">
                   {estimatedKm.toLocaleString()} km
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/5">
-                <div className="text-[10px] font-mono text-slate-400 flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-amber-400" /> Tiempo Estimado
+              <div className="p-space-sm rounded-xl bg-surface-container-low border border-outline-variant/20">
+                <div className="text-[11px] text-on-surface-variant flex items-center gap-1 font-medium">
+                  <Clock className="w-3 h-3 text-primary" /> Tránsito Estimado
                 </div>
-                <div className="text-lg font-mono font-bold text-white mt-1">
+                <div className="text-lg font-bold text-primary mt-1">
                   ~{estimatedHours} Horas
                 </div>
               </div>
             </div>
 
             {/* Cost Breakdown */}
-            <div className="space-y-2.5 text-xs font-mono border-t border-b border-white/10 py-4 text-slate-300">
+            <div className="space-y-2 text-xs border-t border-b border-surface-container py-space-md text-on-surface-variant">
               <div className="flex justify-between">
                 <span>Flete Base ({estimatedKm} km):</span>
-                <span className="font-bold text-white">${pricing.baseRate.toLocaleString()} MXN</span>
+                <span className="font-bold text-primary">${pricing.baseRate.toLocaleString()} MXN</span>
               </div>
               <div className="flex justify-between">
                 <span>Ajuste Diésel Normativo:</span>
@@ -272,85 +265,90 @@ export const QuoteCalculator: React.FC = () => {
                 <span>Casetas SCT Estimadas:</span>
                 <span>${pricing.tolls.toLocaleString()} MXN</span>
               </div>
-              <div className="flex justify-between text-slate-400">
+              <div className="flex justify-between text-on-surface-variant/80">
                 <span>IVA Trasladado (16%):</span>
                 <span>${pricing.iva.toLocaleString()} MXN</span>
               </div>
-              <div className="pt-2 flex justify-between items-baseline text-base font-bold text-white border-t border-white/10">
-                <span className="text-xs text-safety-orange font-mono">TOTAL ESTIMADO:</span>
-                <span className="text-2xl font-mono text-safety-orange">
-                  ${pricing.total.toLocaleString()} <span className="text-xs text-white">MXN</span>
+              <div className="pt-space-xs flex justify-between items-baseline text-base font-bold text-primary border-t border-surface-container">
+                <span className="text-xs text-secondary font-bold uppercase">TOTAL ESTIMADO:</span>
+                <span className="text-2xl font-bold text-secondary">
+                  ${pricing.total.toLocaleString()} <span className="text-xs text-on-surface font-normal">MXN</span>
                 </span>
               </div>
             </div>
 
             {/* Contact Form / Instant Dispatch Action */}
             {!isSubmitted ? (
-              <form onSubmit={handleRequestQuote} className="space-y-3 pt-2">
-                <Input
-                  label="Empresa Solicitante"
-                  placeholder="Ej. Grupo Industrial del Golfo"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  required
-                />
-                <div className="grid grid-cols-2 gap-2">
-                  <Input
-                    label="Nombre"
-                    placeholder="Tu nombre"
-                    value={contactName}
-                    onChange={(e) => setContactName(e.target.value)}
+              <form onSubmit={handleRequestQuote} className="space-y-space-xs pt-1">
+                <div>
+                  <label className="text-xs text-on-surface font-semibold block mb-1">Empresa Solicitante</label>
+                  <input
+                    placeholder="Ej. Grupo Industrial del Golfo"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
                     required
-                  />
-                  <Input
-                    label="Teléfono / WhatsApp"
-                    placeholder="10 dígitos"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
+                    className="w-full bg-surface-container-low text-on-surface text-xs rounded-xl border border-outline-variant/20 p-2.5 outline-none focus:ring-2 focus:ring-primary"
                   />
                 </div>
+                <div className="grid grid-cols-2 gap-space-xs">
+                  <div>
+                    <label className="text-xs text-on-surface font-semibold block mb-1">Nombre</label>
+                    <input
+                      placeholder="Tu nombre"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      required
+                      className="w-full bg-surface-container-low text-on-surface text-xs rounded-xl border border-outline-variant/20 p-2.5 outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs text-on-surface font-semibold block mb-1">Teléfono / WhatsApp</label>
+                    <input
+                      placeholder="10 dígitos"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      required
+                      className="w-full bg-surface-container-low text-on-surface text-xs rounded-xl border border-outline-variant/20 p-2.5 outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                </div>
 
-                <Button
+                <button
                   type="submit"
-                  variant="primary"
-                  size="lg"
-                  shimmer
-                  leftIcon={<Send className="w-4 h-4" />}
-                  className="w-full font-bold shadow-glow mt-2"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-secondary hover:bg-secondary-container py-3 px-4 text-on-secondary font-button-text text-sm font-bold shadow-md transition-all hover:shadow-lg mt-2"
                 >
-                  Solicitar Camión Inmediato
-                </Button>
+                  <Send className="w-4 h-4" />
+                  <span>Confirmar y Solicitar Asignación de Autotanque</span>
+                </button>
               </form>
             ) : (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3"
+                className="p-space-md rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2"
               >
-                <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto" />
-                <h4 className="text-base font-bold text-white font-sans">
+                <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
+                <h4 className="text-sm font-bold text-emerald-950">
                   ¡Solicitud Registrada en Torre de Control!
                 </h4>
-                <p className="text-xs text-slate-300 font-sans">
+                <p className="text-xs text-emerald-800 leading-relaxed">
                   Un despachador senior de la central en Amatlán verificará la disponibilidad de autotanques grado <strong>{category}</strong> y te contactará en menos de 15 minutos.
                 </p>
                 <a
                   href={`https://wa.me/522717128316?text=Hola%20Acarrealiquidos.%20Solicito%20cotizacion%20de%20${liters}%20litros%20de%20${category}%20para%20la%20ruta%20${origin}%20a%20${destination}.`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block w-full"
+                  className="inline-flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors mt-2"
                 >
-                  <Button variant="secondary" size="sm" className="w-full text-xs font-mono" leftIcon={<PhoneCall className="w-3.5 h-3.5 text-emerald-400" />}>
-                    Abrir WhatsApp Directo
-                  </Button>
+                  <PhoneCall className="w-3.5 h-3.5" />
+                  <span>Abrir WhatsApp Directo</span>
                 </a>
               </motion.div>
             )}
 
-            <div className="flex items-center justify-center gap-2 text-[10px] font-mono text-slate-400 pt-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Sujeto a verificación de compatibilidad de carga y NOM-068-SCT.</span>
+            <div className="flex items-center justify-center gap-1.5 text-[11px] text-on-surface-variant pt-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>Sujeto a verificación física de compatibilidad y NOM-068-SCT.</span>
             </div>
           </div>
         </div>

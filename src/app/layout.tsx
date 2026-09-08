@@ -1,27 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, JetBrains_Mono, Hanken_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-headline",
   display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
-});
-
-const hankenGrotesk = Hanken_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const viewport: Viewport = {
-  themeColor: "#020617",
+  themeColor: "#001557",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -30,9 +33,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://acarrealiquidos.com.mx"),
-  title: "Acarrealíquidos | 45 Años de Liderazgo en Logística de Líquidos (1981-2026)",
+  title: "Acarrealíquidos | 45 Años de Excelencia en Logística de Líquidos y HazMat (1981-2026)",
   description:
-    "Líderes en autotransporte terrestre de líquidos a granel en México. Especialistas en hidrocarburos, grado alimenticio y químicos corrosivos con certificación SCT y COFEPRIS.",
+    "Autoridad y máxima seguridad en el transporte especializado de HazMat, grado alimenticio y químicos corrosivos. Conectando a la industria mexicana con telemetría satelital, talleres propios y 45 años de liderazgo.",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: "/favicon.ico",
@@ -42,22 +45,22 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: "https://acarrealiquidos.com.mx/",
-    title: "Acarrealíquidos | Logística Pesada de Líquidos en México",
+    title: "Acarrealíquidos | Logística Especializada de Líquidos y HazMat",
     description:
-      "45 años de excelencia en transporte terrestre de líquidos industriales, químicos y grado alimenticio. Cobertura nacional 24/7 con rastreo GPS.",
+      "45 años de excelencia en transporte terrestre de líquidos industriales, químicos y grado alimenticio. Cobertura nacional con monitoreo satelital 24/7.",
     siteName: "Acarrealíquidos",
     images: [
       {
         url: "/assets/hero_tanker.webp",
         width: 1200,
         height: 630,
-        alt: "Autotanque Acarrealíquidos en Carretera",
+        alt: "Autotanque Acarrealíquidos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acarrealíquidos | Logística Pesada de Líquidos en México",
+    title: "Acarrealíquidos | Logística Especializada de Líquidos y HazMat",
     description:
       "45 años de excelencia en transporte terrestre de líquidos industriales, químicos y grado alimenticio.",
     images: ["/assets/hero_tanker.webp"],
@@ -73,13 +76,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${jetbrainsMono.variable} ${hankenGrotesk.variable} dark`}>
+    <html
+      lang="es"
+      className={`${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
+    >
       <head>
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+        />
       </head>
-      <body className="min-h-screen bg-deep-navy-950 text-slate-100 font-sans antialiased selection:bg-safety-orange selection:text-white">
+      <body className="min-h-screen bg-background text-on-surface font-sans antialiased selection:bg-secondary selection:text-white">
         {children}
         <AiConciergeDrawer />
         <InstallPwaBanner />

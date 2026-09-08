@@ -16,20 +16,6 @@ export const HeroSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Columna Izquierda: Copy y Conversión */}
           <div className="lg:col-span-7 flex flex-col items-start">
-            {/* Banner Identidad Oficial con Acreditación Técnica y Flotación Suave */}
-            <div className="animate-float-subtle flex flex-wrap items-center gap-3 mb-6 p-2 bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-sm">
-              <img
-                alt="Acarrea Líquidos"
-                src="/assets/logo.svg"
-                className="h-8 sm:h-9 w-auto object-contain pl-2"
-              />
-              <div className="h-6 w-[1px] bg-slate-300"></div>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-red-50 border border-red-200/70 text-[#991b1b] font-display text-[11px] uppercase tracking-wider font-bold">
-                <span className="material-symbols-outlined text-[15px] text-red-600">verified</span>
-                Transporte Especializado en Autotanques
-              </span>
-            </div>
-
             {/* Headline de Alto Impacto Industrial (Space Grotesk) */}
             <h1 className="font-headline text-3xl sm:text-4xl lg:text-5xl uppercase text-[#131b2e] tracking-tight mb-5 font-bold leading-[1.15]">
               Solución confiable y máxima seguridad en el transporte para el{" "}
@@ -49,7 +35,7 @@ export const HeroSection: React.FC = () => {
             </p>
 
             {/* Botones Supremos Hero (Stitch Physics & Glow) */}
-            <div className="flex flex-wrap items-center gap-4 mb-8 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-4 mb-2 w-full sm:w-auto">
               <Link
                 href="#contacto"
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red transition-all duration-300 transform active:scale-95 border-t border-white/30"
@@ -64,27 +50,6 @@ export const HeroSection: React.FC = () => {
                 <span className="material-symbols-outlined text-[20px] text-[#18234D]">local_shipping</span>
                 <span>Ver Equipo Especializado</span>
               </Link>
-            </div>
-
-            {/* Acreditaciones Clave Hero con Levitation */}
-            <div className="w-full pt-4 border-t border-slate-200/80">
-              <span className="font-display text-[11px] text-slate-500 uppercase tracking-widest block mb-3 font-semibold">
-                Acreditaciones y Respaldos Clave:
-              </span>
-              <div className="flex flex-wrap items-center gap-2.5">
-                <div className="animate-float-subtle inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-[#131b2e] font-display text-xs shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.7)]"></span>
-                  <span className="font-medium">⭐ Kosher Orthodox Union (OU) · Grado Alimenticio 95%</span>
-                </div>
-                <div className="animate-float-delayed inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-[#131b2e] font-display text-xs shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-[#18234D] shadow-[0_0_8px_rgba(24,35,77,0.5)]"></span>
-                  <span className="font-medium">SICT Federal (NOM-012 · 068 · 035)</span>
-                </div>
-                <div className="animate-float-subtle inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-[#131b2e] font-display text-xs shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-[#0078b6]"></span>
-                  <span className="font-medium">Cofepris (Lavado Sanitario con Vapor)</span>
-                </div>
-              </div>
             </div>
           </div>
 

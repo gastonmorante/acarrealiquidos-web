@@ -192,33 +192,6 @@ export const BlogSection: React.FC = () => {
             </article>
           ))}
         </div>
-
-        {/* Bottom Banner Institutional Note */}
-        <div className="relative bg-gradient-to-r from-[#0f172a] via-[#18234D] to-[#1e293b] text-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-red-600/20 border border-red-500/30 flex items-center justify-center text-red-400 flex-shrink-0">
-              <Newspaper className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-display text-lg uppercase font-bold text-white mb-1">
-                Inteligencia y Noticias al Servicio de tu Cadena de Suministro
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-300">
-                Monitoreo editorial y regulatorio continuo para anticipar contingencias en ruta y garantizar entregas puntuales.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex-shrink-0 w-full sm:w-auto">
-            <Link
-              href="#contacto"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.02] active:scale-95 transition-all shadow-lg border-t border-white/25"
-            >
-              <span>Cotizar con Asesoría Especializada</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   );

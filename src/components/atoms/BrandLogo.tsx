@@ -66,7 +66,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         {!imageError ? (
           <img
             src={logoFile}
-            alt="Acarrea Líquidos - Transporte Especializado"
+            alt="Acarrea Líquidos - Transporte"
             width={sizeConfigs.imgWidth}
             height={sizeConfigs.imgHeight}
             className={`w-auto ${sizeConfigs.containerHeight} object-contain transition-transform`}
@@ -102,7 +102,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
                 : "text-slate-500 group-hover:text-[#18234D]"
             }`}
           >
-            Transporte Especializado
+            Transporte
           </span>
         </div>
       )}

@@ -23,8 +23,8 @@ export const Navbar: React.FC = () => {
     { name: lang === "es" ? "Inicio" : "Home", href: "#" },
     { name: lang === "es" ? "Certificaciones" : "Certifications", href: "#certificaciones" },
     { name: lang === "es" ? "Servicios" : "Services", href: "#servicios" },
-    { name: lang === "es" ? "Equipo Especializado" : "Fleet", href: "#equipo" },
-    { name: lang === "es" ? "Cumplimiento SICT" : "Compliance", href: "#cumplimiento" },
+    { name: lang === "es" ? "Equipo" : "Fleet", href: "#equipo" },
+    { name: lang === "es" ? "Cumplimiento" : "Compliance", href: "#cumplimiento" },
     { name: lang === "es" ? "Noticias" : "News", href: "#noticias" },
     { name: lang === "es" ? "Contacto" : "Contact", href: "#contacto" },
   ];
@@ -61,14 +61,14 @@ export const Navbar: React.FC = () => {
 
           {/* Quick Actions & Language Toggle */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Quick Dispatch Call Button (Stitch Glow Green - Similar to Cotizar Servicio) */}
+            {/* Quick Central Call Button (Stitch Glow Green - Similar to Cotizar Servicio) */}
             <a
               href="tel:+522717128316"
               className="hidden lg:inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] via-[#10B981] to-[#047857] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-green transition-all duration-300 transform hover:scale-[1.02] active:scale-95 border-t border-white/25 whitespace-nowrap group shadow-md"
-              title="Llamar a Torre de Control (+52 271 712-8316)"
+              title="Llamar a Central (+52 271 712-8316)"
             >
               <span className="material-symbols-outlined text-[17px] text-white animate-pulse">call</span>
-              <span>{lang === "es" ? "Llamar a Despacho" : "Call Dispatch"}</span>
+              <span>{lang === "es" ? "Llamar a Central" : "Call Central"}</span>
             </a>
 
             {/* Language Switcher Pill (ES / EN in Head as requested) */}
@@ -181,15 +181,15 @@ export const Navbar: React.FC = () => {
               ))}
             </nav>
 
-            {/* Direct Dispatch Call Button */}
+            {/* Direct Central Call Button */}
             <div className="pt-4 border-t border-slate-100 mt-3 flex items-center justify-between gap-3">
               <a
                 href="tel:+522717128316"
                 className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#047857] text-white text-xs font-display font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all"
-                title="Llamar a Despacho: +52 (271) 712-8316"
+                title="Llamar a Central: +52 (271) 712-8316"
               >
                 <span className="material-symbols-outlined text-white text-[17px] animate-pulse">call</span>
-                <span>{lang === "es" ? "Llamar a Despacho" : "Call Dispatch"}</span>
+                <span>{lang === "es" ? "Llamar a Central" : "Call Central"}</span>
               </a>
               <Link
                 href="#contacto"

@@ -25,6 +25,7 @@ export const Navbar: React.FC = () => {
     { name: lang === "es" ? "Servicios" : "Services", href: "#servicios" },
     { name: lang === "es" ? "Equipo Especializado" : "Fleet", href: "#equipo" },
     { name: lang === "es" ? "Cumplimiento SICT" : "Compliance", href: "#cumplimiento" },
+    { name: lang === "es" ? "Noticias" : "News", href: "#noticias" },
     { name: lang === "es" ? "Contacto" : "Contact", href: "#contacto" },
   ];
 
@@ -50,29 +51,23 @@ export const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative px-3.5 py-2 text-xs uppercase font-display font-semibold tracking-wider text-slate-700 hover:text-[#b70011] hover:bg-slate-50/90 transition-all rounded-xl group"
+                className="relative px-3 py-2 text-xs uppercase font-display font-semibold tracking-wider text-slate-700 hover:text-[#b70011] hover:bg-slate-50/90 transition-all rounded-xl group"
               >
                 <span>{link.name}</span>
-                <span className="absolute bottom-1.5 left-3.5 right-3.5 h-0.5 bg-[#b70011] scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full"></span>
+                <span className="absolute bottom-1.5 left-3 right-3 h-0.5 bg-[#b70011] scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full"></span>
               </Link>
             ))}
           </nav>
 
           {/* Quick Actions & Language Toggle */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Quick Dispatch Call Button (High Executive Aesthetic) */}
+            {/* Quick Dispatch Call Button (Stitch Glow Green - Similar to Cotizar Servicio) */}
             <a
               href="tel:+522717128316"
-              className="hidden lg:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/95 hover:bg-slate-50 border border-slate-200/90 text-[#18234D] font-display text-xs font-bold uppercase tracking-wider btn-chrome transition-all shadow-sm hover:shadow hover:border-emerald-400/60 active:scale-95 whitespace-nowrap group"
+              className="hidden lg:inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] via-[#10B981] to-[#047857] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-green transition-all duration-300 transform hover:scale-[1.02] active:scale-95 border-t border-white/25 whitespace-nowrap group shadow-md"
               title="Llamar a Torre de Control (+52 271 712-8316)"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="material-symbols-outlined text-[#18234D] group-hover:text-emerald-600 transition-colors text-[18px]">
-                call
-              </span>
+              <span className="material-symbols-outlined text-[17px] text-white animate-pulse">call</span>
               <span>{lang === "es" ? "Llamar a Despacho" : "Call Dispatch"}</span>
             </a>
 
@@ -190,14 +185,10 @@ export const Navbar: React.FC = () => {
             <div className="pt-4 border-t border-slate-100 mt-3 flex items-center justify-between gap-3">
               <a
                 href="tel:+522717128316"
-                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-100 text-[#18234D] text-xs font-display font-bold uppercase tracking-wider shadow-sm hover:bg-slate-200 transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#059669] to-[#047857] text-white text-xs font-display font-bold uppercase tracking-wider shadow-md active:scale-95 transition-all"
                 title="Llamar a Despacho: +52 (271) 712-8316"
               >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="material-symbols-outlined text-emerald-600 text-[18px]">call</span>
+                <span className="material-symbols-outlined text-white text-[17px] animate-pulse">call</span>
                 <span>{lang === "es" ? "Llamar a Despacho" : "Call Dispatch"}</span>
               </a>
               <Link

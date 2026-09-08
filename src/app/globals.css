@@ -101,6 +101,15 @@ html {
   transform: translateY(-2px);
 }
 
+.btn-glow-green {
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.4), 0 10px 25px -5px rgba(16, 185, 129, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-glow-green:hover {
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.6), 0 16px 30px -5px rgba(16, 185, 129, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
 .btn-chrome {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.9), inset 0 -1px 0 0 rgba(0, 0, 0, 0.04);
 }

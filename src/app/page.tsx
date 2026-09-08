@@ -9,6 +9,7 @@ import { SpecialtiesSection } from "@/components/organisms/SpecialtiesSection";
 import { FleetShowcase } from "@/components/organisms/FleetShowcase";
 import { InfrastructureSection } from "@/components/organisms/InfrastructureSection";
 import { TestimonialsSection } from "@/components/organisms/TestimonialsSection";
+import { BlogSection } from "@/components/organisms/BlogSection";
 import { TechnicalQuoteSection } from "@/components/organisms/TechnicalQuoteSection";
 import { Footer } from "@/components/organisms/Footer";
 import { FloatingWhatsApp } from "@/components/organisms/FloatingWhatsApp";
@@ -41,7 +42,10 @@ export default function HomePage() {
       {/* 8. La Voz de los Líderes Industriales de México (Testimonios) */}
       <TestimonialsSection />
 
-      {/* 9. Solicite una Cotización Técnica Formal */}
+      {/* 9. Actualidad y Noticias del Autotransporte (Sincronizado con Revista TyT) */}
+      <BlogSection />
+
+      {/* 10. Solicite una Cotización Técnica Formal */}
       <TechnicalQuoteSection />
 
       {/* 10. Corporate Footer with Language Switcher */}

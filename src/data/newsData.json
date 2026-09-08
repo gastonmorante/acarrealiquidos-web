@@ -1,0 +1,68 @@
+{
+  "lastUpdated": "Septiembre 2026",
+  "sourceName": "Revista Transportes y Turismo (TyT)",
+  "sourceUrl": "https://www.tyt.com.mx/categoria/noticias",
+  "totalArticles": 5,
+  "articles": [
+    {
+      "id": "permisionarios-de-gruas-tienen-hasta-el-9-de-septiembre-para-registrarse-en-el-sirse",
+      "title": "Se registran al SIRSE 85% de los permisionarios; plazo vence el 9 de septiembre",
+      "category": "Normativa SICT",
+      "excerpt": "La Dirección General de Autotransporte Federal (DGAF) y SICT reiteran el cumplimiento obligatorio del registro en el Sistema de Registro de Servicios (SIRSE) para mantener dictámenes y licencias en regla.",
+      "imageUrl": "https://wp.tyt.com.mx/wp-content/uploads/2023/12/gruas-arrastre-y-salvamento-tarifas.webp",
+      "source": "Revista TyT",
+      "date": "Septiembre 2026",
+      "originalUrl": "https://www.tyt.com.mx/nota/permisionarios-de-gruas-tienen-hasta-el-9-de-septiembre-para-registrarse-en-el-sirse",
+      "isFeatured": true,
+      "readTime": "3 min lectura"
+    },
+    {
+      "id": "esperanza-entre-municipios-con-mas-robo-al-autotransporte-en-puebla-anerpv",
+      "title": "Esperanza, entre municipios con más robo al autotransporte en Puebla: ANERPV",
+      "category": "Seguridad en Rutas",
+      "excerpt": "Reporte mensual de seguridad carretera destaca la importancia del monitoreo satelital GPS 24/7 y protocolos de reacción inmediata ante alertas en corredores logísticos prioritarios.",
+      "imageUrl": "https://wp.tyt.com.mx/wp-content/uploads/2026/09/DETENIDO-PUEBLA-.webp",
+      "source": "Revista TyT",
+      "date": "Septiembre 2026",
+      "originalUrl": "https://www.tyt.com.mx/nota/esperanza-entre-municipios-con-mas-robo-al-autotransporte-en-puebla-anerpv",
+      "isFeatured": false,
+      "readTime": "3 min lectura"
+    },
+    {
+      "id": "canacar-y-gobierno-del-edomex-promoveran-vacantes-en-el-autotransporte",
+      "title": "Canacar y Gobierno del Edomex promoverán vacantes en el autotransporte",
+      "category": "Institucional CANACAR",
+      "excerpt": "Iniciativa conjunta de la Cámara Nacional del Autotransporte de Carga (CANACAR) para el impulso de capacitación profesional y certificación técnica en la industria del transporte.",
+      "imageUrl": "https://wp.tyt.com.mx/wp-content/uploads/2026/08/OPERADORES-PUESTOS-LABORALES-AUTOTRANSPORTE-DE-CARGA.webp",
+      "source": "Revista TyT",
+      "date": "Septiembre 2026",
+      "originalUrl": "https://www.tyt.com.mx/nota/canacar-y-gobierno-del-edomex-promoveran-vacantes-en-el-autotransporte",
+      "isFeatured": false,
+      "readTime": "3 min lectura"
+    },
+    {
+      "id": "ricardo-buranello-toma-las-riendas-de-teletrac-navman-a-partir-de-octubre",
+      "title": "Ricardo Buranello toma las riendas de Teletrac Navman a partir de octubre",
+      "category": "Actualidad del Autotransporte",
+      "excerpt": "Avance informativo del autotransporte de carga en México: infraestructura carretera, sustentabilidad operativa y mejores prácticas de logística nacional.",
+      "imageUrl": "https://wp.tyt.com.mx/wp-content/uploads/2026/09/Foto-Teletrac.webp",
+      "source": "Revista TyT",
+      "date": "Septiembre 2026",
+      "originalUrl": "https://www.tyt.com.mx/nota/ricardo-buranello-toma-las-riendas-de-teletrac-navman-a-partir-de-octubre",
+      "isFeatured": false,
+      "readTime": "3 min lectura"
+    },
+    {
+      "id": "disrupcion-en-estrecho-de-ormuz-excluye-a-pymes-de-cadenas-de-valor-globales",
+      "title": "Disrupción en Estrecho de Ormuz excluye a Pymes de cadenas de valor globales",
+      "category": "Actualidad del Autotransporte",
+      "excerpt": "Avance informativo del autotransporte de carga en México: infraestructura carretera, sustentabilidad operativa y mejores prácticas de logística nacional.",
+      "imageUrl": "https://wp.tyt.com.mx/wp-content/uploads/2022/03/ComercioMaritimo.webp",
+      "source": "Revista TyT",
+      "date": "Septiembre 2026",
+      "originalUrl": "https://www.tyt.com.mx/nota/disrupcion-en-estrecho-de-ormuz-excluye-a-pymes-de-cadenas-de-valor-globales",
+      "isFeatured": false,
+      "readTime": "3 min lectura"
+    }
+  ]
+}

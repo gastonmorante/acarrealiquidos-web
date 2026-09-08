@@ -3,28 +3,29 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, Award } from "lucide-react";
+import { Menu, X, ArrowRight, Phone } from "lucide-react";
 import { BrandLogo } from "@/components/atoms/BrandLogo";
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [lang, setLang] = useState<"es" | "en">("es");
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: "Inicio", href: "#" },
-    { name: "Certificaciones", href: "#certificaciones" },
-    { name: "Servicios", href: "#servicios" },
-    { name: "Equipo Especializado", href: "#equipo" },
-    { name: "Cumplimiento SICT", href: "#cumplimiento" },
-    { name: "Contacto", href: "#contacto" },
+    { name: lang === "es" ? "Inicio" : "Home", href: "#" },
+    { name: lang === "es" ? "Certificaciones" : "Certifications", href: "#certificaciones" },
+    { name: lang === "es" ? "Servicios" : "Services", href: "#servicios" },
+    { name: lang === "es" ? "Equipo Especializado" : "Fleet", href: "#equipo" },
+    { name: lang === "es" ? "Cumplimiento SICT" : "Compliance", href: "#cumplimiento" },
+    { name: lang === "es" ? "Contacto" : "Contact", href: "#contacto" },
   ];
 
   return (
@@ -33,60 +34,88 @@ export const Navbar: React.FC = () => {
       <div
         className={`w-full transition-all duration-300 ${
           scrolled
-            ? "bg-white/95 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] border-b border-slate-200/90 py-3"
-            : "bg-white/90 backdrop-blur-lg shadow-[0_2px_15px_rgba(0,0,0,0.03)] border-b border-slate-200/60 py-4"
+            ? "bg-white/95 backdrop-blur-2xl shadow-[0_8px_30px_rgba(15,23,42,0.08)] border-b border-slate-200/90 py-2.5"
+            : "bg-white/90 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(15,23,42,0.05)] border-b border-slate-200/70 py-3.5"
         }`}
       >
-        <div className="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-4">
-          {/* Brand Logo */}
+        <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 flex items-center justify-between gap-4">
+          {/* Brand Logo with Centered Tagline */}
           <div className="flex items-center">
             <BrandLogo size="md" showSubtitle={true} />
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative px-3.5 py-2 text-sm font-semibold text-slate-700 hover:text-[#ED2B2C] hover:bg-slate-50/80 transition-all rounded-lg group"
+                className="relative px-3.5 py-2 text-xs uppercase font-display font-semibold tracking-wider text-slate-700 hover:text-[#b70011] hover:bg-slate-50/90 transition-all rounded-xl group"
               >
                 <span>{link.name}</span>
-                <span className="absolute bottom-1.5 left-3.5 right-3.5 h-0.5 bg-[#ED2B2C] scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
+                <span className="absolute bottom-1.5 left-3.5 right-3.5 h-0.5 bg-[#b70011] scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full"></span>
               </Link>
             ))}
           </nav>
 
-          {/* Action Hub (Garantía Kosher OU + Cotizar CTA) */}
+          {/* Quick Actions & Language Toggle */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Kosher OU Certificate Action Link */}
-            <Link
-              href="#certificaciones"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-950 text-xs font-bold transition-all border border-amber-300 shadow-sm"
-              title="Ver Certificación Kosher Orthodox Union"
+            {/* Quick Dispatch Phone Call (Desktop) */}
+            <a
+              href="tel:+522717128316"
+              className="hidden 2xl:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[#18234D] font-display text-xs font-semibold tracking-wide btn-chrome transition-all"
+              title="Línea Directa Torre de Control"
             >
-              <Award className="w-4 h-4 text-amber-600" />
-              <span>Garantía Kosher OU</span>
-            </Link>
+              <span className="material-symbols-outlined text-[#18234D] text-[17px]">call</span>
+              <span>+52 (271) 712-8316</span>
+            </a>
 
-            {/* High-Conversion Cotizar CTA Button */}
+            {/* Language Switcher Pill (ES / EN in Head as requested) */}
+            <div className="inline-flex items-center bg-slate-100/90 hover:bg-slate-100 p-0.5 rounded-full border border-slate-200/90 shadow-sm transition-all">
+              <button
+                type="button"
+                onClick={() => setLang("es")}
+                className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all duration-200 ${
+                  lang === "es"
+                    ? "bg-[#b70011] text-white shadow-sm scale-105"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+                aria-label="Español"
+              >
+                ES
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang("en")}
+                className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all duration-200 ${
+                  lang === "en"
+                    ? "bg-[#b70011] text-white shadow-sm scale-105"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+                aria-label="English"
+              >
+                EN
+              </button>
+            </div>
+
+            {/* High-Conversion Cotizar CTA Button (Stitch Glow Red) */}
             <Link
               href="#contacto"
-              className="group inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-gradient-to-r from-[#ED2B2C] via-[#E02122] to-[#C91A1B] hover:from-[#D81B1C] hover:to-[#B51011] text-white text-xs sm:text-sm font-bold shadow-[0_4px_14px_rgba(237,43,44,0.35)] hover:shadow-[0_6px_20px_rgba(237,43,44,0.45)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red transition-all duration-300 transform hover:scale-[1.02] active:scale-95 border-t border-white/25"
             >
-              <span className="material-symbols-outlined text-lg leading-none">request_quote</span>
-              <span>Cotizar Servicio</span>
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              <span className="material-symbols-outlined text-[17px]">bolt</span>
+              <span>{lang === "es" ? "Cotizar Servicio" : "Request Quote"}</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
 
             {/* Mobile Menu Toggle Button */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-lg bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors focus:outline-none"
+              className="xl:hidden p-2.5 rounded-xl bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors focus:outline-none"
               aria-label="Abrir menú"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -99,20 +128,42 @@ export const Navbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 px-6 py-5 shadow-2xl"
+            className="xl:hidden bg-white/98 backdrop-blur-2xl border-b border-slate-200 px-6 py-5 shadow-2xl"
           >
-            {/* Top drawer header */}
+            {/* Top drawer header with Language Switcher */}
             <div className="flex justify-between items-center pb-3 border-b border-slate-100">
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <span className="text-xs font-display font-bold text-slate-500 uppercase tracking-wider">
                 Menú de Navegación
               </span>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-3">
+                <div className="inline-flex items-center bg-slate-100 p-0.5 rounded-full border border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => setLang("es")}
+                    className={`px-2 py-0.5 rounded-full text-xs font-bold transition-all ${
+                      lang === "es" ? "bg-[#b70011] text-white shadow-sm" : "text-slate-600"
+                    }`}
+                  >
+                    ES
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLang("en")}
+                    className={`px-2 py-0.5 rounded-full text-xs font-bold transition-all ${
+                      lang === "en" ? "bg-[#b70011] text-white shadow-sm" : "text-slate-600"
+                    }`}
+                  >
+                    EN
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* Navigation links */}
@@ -122,30 +173,29 @@ export const Navbar: React.FC = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-3.5 py-2.5 text-sm font-bold text-slate-800 hover:text-[#ED2B2C] hover:bg-slate-50 rounded-lg transition-colors"
+                  className="px-3.5 py-2.5 text-sm font-display font-bold text-slate-800 hover:text-[#b70011] hover:bg-slate-50 rounded-xl transition-colors"
                 >
                   {link.name}
                 </Link>
               ))}
             </nav>
 
-            {/* Action buttons */}
-            <div className="pt-4 grid grid-cols-2 gap-2.5 border-t border-slate-100 mt-3">
-              <Link
-                href="#certificaciones"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300"
+            {/* Direct Dispatch Line */}
+            <div className="pt-4 border-t border-slate-100 mt-3 flex items-center justify-between">
+              <a
+                href="tel:+522717128316"
+                className="flex items-center gap-2 text-xs font-display font-bold text-[#18234D]"
               >
-                <Award className="w-4 h-4 text-amber-600" />
-                <span>Kosher OU</span>
-              </Link>
+                <Phone className="w-4 h-4 text-red-600" />
+                <span>+52 (271) 712-8316</span>
+              </a>
               <Link
                 href="#contacto"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-[#ED2B2C] hover:bg-[#D81B1C] text-white text-xs font-bold shadow-md"
+                className="inline-flex items-center gap-1.5 py-2 px-4 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white text-xs font-display font-bold uppercase tracking-wider shadow-md"
               >
-                <span>Cotizar Servicio</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Cotizar</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
           </motion.div>

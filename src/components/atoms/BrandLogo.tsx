@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
 export interface BrandLogoProps {
@@ -24,10 +23,9 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   href = "/",
 }) => {
   const [imageError, setImageError] = useState(false);
-  const isDarkBg = variant === "light"; // White typography for dark backgrounds
+  const isDarkBg = variant === "light";
   const displaySubtitle = showTagline !== undefined ? showTagline : showSubtitle;
 
-  // Select optimal SVG vector file based on theme/background
   const logoFile = customSrc
     ? customSrc
     : isDarkBg
@@ -36,35 +34,35 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
   const sizeConfigs = {
     sm: {
-      imgHeight: 30,
-      imgWidth: 158,
-      containerHeight: "h-7 sm:h-8",
-      subText: "text-[9px] tracking-[0.18em]",
+      imgHeight: 32,
+      imgWidth: 168,
+      containerHeight: "h-8",
+      subText: "text-[9px] tracking-[0.24em]",
     },
     md: {
       imgHeight: 38,
       imgWidth: 200,
       containerHeight: "h-9 sm:h-10",
-      subText: "text-[10px] tracking-[0.2em]",
+      subText: "text-[10px] tracking-[0.26em]",
     },
     lg: {
       imgHeight: 46,
       imgWidth: 242,
       containerHeight: "h-11 sm:h-12",
-      subText: "text-[11px] tracking-[0.22em]",
+      subText: "text-[11px] tracking-[0.28em]",
     },
     xl: {
       imgHeight: 56,
       imgWidth: 295,
       containerHeight: "h-14 sm:h-16",
-      subText: "text-xs tracking-[0.25em]",
+      subText: "text-xs tracking-[0.3em]",
     },
   }[size];
 
   const content = (
-    <div className={`flex flex-col items-start group select-none ${className}`}>
+    <div className={`flex flex-col items-center text-center group select-none ${className}`}>
       {/* Crisp Vector SVG Logo */}
-      <div className="relative flex items-center transition-all duration-300 group-hover:brightness-110 group-hover:scale-[1.02]">
+      <div className="relative flex items-center justify-center transition-all duration-300 group-hover:brightness-110 group-hover:scale-[1.02]">
         {!imageError ? (
           <img
             src={logoFile}
@@ -77,13 +75,13 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           />
         ) : (
           /* High-fidelity Vector Fallback */
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <span className="font-extrabold text-2xl tracking-tighter text-[#ED2B2C]">
               ACARREA
             </span>
             <span
               className={`font-extrabold text-2xl tracking-tight ${
-                isDarkBg ? "text-white" : "text-[#2C2F7E]"
+                isDarkBg ? "text-white" : "text-[#18234D]"
               }`}
             >
               LÍQUIDOS
@@ -92,26 +90,31 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         )}
       </div>
 
-      {/* Subtitle / Corporate Sub-brand */}
+      {/* Subtitle / Corporate Sub-brand Centered with Harmonious Spacing */}
       {displaySubtitle && (
-        <span
-          className={`font-semibold uppercase transition-colors duration-200 mt-1 font-mono ${
-            sizeConfigs.subText
-          } ${
-            isDarkBg
-              ? "text-slate-400 group-hover:text-amber-400"
-              : "text-slate-500 group-hover:text-primary"
-          }`}
-        >
-          Transporte Especializado · Est. 1981
-        </span>
+        <div className="w-full flex items-center justify-center">
+          <span
+            className={`font-mono font-bold uppercase transition-colors duration-200 mt-1 text-center ${
+              sizeConfigs.subText
+            } ${
+              isDarkBg
+                ? "text-slate-300 group-hover:text-amber-300"
+                : "text-slate-500 group-hover:text-[#18234D]"
+            }`}
+          >
+            Transporte Especializado
+          </span>
+        </div>
       )}
     </div>
   );
 
   if (href) {
     return (
-      <Link href={href} className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-secondary/50 rounded-lg">
+      <Link
+        href={href}
+        className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-red-500/50 rounded-xl transition-transform"
+      >
         {content}
       </Link>
     );

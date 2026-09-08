@@ -1,61 +1,84 @@
-# Project Walkthrough - Acarrealíquidos Refactor & AI Concierge Integration (45th Edition)
+# Project Walkthrough: Next.js 15 PWA Hybrid Web App (Silicon Valley Edition)
 
-This walkthrough details the optimizations, bug fixes, and AI integrations deployed on the Acarrealíquidos platform.
-
-## Features & Refactoring Logs
-
-### 1. 45th Anniversary Pyrotechnic Preloader (8.0s Cinematic Experience, 1981-2026)
-* **The Ascent (0.0s - 2.0s)**: Set up a full-screen HTML5 `<canvas>` on `z-index: 10000` with a deep midnight navy background. The animation starts with a slower, more anticipation-rich orange spark ascending from the bottom center, leaving a glowing trail.
-* **The Pyrotechnic Blast (2.0s - 4.5s)**: Upon hitting the center, the spark explodes into a massive burst. Embers scatter outwards, and inside the core, a dense constellation of flickering, incandescent white/gold/orange particles forms the number **"45"** (created by reading pixel coordinates from an offscreen text renderer).
-* **Digital Year Counter (2.0s - 3.5s)**: A digital fast-counter container fades in at the bottom of the screen, counting rapidly from **1981** up to **2026** during the particle burning stage.
-* **Branding & Legacy (4.5s - 6.5s)**: As the embers start to float and settle downwards, the official logo emerges with a dynamic CSS gradient sheen Light Sweep effect. Elegant trajectory subtitle `"CELEBRANDO 45 AÑOS DE LIDERAZGO"` (Spanish) or `"CELEBRATING 45 YEARS OF LEADERSHIP"` (English) fades in, while the year counter fades out.
-* **The Reveal (6.5s - 8.0s)**: The preloader triggers a GPU-accelerated Heat Distortion scale and blur transition (`.heat-exit`) to blend smoothly into the Hero section.
-* **Execution & Skips**: The sequence runs on page load and plays every single time the page is loaded (with storage checks bypassed as requested). A "Skip Intro" button displays after a 1.5s delay to allow immediate bypass.
-
-### 2. Global Trajectory Alignment (45 Years, Est. 1981)
-* **Hero Content**: Updated Hero text badges and H1 headers to `"45 Años de Excelencia en Logística de Líquidos" / "45 Years of Excellence in Liquid Logistics"`.
-* **Dynamic Stats Counter**: Aligned the Trust Section counters. The experience stat counter counts up from `0` to exactly `45+` via the intersection observer.
-* **About Us Copy**: Updated all trajectory explanations to "Con 45 años de trayectoria impecable..." / "With 45 years of flawless trajectory...".
-* **Metadata & SEO**: Adjusted the meta tags `<meta name="description">` (English & Spanish), canonical headers, and document titles to reflect 45 years.
-* **Structured Data**: Configured `foundingDate` to `"1981-01-01"` in the LocalBusiness JSON-LD block.
-
-### 3. AI Concierge Re-training (45 Years, Est. 1981)
-* **System Prompt training**: Configured both server-side (`server.js`) system instruction parameters (Supreme System Instruction) and client-side (`app.js`) offline fallback rules to define Acarrealíquidos as a company founded in 1981 with 45 years of experience.
-* **Direct Answer Hook**: Trained the bot to answer exactly `"Desde el año 1981"` (or `"We operate since 1981"` in English context) when queried *"Since when do you operate?"* / *"¿Desde cuándo operan?"*.
-
-### 4. Node.js Express Backend Setup
-* **Express Server (`server.js`)**: Added a Node.js Express server to host the static files and expose the `POST /api/chat` route on Render. This enables the client-side `app.js` chatbot fetch call to route directly to a server-side endpoint.
-* **Gemini API Key Integration**: Designed `/api/chat` to load `process.env.GEMINI_API_KEY` to query Google Generative AI securely from the server side without exposing keys in client-side code.
-* **Dependency Declarations**: Configured `package.json` with ESM (`type: "module"`) and scripts to launch the application. Installed `@google/generative-ai` (upgraded to version `0.24.1` for native `systemInstruction` support on older/newer keys), `express`, `cors`, and `dotenv`.
-* **Repository Safety (.gitignore)**: Added rules to ignore node modules, local environment files (`.env`), and logs to keep the repository clean and secure. Included `.env.example` as a setup template.
-* **GitHub Push Protection Safety**: Ensured no API keys are hardcoded in the committed files, fully satisfying GitHub Code Scanning and Secret Detection push rules.
-
-### 5. Generative AI Chatbot Integration (AI Logistics Concierge)
-* **Active Model Verification**: Refactored the Express backend to query the industry-standard **`gemini-1.5-flash`** model with the new **"God-Mode" System Instruction** outlining Acarrealíquidos' identity, tone (professional/human-like logistics consultant), SCT/COFEPRIS certifications, and strategic Veracruz hub.
-* **Conversational Session Memory (`startChat`)**: Upgraded to a pure generative flow utilizing the Gemini SDK's `model.startChat({ history })` method. The backend keeps an active window of the last 14 messages (7 user/assistant exchanges) in the context memory, enabling complex follow-up routing (e.g. asking "Quiero mover melaza" and later asking "¿Tienen permisos?" works with perfect coherence).
-* **General Knowledge Linking & Company Anchor**: Instructed the agent to support open-ended chats (e.g. asking for the history of Veracruz or distances like Veracruz to Mérida) using its full general knowledge, and sutil y coherentemente linking the conversation back to Acarrealíquidos' operations (e.g., "De Veracruz a Mérida son 950 km. En Acarrealíquidos cubrimos esa ruta...").
-* **Eradicated Keyword Matching Fallbacks**: Wiped out the local offline NLP parser in `app.js` completely. The client code acts strictly as a lightweight bridge routing all requests to Gemini, avoiding rigid checks. In case of API failure, it displays a professional connectivity error prompt.
-* **UI/UX Upgrades**:
-  * Replaced the text input field with a dynamically-growing **`<textarea>`** supporting multi-line entries (Shift+Enter adds newlines, Enter submits, auto-grows up to 4 lines maximum).
-  * **Markdown Support**: Added client-side parsing utility `parseMarkdown` to render bold text (`**bold**`), italics, and bullet lists (`- item`), combined with CSS overrides in `index.html` to guarantee bold text and clean lists render correctly inside chat bubbles.
-  * **Dynamic "Thinking" Thought Logs**: The preloader indicator bubble selects a random, realistic thought log (e.g. "Analizando viabilidad de ruta...", "Consultando base de datos operativa...") and renders it alongside a spinning sync icon, making the thinking state feel incredibly smart and organic.
-  * **Auto-Scroll**: Triggers on a `setTimeout` window using `scrollIntoView` for pixel-perfect viewport alignment.
+Transforming **Acarrealíquidos S.A. de C.V.** into a world-class, high-converting Hybrid Web App (PWA) powered by **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
 
 ---
 
-## Verification Steps
+## 1. Executive Summary
 
-1. Launch the platform locally:
-   * Run `npm.cmd install` to download dependencies.
-   * Copy `.env.example` to `.env` and fill in your `GEMINI_API_KEY`.
-   * Start the server with `node server.js` and open `http://localhost:3000` in your browser.
-2. Observe the **45th Anniversary Pyrotechnic Preloader**:
-   * Rocket spark ascends and explodes into orange/gold embers.
-   * Incandescent particles form the number `"45"` at the center.
-   * Digital ticker climbs from 1981 to 2026.
-   * Brand logo fades in with light sweep, revealing tagline.
-   * Preloader does a heat wave distortion exit and fades out.
-3. Test **Skip Intro** logic:
-   * Reload the page in a new tab to see the intro. Press the skip button to verify immediate exit.
-4. Verify that the chatbot is focused and responsive when checking quotes or routes.
-5. In the chat, ask: **`¿Desde cuándo operan?`** or **`Since when do you operate?`** and verify that it answers **`Operamos desde el año 1981.`** or **`We operate since 1981.`**.
+Acarrealíquidos has evolved from a static HTML/JS landing page into a modern, Silicon Valley-caliber logistics platform that bridges:
+1. **Public Conversion Portal (SSR)**: High-impact typography, glassmorphism, Bento Grid layout, dynamic 45th Anniversary legacy badge (`1981–2026`), and interactive trust metrics.
+2. **Interactive Liquid & Truck Quote Engine (CSR)**: Real-time volume slider (`5,000 L` to `45,000 L`), dynamic liquid simulation with visual cross-section, automatic equipment switcher (Sencillo vs. Full Doble Semirremolque), and instant route pricing.
+3. **Live Telemetry & Customer Operations Dashboard (`/dashboard`)**: 5-stage shipment progression stepper, live sensor gauges (speed, cargo temperature, valve pressure, tank level), interactive route vector map with moving tanker marker, driver credentials (SCT Type E HazMat), and past shipments with digital remisiones.
+4. **App-Native PWA (Mobile First)**: Bottom Tab Bar (`MobileTabBar`), Web App Manifest (`manifest.webmanifest`), Service Worker (`sw.js`) with offline caching, and native install prompt banner (`InstallPwaBanner`).
+
+---
+
+## 2. Updated Directory Structure (Atomic Design)
+
+```plaintext
+acarrealiquidos-web/
+├── public/
+│   ├── assets/                     # Optimized WebP assets (tankers, logos, certifications)
+│   └── sw.js                       # High-performance Stale-While-Revalidate Service Worker
+├── src/
+│   ├── app/                        # Next.js App Router
+│   │   ├── api/chat/route.ts       # Gemini 1.5 Flash AI Logistics Concierge
+│   │   ├── dashboard/
+│   │   │   └── page.tsx            # Live Telemetry & Customer Tracking Dashboard
+│   │   ├── globals.css             # Tailwind base, custom scrollbar & glassmorphism
+│   │   ├── layout.tsx              # Root Layout (Outfit + JetBrains Mono + PWA Meta)
+│   │   ├── manifest.ts             # Dynamic Web App Manifest
+│   │   └── page.tsx                # Silicon Valley Home Page (SSR)
+│   ├── components/                 # Atomic Design Architecture
+│   │   ├── atoms/
+│   │   │   ├── Badge.tsx           # HazMat, SCT, COFEPRIS, Live & Anniversary variants
+│   │   │   ├── Button.tsx          # Shimmer, neon glow, and Framer Motion spring physics
+│   │   │   ├── Input.tsx           # Floating glassmorphic inputs with error states
+│   │   │   ├── Slider.tsx          # Interactive volume scrubber (5kL - 45kL)
+│   │   │   └── Spinner.tsx         # Dual-glow spinning indicator
+│   │   ├── molecules/
+│   │   │   ├── DriverCard.tsx      # Operator profile with SCT Class E license & direct call
+│   │   │   └── VolumeDisplay.tsx   # Tanker cross-section visualizer with dynamic liquid fill
+│   │   └── organisms/
+│   │       ├── ActiveOrderCard.tsx # 5-stage stepper + real-time telemetry meters
+│   │       ├── AiConciergeDrawer.tsx# Generative AI chat drawer with streaming thoughts
+│   │       ├── BentoGridServices.tsx# Modern SaaS Bento Grid for HazMat, Food Grade, Corrosives
+│   │       ├── FleetShowcase.tsx   # Tanker fleet specifications and capacities
+│   │       ├── Footer.tsx          # 45-year heritage branding and regulatory info
+│   │       ├── HeroSection.tsx     # Animated headline, 45-year badge, and CTAs
+│   │       ├── InstallPwaBanner.tsx# Floating native install banner & SW registration
+│   │       ├── LiveMapTracker.tsx  # Route polyline map with animated moving tanker marker
+│   │       ├── MobileTabBar.tsx    # Native-like mobile bottom tab navigation
+│   │       ├── Navbar.tsx          # Floating glassmorphic header with language switcher
+│   │       ├── OrdersTable.tsx     # Past shipments table with digital remisión download
+│   │       ├── QuoteCalculator.tsx # Real-time volume, route distance & freight estimator
+│   │       └── TrustSection.tsx    # Testimonials and 45th Anniversary credentials
+│   ├── lib/
+│   │   └── utils.ts                # clsx & tailwind-merge (cn helper)
+│   └── types/
+│       └── logistics.ts            # Strict domain types for cargo, telemetry, routes, and quotes
+├── render.yaml                     # Render.com Blueprint configuration
+├── next.config.mjs                 # Next.js configuration
+├── tailwind.config.ts              # Extended colors (Midnight Navy, Safety Orange, Amber)
+├── tsconfig.json                   # Strict TypeScript compiler options
+└── package.json                    # Dependencies & build scripts
+```
+
+---
+
+## 3. GitHub & Render.com Continuous Deployment
+
+### GitHub Repository
+- **Remote**: `https://github.com/gastonmorante/acarrealiquidos-web.git`
+- **Active Branch**: `main`
+- **Latest Commit**: `bcac155` (*"feat: add Next.js native API chat route, AI concierge drawer, and render.yaml blueprint for continuous deployment"*)
+
+### Render.com Deployment Configuration
+A declarative `render.yaml` blueprint is present in the repository root:
+
+- **Runtime**: Node.js 22.17.0
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm start`
+- **Health Check Path**: `/`
+- **Environment Variables**: Configure `GEMINI_API_KEY` in the Render service dashboard.

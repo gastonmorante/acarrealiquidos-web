@@ -3,61 +3,56 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShieldCheck, Award, Droplets, ArrowRight } from "lucide-react";
 import { DynamicKpiCards } from "@/components/molecules/DynamicKpiCards";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const HeroSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative w-full bg-gradient-to-b from-white via-slate-50 to-[#eaedff]/30 overflow-hidden border-b border-slate-200/80 tech-grid-pattern pt-24 sm:pt-28 pb-16 lg:pb-20">
-      {/* Ambient lighting accents */}
       <div className="absolute -right-40 -top-40 w-[550px] h-[550px] rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
       <div className="absolute left-1/4 -bottom-32 w-[450px] h-[450px] rounded-full bg-red-500/10 blur-3xl pointer-events-none" />
 
       <div className="relative max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Columna Izquierda: Copy y Conversión */}
           <div className="lg:col-span-7 flex flex-col items-start">
-            {/* Headline de Alto Impacto Industrial (Space Grotesk) */}
             <h1 className="font-headline text-3xl sm:text-4xl lg:text-5xl uppercase text-[#131b2e] tracking-tight mb-5 font-bold leading-[1.15]">
-              Solución confiable y máxima seguridad en el transporte para el{" "}
+              {t.hero.headlinePre}{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#DC2626] to-[#991b1b]">
-                sector industrial
+                {t.hero.headlineHighlight}
               </span>
-              .
+              {t.hero.headlinePost}
             </h1>
 
-            {/* Subtitle Oficial Operativo */}
             <p className="text-base sm:text-lg text-slate-600 max-w-2xl mb-8 leading-relaxed">
-              Operando desde{" "}
+              {t.hero.locationSub}{" "}
               <strong className="text-[#131b2e] font-semibold">
-                Amatlán de los Reyes, Veracruz
+                {t.hero.locationCity}
               </strong>
               , con cobertura estratégica en todo el territorio nacional.
             </p>
 
-            {/* Botones Supremos Hero (Stitch Physics & Glow) */}
             <div className="flex flex-wrap items-center gap-4 mb-2 w-full sm:w-auto">
               <Link
                 href="#contacto"
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red transition-all duration-300 transform active:scale-95 border-t border-white/30"
               >
                 <span className="material-symbols-outlined text-[20px]">request_quote</span>
-                <span>Solicitar Cotización Inmediata</span>
+                <span>{t.hero.ctaQuote}</span>
               </Link>
               <Link
                 href="#equipo"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300/90 text-[#18234D] font-display text-xs uppercase font-bold tracking-wider shadow-sm hover:shadow-md hover:border-slate-400 transition-all duration-200 btn-chrome"
               >
                 <span className="material-symbols-outlined text-[20px] text-[#18234D]">local_shipping</span>
-                <span>Ver Equipo Especializado</span>
+                <span>{t.hero.ctaFleet}</span>
               </Link>
             </div>
           </div>
 
-          {/* Columna Derecha: Tarjeta Visual de Telemetría e Ingeniería (Continuous Levitation Physics) */}
           <div className="lg:col-span-5 relative">
             <div className="animate-float-slow relative bg-white rounded-2xl p-3.5 shadow-2xl border border-slate-200/90 ring-1 ring-slate-100">
-              {/* Imagen del Tractocamión */}
               <div className="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden group">
                 <Image
                   src="/assets/hero_tanker.webp"
@@ -68,7 +63,6 @@ export const HeroSection: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
 
-                {/* Floating Operational Telemetry Overlay (Display Aero-Industrial) */}
                 <div className="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md rounded-xl p-3.5 text-white border border-slate-700/80 shadow-xl">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -77,33 +71,33 @@ export const HeroSection: React.FC = () => {
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                       </span>
                       <span className="font-display text-[11px] tracking-wider uppercase font-bold text-slate-200">
-                        Torre Amatlán · Despacho 24/7
+                        {t.hero.telemetryTitle}
                       </span>
                     </div>
-                    <span className="font-display text-[10px] uppercase text-emerald-400 bg-emerald-950/70 border border-emerald-500/30 px-2 py-0.5 rounded font-bold">
-                      Unidad 2026 Activa
+                    <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/80">
+                      EN RUTA
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-2 text-left font-sans text-xs border-t border-slate-700/60 pt-2 text-slate-300">
-                    <div>Carga: <span className="font-semibold text-white">Aceite Palma Kosher</span></div>
-                    <div>Monitoreo: <span className="font-semibold text-red-400">SAF &amp; GPS 100% OK</span></div>
+                  <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-700/80 text-[11px]">
+                    <div>
+                      <span className="text-slate-400 block text-[9px] uppercase font-mono">Status</span>
+                      <span className="font-semibold text-slate-200 truncate block">{t.hero.telemetryRoute}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block text-[9px] uppercase font-mono">Inocuidad</span>
+                      <span className="font-semibold text-emerald-400 truncate block">{t.hero.telemetryCert}</span>
+                    </div>
+                    <div>
+                      <span className="text-slate-400 block text-[9px] uppercase font-mono">Equipo</span>
+                      <span className="font-semibold text-slate-200 truncate block">{t.hero.telemetryCapacity}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              {/* Bottom Card Route Footnote */}
-              <div className="mt-3 flex items-center justify-between px-2 text-slate-500 font-display text-[10px] uppercase font-bold tracking-wider">
-                <span className="flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[14px]">pin_drop</span>
-                  Carretera Federal Córdoba-Veracruz
-                </span>
-                <span className="text-slate-700 font-semibold">NOM-068-SCT Dictamen Vigente</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Dynamic Interactive KPI Cards con Mucho Estilo */}
         <DynamicKpiCards />
       </div>
     </section>

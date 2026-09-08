@@ -1,79 +1,77 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { BrandLogo } from "@/components/atoms/BrandLogo";
 import { MapPin, Phone, Mail, Clock, MessageSquare, Globe, ShieldCheck } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const Footer: React.FC = () => {
-  const [lang, setLang] = useState<"es" | "en">("es");
+  const { lang, setLang, t } = useLanguage();
   const waLink = "https://wa.me/522717128316?text=Hola,%20estoy%20interesado%20en%20un%20servicio%20de%20transporte%20especializado.";
 
   return (
     <footer className="w-full bg-[#0B1120] text-slate-300 border-t border-slate-800">
       <div className="max-w-[84rem] mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
-          {/* Col 1: Identity & Credentials */}
           <div className="lg:col-span-4 flex flex-col items-start">
             <div className="mb-5">
               <BrandLogo variant="light" size="lg" showSubtitle={true} />
               <p className="mt-3 text-xs text-amber-400 font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-                <span>Transporte Especializado en Autotanques</span>
+                <span>{t.footer.tagline}</span>
               </p>
             </div>
             <p className="text-sm text-slate-400 max-w-sm mb-6 leading-relaxed">
-              Solución confiable y máxima seguridad en el transporte para el sector industrial. Operando desde Amatlán de los Reyes, Veracruz, con cobertura estratégica en territorio nacional.
+              {t.footer.description}
             </p>
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 font-mono text-[11px] text-slate-300 border border-slate-700">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                SICT REGULADO
+                {t.footer.regulatedSict}
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 font-mono text-[11px] text-slate-300 border border-slate-700">
                 <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-                KOSHER OU
+                {t.footer.kosherOu}
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 font-mono text-[11px] text-slate-300 border border-slate-700">
                 <span className="w-2 h-2 rounded-full bg-sky-400"></span>
-                COFEPRIS
+                {t.footer.cofepris}
               </span>
             </div>
           </div>
 
-          {/* Col 2: Navigation */}
           <div className="lg:col-span-2 flex flex-col space-y-2.5">
             <span className="text-sm text-white font-bold uppercase tracking-wider mb-1">
-              Navegación
+              {t.footer.navTitle}
             </span>
             <Link className="text-sm text-slate-400 hover:text-white transition-colors" href="#">
-              Inicio
+              {t.nav.home}
             </Link>
             <Link className="text-sm text-slate-400 hover:text-white transition-colors" href="#certificaciones">
-              Certificaciones
+              {t.nav.certifications}
             </Link>
             <Link className="text-sm text-slate-400 hover:text-white transition-colors" href="#servicios">
-              Servicios Especializados
+              {t.nav.services}
             </Link>
             <Link className="text-sm text-slate-400 hover:text-white transition-colors" href="#equipo">
-              Equipo Especializado
+              {t.nav.fleet}
             </Link>
             <Link className="text-sm text-slate-400 hover:text-white transition-colors" href="#cumplimiento">
-              Cumplimiento Normativo
+              {t.nav.compliance}
             </Link>
             <Link className="text-sm text-slate-400 hover:text-white transition-colors" href="#contacto">
-              Contacto y Cotización
+              {t.nav.contact}
             </Link>
           </div>
 
-          {/* Col 3: Base Operativa Central */}
           <div className="lg:col-span-3 flex flex-col space-y-3">
             <span className="text-sm text-white font-bold uppercase tracking-wider mb-1">
-              Base Operativa Central
+              {t.footer.baseTitle}
             </span>
             <div className="flex items-start gap-2.5 text-slate-400 text-xs leading-relaxed">
               <MapPin className="h-4 w-4 mt-0.5 text-red-500 shrink-0" />
-              <span>Km. 2 Carretera Córdoba a Potrero, Amatlán de los Reyes, Veracruz, México</span>
+              <span>{t.footer.baseAddress}</span>
             </div>
             <div className="flex items-center gap-2.5 text-slate-400 text-xs">
               <Phone className="h-4 w-4 text-red-500 shrink-0" />
@@ -89,13 +87,12 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 4: Atención Inmediata & Language Selector */}
           <div className="lg:col-span-3 flex flex-col items-start space-y-4">
             <span className="text-sm text-white font-bold uppercase tracking-wider">
-              Atención Inmediata
+              {t.footer.immediateTitle}
             </span>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Canal directo con nuestra torre de control para cotizaciones y requerimientos de transporte especializado.
+              {t.footer.immediateDesc}
             </p>
             <a
               className="inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs shadow-sm transition-all w-full justify-center font-bold"
@@ -104,12 +101,11 @@ export const Footer: React.FC = () => {
               target="_blank"
             >
               <MessageSquare className="h-4 w-4" />
-              <span>WhatsApp Torre de Control</span>
+              <span>{t.footer.whatsappBtn}</span>
             </a>
 
-            {/* Language Selector Box (Located at bottom as requested) */}
             <div className="w-full pt-2">
-              <span className="block text-xs text-slate-400 font-medium mb-2">Seleccionar Idioma / Language:</span>
+              <span className="block text-xs text-slate-400 font-medium mb-2">{t.footer.languageSelect}</span>
               <div className="inline-flex items-center bg-slate-900 rounded-xl p-1 border border-slate-700/80 w-full justify-between">
                 <button
                   type="button"
@@ -140,32 +136,15 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Institutional Logos Banner in Footer */}
-        <div className="py-6 border-b border-slate-800 flex flex-wrap items-center justify-between gap-6">
-          <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
-            Respaldado y Regulado por Instituciones Oficiales:
-          </span>
-          <div className="flex flex-wrap items-center gap-6 sm:gap-8 opacity-85 hover:opacity-100 transition-opacity">
-            <img src="/assets/logo-kosher-ou-white.svg" alt="Kosher OU" className="h-7 w-auto object-contain" />
-            <img src="/assets/logo-sict-white.svg" alt="SICT" className="h-7 w-auto object-contain" />
-            <img src="/assets/logo-cofepris-white.svg" alt="COFEPRIS" className="h-7 w-auto object-contain" />
-            <img src="/assets/logo-canacar-white.svg" alt="CANACAR" className="h-7 w-auto object-contain" />
-          </div>
-        </div>
-
-        {/* Bottom Legal bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 Acarrea Líquidos S.A. de C.V. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} {t.footer.allRights}</p>
           <div className="flex items-center gap-6">
-            <a className="hover:text-slate-300 transition-colors" href="#">
-              Aviso de Privacidad
-            </a>
-            <a className="hover:text-slate-300 transition-colors" href="#">
-              Términos y Condiciones
-            </a>
-            <a className="hover:text-slate-300 transition-colors" href="#cumplimiento">
-              Cumplimiento SICT
-            </a>
+            <Link href="/aviso-de-privacidad" className="hover:text-white transition-colors">
+              {t.footer.privacy}
+            </Link>
+            <Link href="/terminos-y-condiciones" className="hover:text-white transition-colors">
+              {t.footer.terms}
+            </Link>
           </div>
         </div>
       </div>

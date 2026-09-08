@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export const TechnicalQuoteSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const { t } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -11,20 +13,20 @@ export const TechnicalQuoteSection: React.FC = () => {
   };
 
   return (
-    <section className="w-full bg-white py-20" id="contacto">
+    <section className="w-full bg-white py-16 sm:py-20" id="contacto">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Columna Info */}
           <div className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <span className="font-display text-xs uppercase tracking-widest text-[#18234D] font-bold block mb-2">
-                Atención Operativa Inmediata
+                {t.quote.badge}
               </span>
               <h2 className="font-display text-3xl sm:text-4xl uppercase text-[#131b2e] tracking-tight mb-4 font-bold">
-                Contacto y Cotización Especializada
+                {t.quote.title}
               </h2>
               <p className="text-base text-slate-600 mb-8 leading-relaxed">
-                Desde nuestra central operativa en <strong className="text-[#131b2e] font-semibold">Amatlán de los Reyes, Veracruz</strong>, nuestro equipo de tráfico evalúa su solicitud para asignación de unidades térmicas en acero inoxidable y plataformas multimodales.
+                {t.quote.subtitle}
               </p>
 
               <div className="space-y-5 mb-8">
@@ -37,7 +39,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       Respuesta Rápida Garantizada
                     </span>
                     <span className="text-xs text-slate-600">
-                      Atención inmediata de un ejecutivo técnico en menos de 2 horas hábiles.
+                      Atención inmediata de un ejecutivo técnico en menos de 30 minutos.
                     </span>
                   </div>
                 </div>
@@ -87,7 +89,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                 target="_blank"
               >
                 <span className="material-symbols-outlined text-[16px]">call</span>
-                <span>Escribir por WhatsApp a Torre de Control</span>
+                <span>{t.footer.whatsappBtn}</span>
               </a>
             </div>
           </div>
@@ -100,10 +102,10 @@ export const TechnicalQuoteSection: React.FC = () => {
                   <span className="material-symbols-outlined text-3xl">check_circle</span>
                 </div>
                 <h3 className="font-display text-2xl uppercase font-bold text-[#131b2e] mb-2">
-                  Solicitud Recibida con Éxito
+                  {t.quote.successMsg}
                 </h3>
                 <p className="text-sm text-slate-600 max-w-md">
-                  Un ejecutivo de tráfico y despacho de Acarrea Líquidos confirmará disponibilidad técnica en menos de 2 horas hábiles.
+                  Un ejecutivo de tráfico y despacho de Acarrealíquidos confirmará disponibilidad técnica en menos de 30 minutos.
                 </p>
               </div>
             ) : (
@@ -111,7 +113,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                      Nombre Completo *
+                      {t.quote.nameLabel} *
                     </label>
                     <input
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
@@ -122,7 +124,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                   </div>
                   <div>
                     <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                      Empresa / Razón Social *
+                      {t.quote.companyLabel} *
                     </label>
                     <input
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
@@ -136,83 +138,80 @@ export const TechnicalQuoteSection: React.FC = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                      Correo Corporativo *
+                      {t.quote.emailLabel} *
                     </label>
                     <input
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
-                      placeholder="logistica@empresa.com"
+                      placeholder="contacto@empresa.com"
                       required
                       type="email"
                     />
                   </div>
                   <div>
                     <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                      Teléfono de Contacto *
+                      {t.quote.phoneLabel} *
                     </label>
                     <input
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
-                      placeholder="+52 (55) 1234 5678"
+                      placeholder="+52 (271) 000-0000"
                       required
                       type="tel"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                    Tipo de Servicio Requerido *
-                  </label>
-                  <select
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500/20"
-                    required
-                  >
-                    <option value="alimentos">Transporte Grado Alimenticio (Aceites y Grasas)</option>
-                    <option value="quimicos">Materiales Peligrosos (Alcoholes y Solventes)</option>
-                    <option value="multimodal">Plataformas y Carga General (40ft / Melaza)</option>
-                    <option value="agua">Agua Industrial (Tratada / Proceso)</option>
-                  </select>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
+                      {t.quote.cargoType}
+                    </label>
+                    <select className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500/20">
+                      <option>{t.quote.options.foodGrade}</option>
+                      <option>{t.quote.options.chemical}</option>
+                      <option>{t.quote.options.flatbed}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
+                      {t.quote.volumeLabel}
+                    </label>
+                    <input
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      placeholder="Ej. 45,000 Litros"
+                      type="text"
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                    Ruta Requerida (Origen – Destino) *
-                  </label>
-                  <input
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
-                    placeholder="Ej. Amatlán de los Reyes, Ver. – Guadalajara, Jal."
-                    required
-                    type="text"
-                  />
-                </div>
-
-                <div>
-                  <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
-                    Detalles del Requerimiento
-                  </label>
-                  <textarea
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
-                    placeholder="Indicar volumen en litros, producto específico a transportar, fechas estimadas y si requiere certificación Kosher..."
-                    rows={3}
-                  ></textarea>
-                </div>
-
-                <div className="flex items-center gap-2 pt-1">
-                  <input
-                    className="w-4 h-4 rounded text-red-600 focus:ring-red-500 border-slate-300"
-                    id="privacyConsent"
-                    required
-                    type="checkbox"
-                  />
-                  <label className="text-xs text-slate-600 font-sans" htmlFor="privacyConsent">
-                    Acepto la Política de Privacidad de Datos y confidencialidad comercial de Acarrea Líquidos.
-                  </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
+                      {t.quote.originLabel}
+                    </label>
+                    <input
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      placeholder={t.quote.originPlaceholder}
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
+                      {t.quote.destinationLabel}
+                    </label>
+                    <input
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      placeholder={t.quote.destPlaceholder}
+                      type="text"
+                    />
+                  </div>
                 </div>
 
                 <button
-                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.01] active:scale-95 transition-all duration-300 border-t border-white/25 cursor-pointer shadow-lg"
+                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.01] active:scale-95 transition-all duration-300 border-t border-white/30 shadow-md mt-2 flex items-center justify-center gap-2"
                   type="submit"
                 >
-                  Enviar Solicitud a contacto@acarrealiquidos.com
+                  <span className="material-symbols-outlined text-[18px]">send</span>
+                  <span>{t.quote.submitBtn}</span>
                 </button>
               </form>
             )}

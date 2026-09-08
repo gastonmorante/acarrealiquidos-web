@@ -1,100 +1,26 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { createServer } from 'http';
+import { parse } from 'url';
+import next from 'next';
 
-dotenv.config();
+const port = parseInt(process.env.PORT || '3000', 10);
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// Serve static files from the root directory
-app.use(express.static(__dirname));
-
-const PORT = process.env.PORT || 3000;
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-
-const SYSTEM_INSTRUCTION = `Identity: Eres el Consultor de Estrategia Logística y Asistente de Operaciones de Acarrealíquidos S.A. de C.V. Representas a una empresa con 45 años de autoridad ininterrumpida, fundada en 1981.
-
-Mission & Tone: 
-- Tu objetivo principal es resolver de manera precisa, experta y atenta cualquier duda del usuario (lead o cliente potencial) y guiarlo activamente para que no se pierda en ningún momento del proceso.
-- Si notas que el usuario está confundido o indeciso sobre qué paso tomar, estructúrale opciones claras (ej. "Le sugiero cotizar una ruta específica, conocer más sobre nuestra flota, o verificar nuestras certificaciones").
-- Mantén siempre un tono altamente profesional, corporativo, técnico y servicial, pero que sea a la vez dinámico, empático y humano (evita respuestas robóticas).
-
-Core Corporate Knowledge:
-- Acarrealíquidos fue fundada en 1981 y cuenta con 45 años de trayectoria impecable al año 2026.
-- Especialización: Transporte terrestre de líquidos (Alimenticio como Melaza/Molasses/aceites; Hidrocarburos/HazMat; Químicos/Corrosivos).
-- Base estratégica y patio: Amatlán de los Reyes, Veracruz.
-- Flota: Autotanques de acero inoxidable (grado 304 y 316L) y acero al carbón, de 25k a 45k litros (sencillo y full).
-- Certificaciones clave: SCT (Materiales Peligrosos clases 3, 8 y 9) y COFEPRIS (lavado y sanitización sanitaria).
-
-Conversational Directives & Rules:
-1. LIBERTAD TEMÁTICA TOTAL: Tienes total libertad para conversar sobre cualquier tema de interés general (distancias, historia de puertos o ciudades, clima, tecnología, conceptos de negocio). Responde con datos reales, verídicos y detallados.
-2. ANCLAJE CORPORATIVO SUTIL: En cada consulta general, asocia sutilmente la respuesta de vuelta a la autoridad de 45 años de Acarrealíquidos. (Ej: Si te preguntan sobre rutas o Veracruz a Mérida, menciona la distancia y cómo Acarrealíquidos la opera desde hace décadas).
-3. GUÍA AL LEAD (Que no se pierda): Cuando el lead demuestre interés en cotizar o contratar, coordina la planeación solicitando de forma ordenada y natural:
-   a) Nombre de contacto y empresa.
-   b) Tipo de producto líquido a transportar.
-   c) Ruta (Origen y Destino).
-   d) Datos de contacto (WhatsApp o Correo).
-   *Si el usuario se desvía, retoma amablemente orientándolo de regreso al flujo.
-4. TOLERANCIA A ERRORES (Fuzzy Matching): Si el usuario tiene errores de dedo o escribe abreviaturas (ej. "merdia" en vez de Mérida, "kms" o "sct"), interpreta el contexto correcto de inmediato y responde con propiedad.
-5. IDIOMA: Autodetecta el idioma del usuario y responde en el mismo (Español o Inglés).`;
-
-app.post('/api/chat', async (req, res) => {
-    const { messages, userMessage } = req.body;
-
-    if (!userMessage) {
-        return res.status(400).json({ error: "Falta el mensaje del usuario." });
-    }
-
-    if (!GEMINI_API_KEY) {
-        return res.status(500).json({ error: "La API Key de Gemini no está configurada." });
-    }
-
+app.prepare().then(() => {
+  createServer(async (req, res) => {
     try {
-        const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-        // Using standard gemini-1.5-flash model as requested
-        const model = genAI.getGenerativeModel({
-            model: 'gemini-1.5-flash',
-            systemInstruction: SYSTEM_INSTRUCTION
-        });
-
-        // Map messages history to Gemini's startChat expected structure
-        const history = [];
-        if (messages && messages.length > 1) {
-            // Slice the last message since it represents the current userMessage
-            const previousMessages = messages.slice(0, -1).slice(-14);
-            for (const m of previousMessages) {
-                history.push({
-                    role: m.role === 'user' ? 'user' : 'model',
-                    parts: [{ text: m.content }]
-                });
-            }
-        }
-
-        // Start Chat session with history memory window (Pure Generative Flow)
-        const chat = model.startChat({ history });
-        const result = await chat.sendMessage(userMessage);
-        const replyText = result.response.text() || "";
-
-        res.json({ response: replyText });
-    } catch (error) {
-        console.error("Error calling Gemini API:", error);
-        res.status(500).json({ error: "Error interno del servidor de IA." });
+      const parsedUrl = parse(req.url, true);
+      await handle(req, res, parsedUrl);
+    } catch (err) {
+      console.error('Error handling request:', err);
+      res.statusCode = 500;
+      res.end('Internal Server Error');
     }
-});
-
-// Serve index.html for all other routes (single page application support)
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  }).listen(port, () => {
+    console.log(`> Acarrea Líquidos server ready on port ${port}`);
+  });
+}).catch((err) => {
+  console.error('Failed to start server:', err);
+  process.exit(1);
 });

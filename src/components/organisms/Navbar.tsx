@@ -60,14 +60,20 @@ export const Navbar: React.FC = () => {
 
           {/* Quick Actions & Language Toggle */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Quick Dispatch Phone Call (Desktop) */}
+            {/* Quick Dispatch Call Button (High Executive Aesthetic) */}
             <a
               href="tel:+522717128316"
-              className="hidden 2xl:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-[#18234D] font-display text-xs font-semibold tracking-wide btn-chrome transition-all"
-              title="Línea Directa Torre de Control"
+              className="hidden lg:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/95 hover:bg-slate-50 border border-slate-200/90 text-[#18234D] font-display text-xs font-bold uppercase tracking-wider btn-chrome transition-all shadow-sm hover:shadow hover:border-emerald-400/60 active:scale-95 whitespace-nowrap group"
+              title="Llamar a Torre de Control (+52 271 712-8316)"
             >
-              <span className="material-symbols-outlined text-[#18234D] text-[17px]">call</span>
-              <span>+52 (271) 712-8316</span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="material-symbols-outlined text-[#18234D] group-hover:text-emerald-600 transition-colors text-[18px]">
+                call
+              </span>
+              <span>{lang === "es" ? "Llamar a Despacho" : "Call Dispatch"}</span>
             </a>
 
             {/* Language Switcher Pill (ES / EN in Head as requested) */}
@@ -180,19 +186,24 @@ export const Navbar: React.FC = () => {
               ))}
             </nav>
 
-            {/* Direct Dispatch Line */}
-            <div className="pt-4 border-t border-slate-100 mt-3 flex items-center justify-between">
+            {/* Direct Dispatch Call Button */}
+            <div className="pt-4 border-t border-slate-100 mt-3 flex items-center justify-between gap-3">
               <a
                 href="tel:+522717128316"
-                className="flex items-center gap-2 text-xs font-display font-bold text-[#18234D]"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-slate-100 text-[#18234D] text-xs font-display font-bold uppercase tracking-wider shadow-sm hover:bg-slate-200 transition-colors"
+                title="Llamar a Despacho: +52 (271) 712-8316"
               >
-                <Phone className="w-4 h-4 text-red-600" />
-                <span>+52 (271) 712-8316</span>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="material-symbols-outlined text-emerald-600 text-[18px]">call</span>
+                <span>{lang === "es" ? "Llamar a Despacho" : "Call Dispatch"}</span>
               </a>
               <Link
                 href="#contacto"
                 onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center gap-1.5 py-2 px-4 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white text-xs font-display font-bold uppercase tracking-wider shadow-md"
+                className="inline-flex items-center gap-1.5 py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white text-xs font-display font-bold uppercase tracking-wider shadow-md"
               >
                 <span>Cotizar</span>
                 <ArrowRight className="w-3.5 h-3.5" />

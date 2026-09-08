@@ -75,12 +75,12 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
           />
         ) : (
           /* High-fidelity Vector Fallback */
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center">
             <span className="font-extrabold text-2xl tracking-tighter text-[#ED2B2C]">
               ACARREA
             </span>
             <span
-              className={`font-extrabold text-2xl tracking-tight ${
+              className={`font-extrabold text-2xl tracking-tighter ${
                 isDarkBg ? "text-white" : "text-[#18234D]"
               }`}
             >
@@ -90,11 +90,11 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
         )}
       </div>
 
-      {/* Subtitle / Corporate Sub-brand Centered with Harmonious Spacing */}
+      {/* Subtitle / Corporate Sub-brand Centered with Harmonious Spacing and No-Wrap */}
       {displaySubtitle && (
         <div className="w-full flex items-center justify-center">
           <span
-            className={`font-mono font-bold uppercase transition-colors duration-200 mt-1 text-center ${
+            className={`font-mono font-bold uppercase transition-colors duration-200 mt-0.5 text-center whitespace-nowrap ${
               sizeConfigs.subText
             } ${
               isDarkBg

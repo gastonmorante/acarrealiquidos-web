@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Calculator, Activity, MessageCircle } from "lucide-react";
+import { Home, Calculator, Award, MessageCircle } from "lucide-react";
 
 export const MobileTabBar: React.FC = () => {
   const pathname = usePathname();
@@ -23,6 +23,15 @@ export const MobileTabBar: React.FC = () => {
         <span className="text-[10px] font-label-badge tracking-tight">Inicio</span>
       </Link>
 
+      {/* Kosher & Certifications Tab */}
+      <Link
+        href="/#certificaciones"
+        className="flex flex-col items-center gap-1 py-1 px-3 text-amber-700 hover:text-amber-800 transition-all font-bold"
+      >
+        <Award className="w-5 h-5 text-amber-600" />
+        <span className="text-[10px] font-label-badge tracking-tight">Kosher OU</span>
+      </Link>
+
       {/* Quote Tab */}
       <Link
         href="/#contacto"
@@ -30,25 +39,6 @@ export const MobileTabBar: React.FC = () => {
       >
         <Calculator className="w-5 h-5" />
         <span className="text-[10px] font-label-badge tracking-tight">Cotizar</span>
-      </Link>
-
-      {/* Active GPS Dashboard Tab */}
-      <Link
-        href="/dashboard"
-        className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition-all relative ${
-          pathname.startsWith("/dashboard")
-            ? "text-primary font-bold"
-            : "text-on-surface-variant hover:text-primary"
-        }`}
-      >
-        <div className="relative">
-          <Activity className="w-5 h-5 text-emerald-600" />
-          <span className="absolute -top-1 -right-1 flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-          </span>
-        </div>
-        <span className="text-[10px] font-label-badge tracking-tight">Rastreo GPS</span>
       </Link>
 
       {/* WhatsApp Dispatch Call Tab */}

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Globe, Activity, ArrowRight, MapPin, Phone, Mail, ShieldCheck, Sparkles } from "lucide-react";
+import { Menu, X, Globe, Activity, ArrowRight, MapPin, Phone, Mail, ShieldCheck, Sparkles, Award } from "lucide-react";
 import { BrandLogo } from "@/components/atoms/BrandLogo";
 
 export const Navbar: React.FC = () => {
@@ -21,6 +21,7 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { name: lang === "es" ? "Inicio" : "Home", href: "#" },
+    { name: lang === "es" ? "Certificaciones" : "Certifications", href: "#certificaciones" },
     { name: lang === "es" ? "Servicios" : "Services", href: "#servicios" },
     { name: lang === "es" ? "Equipo Especializado" : "Fleet", href: "#equipo" },
     { name: lang === "es" ? "Cumplimiento SICT" : "Compliance", href: "#cumplimiento" },
@@ -39,14 +40,14 @@ export const Navbar: React.FC = () => {
               <span>Amatlán de los Reyes, Veracruz · Base Operativa Central</span>
             </span>
             <span className="text-slate-700">|</span>
-            <span className="flex items-center gap-1.5 text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Monitoreo GPS Activo 24/7 en Ruta</span>
+            <span className="flex items-center gap-1.5 text-amber-300 font-bold">
+              <Award className="w-3.5 h-3.5 text-amber-400" />
+              <span>Inocuidad Certificada Kosher Orthodox Union (OU)</span>
             </span>
             <span className="text-slate-700">|</span>
-            <span className="flex items-center gap-1.5 text-amber-300">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-              <span>Normas SICT · Grado Alimenticio Kosher OU · Cofepris</span>
+            <span className="flex items-center gap-1.5 text-emerald-300">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Normas SICT · Cofepris · CANACAR</span>
             </span>
           </div>
 
@@ -135,15 +136,16 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Action Hub (GPS Live + Cotizar CTA) */}
+          {/* Action Hub (Kosher OU + Cotizar CTA) */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Live GPS Telemetry Portal */}
+            {/* Kosher OU Certificate Action Link */}
             <Link
-              href="/dashboard"
-              className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-800 text-xs font-bold transition-all border border-slate-200/80 shadow-sm hover:border-slate-300"
+              href="#certificaciones"
+              className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-950 text-xs font-bold transition-all border border-amber-300 shadow-sm"
+              title="Ver Certificación Kosher Orthodox Union"
             >
-              <Activity className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
-              <span>Rastreo GPS</span>
+              <Award className="w-4 h-4 text-amber-600" />
+              <span>Garantía Kosher OU</span>
             </Link>
 
             {/* High-Conversion Cotizar CTA Button */}
@@ -234,12 +236,12 @@ export const Navbar: React.FC = () => {
             {/* Action buttons */}
             <div className="pt-4 grid grid-cols-2 gap-2.5">
               <Link
-                href="/dashboard"
+                href="#certificaciones"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold"
+                className="flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 text-xs font-bold border border-amber-300"
               >
-                <Activity className="w-4 h-4 text-emerald-600" />
-                <span>Rastreo GPS</span>
+                <Award className="w-4 h-4 text-amber-600" />
+                <span>Kosher OU</span>
               </Link>
               <Link
                 href="#contacto"

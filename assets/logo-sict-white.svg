@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 95" fill="none" class="institution-logo sict-gob">
+  <!-- Seal / Emblem -->
+  <g transform="translate(18, 14)">
+    <rect x="0" y="0" width="68" height="68" rx="16" fill="#FFFFFF" />
+    <path d="M34 14 L52 26 L52 48 L34 56 L16 48 L16 26 Z" stroke="#C5A059" stroke-width="2.5" fill="none"/>
+    <circle cx="34" cy="35" r="9" fill="#C5A059"/>
+    <path d="M24 35 L44 35 M34 25 L34 45" stroke="#0C2340" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <!-- Typography -->
+  <text x="102" y="38" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="27" font-weight="900" fill="#FFFFFF" letter-spacing="1.5">SICT</text>
+  <text x="102" y="56" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#FCA5A5" letter-spacing="0.8">SECRETARÍA DE INFRAESTRUCTURA,</text>
+  <text x="102" y="71" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#FCA5A5" letter-spacing="0.8">COMUNICACIONES Y TRANSPORTES</text>
+</svg>

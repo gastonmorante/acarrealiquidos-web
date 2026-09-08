@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "@/components/organisms/Navbar";
 import { HeroSection } from "@/components/organisms/HeroSection";
+import { TrustSection } from "@/components/organisms/TrustSection";
 import { AboutGovernance } from "@/components/organisms/AboutGovernance";
 import { SpecialtiesSection } from "@/components/organisms/SpecialtiesSection";
 import { FleetShowcase } from "@/components/organisms/FleetShowcase";
@@ -18,10 +19,13 @@ export default function HomePage() {
       {/* 1. Fixed Top Header Navigation */}
       <Navbar />
 
-      {/* 2. Hero Section with Glow Nodes & Metric KPI Cards */}
+      {/* 2. Hero Section with Metric KPI Cards */}
       <HeroSection />
 
-      {/* 3. Trayectoria y Gobernanza (45 Años de Liderazgo & Tabs) */}
+      {/* 3. Acreditaciones Oficiales e Instituciones (Kosher OU, SICT, Cofepris, CANACAR) */}
+      <TrustSection />
+
+      {/* 4. Trayectoria y Gobernanza (45 Años de Liderazgo) */}
       <AboutGovernance />
 
       {/* 4. Especialidades (Grado Alimenticio, Materiales Peligrosos, Plataformas y Carga General) */}

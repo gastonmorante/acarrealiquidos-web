@@ -119,6 +119,25 @@ export const SpecialtiesSection: React.FC = () => {
                   &ldquo;{srv.copy}&rdquo;
                 </p>
 
+                {/* Prominent Kosher OU Badge for Food Grade */}
+                {srv.highlight && (
+                  <div className="mt-4 p-3 rounded-xl bg-amber-50 border border-amber-300/80 flex items-center gap-3">
+                    <img
+                      src="/assets/logo-kosher-ou.svg"
+                      alt="Kosher Orthodox Union"
+                      className="h-10 w-auto object-contain shrink-0"
+                    />
+                    <div>
+                      <span className="text-xs font-mono font-bold text-amber-950 block">
+                        Certificación Kosher Orthodox Union (OU)
+                      </span>
+                      <span className="text-[10px] text-amber-800 font-medium">
+                        Auditoría permanente e inocuidad garantizada
+                      </span>
+                    </div>
+                  </div>
+                )}
+
                 {/* Official Certifications List */}
                 <div className="mt-space-lg space-y-space-xs pt-space-xs border-t border-surface-container">
                   <span className="font-label-badge text-[10px] text-primary uppercase font-bold tracking-wider block">

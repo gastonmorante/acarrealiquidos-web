@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 95" fill="none" class="institution-logo cofepris-gob">
+  <!-- Cross / Shield Emblem -->
+  <g transform="translate(18, 14)">
+    <rect x="0" y="0" width="68" height="68" rx="16" fill="#047857" />
+    <path d="M26 18 H42 V28 H52 V44 H42 V54 H26 V44 H16 V28 H26 Z" fill="#FFFFFF"/>
+    <circle cx="34" cy="36" r="4.5" fill="#047857"/>
+  </g>
+  <!-- Typography -->
+  <text x="102" y="38" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="24" font-weight="900" fill="#047857" letter-spacing="1.5">COFEPRIS</text>
+  <text x="102" y="56" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="800" fill="#1E293B" letter-spacing="0.6">COMISIÓN FEDERAL PARA LA PROTECCIÓN</text>
+  <text x="102" y="71" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#64748B" letter-spacing="0.6">CONTRA RIESGOS SANITARIOS · LAVADO CERTIFICADO</text>
+</svg>

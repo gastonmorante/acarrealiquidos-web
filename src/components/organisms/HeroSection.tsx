@@ -107,34 +107,34 @@ export const HeroSection: React.FC = () => {
               <span>Ver Equipo Especializado</span>
             </Link>
 
-            {/* Live GPS Telemetry Button */}
+            {/* High-Visibility Kosher OU Certification Button */}
             <Link
-              href="/dashboard"
-              className="inline-flex items-center gap-2 rounded-xl bg-emerald-950/50 backdrop-blur-md px-4 sm:px-5 py-3.5 text-xs sm:text-sm text-emerald-300 font-semibold shadow-md transition-all hover:bg-emerald-900/60 border border-emerald-500/30 hover:border-emerald-400"
+              href="#certificaciones"
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500/20 to-amber-600/20 hover:from-amber-500/30 hover:to-amber-600/30 backdrop-blur-md px-4 sm:px-5 py-3.5 text-xs sm:text-sm text-amber-300 font-bold shadow-md transition-all border border-amber-400/50 hover:border-amber-300"
             >
-              <Activity className="w-4 h-4 text-emerald-400 animate-pulse" />
-              <span>Rastreo GPS en Tiempo Real</span>
+              <Award className="w-4 h-4 text-amber-400 animate-pulse" />
+              <span>Acreditación Kosher Orthodox Union (OU)</span>
             </Link>
           </motion.div>
 
-          {/* Accreditation Trust Badges Row */}
+          {/* Accreditation Trust Badges Row with Official Institutional Marks */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.4 }}
             className="mt-8 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-300 font-medium"
           >
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/60 border border-slate-700/60 backdrop-blur-sm">
+            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-400/40 backdrop-blur-sm text-amber-300 font-bold">
+              <span className="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span>⭐ Kosher Orthodox Union (OU) · Grado Alimenticio 95%</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-slate-700/60 backdrop-blur-sm">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Normas SICT (NOM-012 · 068 · 035)</span>
+              <span>SICT Federal (NOM-012 · 068 · 035)</span>
             </div>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/60 border border-slate-700/60 backdrop-blur-sm">
-              <Award className="w-4 h-4 text-amber-400" />
-              <span>Grado Alimenticio Kosher Orthodox Union</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-slate-900/60 border border-slate-700/60 backdrop-blur-sm">
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-slate-700/60 backdrop-blur-sm">
               <Droplets className="w-4 h-4 text-sky-400" />
-              <span>Lavado Sanitario Certificado Cofepris</span>
+              <span>Cofepris (Lavado Sanitario con Vapor)</span>
             </div>
           </motion.div>
 

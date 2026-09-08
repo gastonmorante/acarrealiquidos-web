@@ -30,30 +30,26 @@ export const AboutGovernance: React.FC = () => {
               </p>
             </div>
 
-            {/* Badges Cluster */}
-            <div className="mt-space-lg grid grid-cols-1 sm:grid-cols-3 gap-space-sm">
-              <div className="flex items-center gap-space-xs rounded-xl bg-surface-container-low p-space-sm border border-outline-variant/30">
-                <ShieldCheck className="h-6 w-6 text-primary shrink-0" />
-                <div className="flex flex-col">
-                  <span className="font-button-text text-xs text-primary font-bold">Permiso SICT</span>
-                  <span className="font-label-badge text-[10px] text-on-surface-variant">Tipo E &bull; Federal</span>
-                </div>
+            {/* Official Institutional Logos Cluster */}
+            <div className="mt-space-lg grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-amber-300/80 shadow-sm hover:scale-105 transition-transform">
+                <img src="/assets/logo-kosher-ou.svg" alt="Kosher Orthodox Union" className="h-12 w-full object-contain" />
+                <span className="text-[10px] font-mono font-bold text-amber-900 mt-1.5 uppercase">Kosher OU</span>
               </div>
 
-              <div className="flex items-center gap-space-xs rounded-xl bg-surface-container-low p-space-sm border border-outline-variant/30">
-                <Award className="h-6 w-6 text-secondary shrink-0" />
-                <div className="flex flex-col">
-                  <span className="font-button-text text-xs text-primary font-bold">Kosher OU</span>
-                  <span className="font-label-badge text-[10px] text-on-surface-variant">Orthodox Union</span>
-                </div>
+              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform">
+                <img src="/assets/logo-sict.svg" alt="SICT" className="h-12 w-full object-contain" />
+                <span className="text-[10px] font-mono font-bold text-slate-800 mt-1.5 uppercase">SICT Federal</span>
               </div>
 
-              <div className="flex items-center gap-space-xs rounded-xl bg-surface-container-low p-space-sm border border-outline-variant/30">
-                <BadgeCheck className="h-6 w-6 text-primary shrink-0" />
-                <div className="flex flex-col">
-                  <span className="font-button-text text-xs text-primary font-bold">COFEPRIS</span>
-                  <span className="font-label-badge text-[10px] text-on-surface-variant">Lavado Sanitario</span>
-                </div>
+              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform">
+                <img src="/assets/logo-cofepris.svg" alt="COFEPRIS" className="h-12 w-full object-contain" />
+                <span className="text-[10px] font-mono font-bold text-emerald-800 mt-1.5 uppercase">COFEPRIS</span>
+              </div>
+
+              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform">
+                <img src="/assets/logo-canacar.svg" alt="CANACAR" className="h-12 w-full object-contain" />
+                <span className="text-[10px] font-mono font-bold text-slate-800 mt-1.5 uppercase">CANACAR</span>
               </div>
             </div>
           </div>

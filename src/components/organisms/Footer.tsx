@@ -59,8 +59,8 @@ export const Footer: React.FC = () => {
             <Link className="font-body-sm text-sm text-slate-400 hover:text-white transition-colors py-0.5" href="#contacto">
               Contacto y Cotización
             </Link>
-            <Link className="font-body-sm text-sm text-slate-400 hover:text-white transition-colors py-0.5" href="/dashboard">
-              Rastreo Satelital
+            <Link className="font-body-sm text-sm text-amber-400 hover:text-amber-300 font-bold transition-colors py-0.5" href="#certificaciones">
+              ⭐ Certificación Kosher OU
             </Link>
           </div>
 
@@ -83,7 +83,7 @@ export const Footer: React.FC = () => {
             </div>
             <div className="flex items-center gap-space-xs text-slate-400 text-xs mt-space-2xs">
               <Clock className="h-4 w-4 text-amber-500 shrink-0" />
-              <span>Operaciones 24/7 / Monitoreo GPS Activo</span>
+              <span>Operaciones 24/7 / Atención Especializada</span>
             </div>
           </div>
 
@@ -104,6 +104,19 @@ export const Footer: React.FC = () => {
               <MessageSquare className="h-4 w-4" />
               <span>WhatsApp Torre de Control</span>
             </a>
+          </div>
+        </div>
+
+        {/* Institutional Logos Banner in Footer */}
+        <div className="py-6 border-b border-white/10 flex flex-wrap items-center justify-between gap-6">
+          <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
+            Respaldado y Regulado por Instituciones Oficiales:
+          </span>
+          <div className="flex flex-wrap items-center gap-6 sm:gap-8 opacity-85 hover:opacity-100 transition-opacity">
+            <img src="/assets/logo-kosher-ou-white.svg" alt="Kosher OU" className="h-7 w-auto object-contain" />
+            <img src="/assets/logo-sict-white.svg" alt="SICT" className="h-7 w-auto object-contain" />
+            <img src="/assets/logo-cofepris-white.svg" alt="COFEPRIS" className="h-7 w-auto object-contain" />
+            <img src="/assets/logo-canacar-white.svg" alt="CANACAR" className="h-7 w-auto object-contain" />
           </div>
         </div>
 

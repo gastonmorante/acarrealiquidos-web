@@ -65,6 +65,7 @@ export const metadata: Metadata = {
 };
 
 import { InstallPwaBanner } from "@/components/organisms/InstallPwaBanner";
+import { AiConciergeDrawer } from "@/components/organisms/AiConciergeDrawer";
 
 export default function RootLayout({
   children,
@@ -80,6 +81,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-deep-navy-950 text-slate-100 font-sans antialiased selection:bg-safety-orange selection:text-white">
         {children}
+        <AiConciergeDrawer />
         <InstallPwaBanner />
       </body>
     </html>

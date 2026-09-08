@@ -23,20 +23,20 @@ export const AboutGovernance: React.FC = () => {
           </div>
 
           <div className="lg:col-span-5 flex flex-wrap gap-3 items-center justify-start lg:justify-end">
-            <div className="animate-float-subtle px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
-              <span className="material-symbols-outlined text-red-600 text-[22px]">star</span>
+            <div className="animate-float-subtle px-4 py-2.5 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5 hover:shadow-md transition-shadow">
+              <img src="/assets/logo-kosher-ou.svg" alt="Kosher OU" className="h-5 w-auto object-contain" />
               <span className="font-display text-xs uppercase font-bold text-[#18234D]">Kosher OU</span>
             </div>
-            <div className="animate-float-medium px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
-              <span className="material-symbols-outlined text-[#18234D] text-[22px]">badge</span>
+            <div className="animate-float-medium px-4 py-2.5 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5 hover:shadow-md transition-shadow">
+              <img src="/assets/logo-sict.svg" alt="SICT" className="h-5 w-auto object-contain" />
               <span className="font-display text-xs uppercase font-bold text-[#18234D]">SICT Federal</span>
             </div>
-            <div className="animate-float-reverse px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
-              <span className="material-symbols-outlined text-[#0078b6] text-[22px]">verified_user</span>
+            <div className="animate-float-reverse px-4 py-2.5 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5 hover:shadow-md transition-shadow">
+              <img src="/assets/logo-cofepris.png" alt="COFEPRIS" className="h-5 w-auto object-contain" />
               <span className="font-display text-xs uppercase font-bold text-[#18234D]">COFEPRIS</span>
             </div>
-            <div className="animate-float-subtle px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
-              <span className="material-symbols-outlined text-slate-700 text-[22px]">shield</span>
+            <div className="animate-float-subtle px-4 py-2.5 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5 hover:shadow-md transition-shadow">
+              <img src="/assets/logo-canacar.png" alt="CANACAR" className="h-5 w-auto object-contain" />
               <span className="font-display text-xs uppercase font-bold text-[#18234D]">CANACAR</span>
             </div>
           </div>

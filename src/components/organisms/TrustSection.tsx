@@ -93,7 +93,7 @@ export const TrustSection: React.FC = () => {
                 <span className="material-symbols-outlined text-cyan-700 text-[20px]">sanitizer</span>
               </div>
               <div className="h-16 flex items-center justify-center p-2 mb-3 bg-white rounded-xl border border-slate-100">
-                <img src="/assets/logo-cofepris.svg" alt="COFEPRIS" className="h-12 w-auto object-contain" />
+                <img src="/assets/logo-cofepris.png" alt="COFEPRIS" className="h-12 w-auto object-contain" />
               </div>
               <h3 className="font-display text-xl text-[#131b2e] uppercase font-bold mb-1 group-hover:text-[#0078b6] transition-colors">
                 COFEPRIS
@@ -123,7 +123,7 @@ export const TrustSection: React.FC = () => {
                 <span className="material-symbols-outlined text-slate-700 text-[20px]">local_shipping</span>
               </div>
               <div className="h-16 flex items-center justify-center p-2 mb-3 bg-white rounded-xl border border-slate-100">
-                <img src="/assets/logo-canacar.svg" alt="CANACAR" className="h-12 w-auto object-contain" />
+                <img src="/assets/logo-canacar.png" alt="CANACAR" className="h-12 w-auto object-contain" />
               </div>
               <h3 className="font-display text-xl text-[#131b2e] uppercase font-bold mb-1 group-hover:text-slate-900 transition-colors">
                 CANACAR
@@ -147,6 +147,9 @@ export const TrustSection: React.FC = () => {
         {/* Banner Destacado Kosher - Display Premium Alta Fidelidad (Stitch Physics) */}
         <div className="animate-float-slow relative bg-gradient-to-r from-[#0f172a] via-[#18234D] to-[#253375] text-white rounded-2xl p-8 lg:p-12 overflow-hidden shadow-2xl border border-slate-700 tech-grid-dark">
           <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute right-12 top-1/2 -translate-y-1/2 opacity-10 pointer-events-none hidden lg:block">
+            <img src="/assets/logo-kosher-ou-white.svg" alt="Kosher OU Seal" className="w-56 h-56" />
+          </div>
           <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-600/30 border border-red-500/40 text-red-200 font-display text-xs uppercase tracking-widest font-bold mb-3">

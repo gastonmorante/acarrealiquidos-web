@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Award, Droplets, ArrowRight } from "lucide-react";
+import { DynamicKpiCards } from "@/components/molecules/DynamicKpiCards";
 
 export const HeroSection: React.FC = () => {
   return (
@@ -102,48 +103,8 @@ export const HeroSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Métricas Técnicas de Alta Precisión con Física de Flotación Escalonada */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-14 pt-8 border-t border-slate-200/80">
-          <div className="animate-float-subtle bg-white rounded-xl p-5 border border-slate-200/80 shadow-sm hover:border-red-400/50 hover:shadow-md transition-all group">
-            <span className="font-display text-4xl font-bold text-red-600 leading-none mb-1 block group-hover:scale-105 transition-transform">
-              45+
-            </span>
-            <span className="font-display text-xs uppercase font-bold text-[#18234D] block">
-              Años de Trayectoria
-            </span>
-            <span className="text-xs text-slate-500">Desde 1981 en Veracruz</span>
-          </div>
-
-          <div className="animate-float-medium bg-white rounded-xl p-5 border border-slate-200/80 shadow-sm hover:border-[#18234D]/50 hover:shadow-md transition-all group">
-            <span className="font-display text-4xl font-bold text-[#18234D] leading-none mb-1 block group-hover:scale-105 transition-transform">
-              100%
-            </span>
-            <span className="font-display text-xs uppercase font-bold text-[#18234D] block">
-              Cobertura Nacional
-            </span>
-            <span className="text-xs text-slate-500">Rutas Federales SICT</span>
-          </div>
-
-          <div className="animate-float-reverse bg-white rounded-xl p-5 border border-slate-200/80 shadow-sm hover:border-blue-400/50 hover:shadow-md transition-all group">
-            <span className="font-display text-4xl font-bold text-[#0078b6] leading-none mb-1 block group-hover:scale-105 transition-transform">
-              24/7
-            </span>
-            <span className="font-display text-xs uppercase font-bold text-[#18234D] block">
-              Monitoreo Satelital
-            </span>
-            <span className="text-xs text-slate-500">SAF &amp; GPS en Tiempo Real</span>
-          </div>
-
-          <div className="animate-float-subtle bg-white rounded-xl p-5 border border-slate-200/80 shadow-sm hover:border-slate-400/50 hover:shadow-md transition-all group">
-            <span className="font-display text-4xl font-bold text-slate-800 leading-none mb-1 block group-hover:scale-105 transition-transform">
-              SICT
-            </span>
-            <span className="font-display text-xs uppercase font-bold text-[#18234D] block">
-              Cumplimiento Técnico
-            </span>
-            <span className="text-xs text-slate-500">NOM-012, 068 y 035</span>
-          </div>
-        </div>
+        {/* Dynamic Interactive KPI Cards con Mucho Estilo */}
+        <DynamicKpiCards />
       </div>
     </section>
   );

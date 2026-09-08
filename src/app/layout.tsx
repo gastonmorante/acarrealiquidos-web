@@ -33,9 +33,9 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://acarrealiquidos.com.mx"),
-  title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
+  title: "Acarrea Líquidos | Transporte en Autotanques",
   description:
-    "Solución confiable y máxima seguridad en el transporte para el sector industrial. Grado alimenticio Kosher OU, alcoholes y solventes SICT, y plataformas multimodales desde Amatlán de los Reyes, Veracruz.",
+    "Solución confiable y máxima seguridad en el transporte para el sector industrial. Grado alimenticio Kosher OU, alcoholes y solventes, y plataformas multimodales desde Amatlán de los Reyes, Veracruz.",
   keywords: [
     "Transporte grado alimenticio Veracruz",
     "Transporte de alcoholes y solventes México",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     "Lavado sanitario certificado Cofepris",
     "Plataformas 40 pies",
     "Transporte de melaza",
-    "Normas SICT NOM-012 NOM-068 NOM-035",
+    "Normas NOM-012 NOM-068 NOM-035",
     "Amatlán de los Reyes Veracruz",
   ],
   manifest: "/manifest.webmanifest",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     apple: "/icons/icon-192.png",
   },
   openGraph: {
-    title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
+    title: "Acarrea Líquidos | Transporte en Autotanques",
     description:
       "Solución confiable y máxima seguridad en el transporte para el sector industrial. Operando desde Amatlán de los Reyes, Veracruz, con cobertura estratégica en todo el territorio nacional.",
     url: "https://acarrealiquidos.com.mx",
@@ -70,13 +70,13 @@ export const metadata: Metadata = {
         url: "/assets/hero_tanker.webp",
         width: 1200,
         height: 630,
-        alt: "Acarrea Líquidos - Equipo Especializado",
+        alt: "Acarrea Líquidos - Equipo",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
+    title: "Acarrea Líquidos | Transporte en Autotanques",
     description:
       "Solución confiable y máxima seguridad en el transporte para el sector industrial. Grado alimenticio, alcoholes y solventes.",
     images: ["/assets/hero_tanker.webp"],

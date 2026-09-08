@@ -33,7 +33,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://acarrealiquidos.com.mx"),
-  title: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
+  title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
   description:
     "Transporte grado alimenticio Veracruz y transporte de alcoholes y solventes México. Acarrea Líquidos Amatlán: Solución confiable y máxima seguridad en el transporte para el sector industrial bajo normas SICT, Kosher y Cofepris.",
   keywords: [
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     url: "https://acarrealiquidos.com.mx/",
-    title: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
+    title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
     description:
       "Transporte grado alimenticio Veracruz y transporte de alcoholes y solventes México. Operando desde Amatlán de los Reyes, Veracruz, con cobertura en territorio nacional.",
     siteName: "Acarrea Líquidos",
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
+    title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
     description:
       "Solución confiable y máxima seguridad en el transporte para el sector industrial. Grado alimenticio, alcoholes y solventes.",
     images: ["/assets/hero_tanker.webp"],

@@ -16,7 +16,7 @@ export const AboutGovernance: React.FC = () => {
             </div>
             
             <h2 className="mt-space-xs font-headline-lg text-2xl sm:text-headline-lg text-primary tracking-tight font-bold">
-              45 Años de Trayectoria en el Transporte Especializado
+              Liderazgo y Solvencia en el Transporte Especializado
             </h2>
 
             <p className="mt-space-md font-body-md text-body-md text-on-surface-variant leading-relaxed">

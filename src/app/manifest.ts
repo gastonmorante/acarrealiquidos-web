@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Acarrea Líquidos | 45 años de trayectoria en el transporte especializado",
+    name: "Acarrea Líquidos | Transporte Especializado en Autotanques",
     short_name: "Acarrea Líquidos",
-    description: "45 años de trayectoria en el transporte especializado de grado alimenticio, alcoholes, solventes y soluciones multimodales bajo normas SICT.",
+    description: "Transporte especializado de grado alimenticio, alcoholes, solventes y soluciones multimodales bajo normas SICT.",
     start_url: "/",
     display: "standalone",
     background_color: "#faf8ff",

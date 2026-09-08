@@ -28,7 +28,7 @@ export const AiConciergeDrawer: React.FC = () => {
     {
       role: "assistant",
       content:
-        "Hola, soy el Consultor Técnico de Acarrea Líquidos S.A. de C.V. (45 años de trayectoria en el transporte especializado, fundada en 1981). ¿En qué puedo apoyarte hoy? Puedes consultarme sobre transporte de grado alimenticio (Kosher/Cofepris), alcoholes y solventes en acero inoxidable, o solicitar una cotización técnica inmediata.",
+        "Hola, soy el Consultor Técnico de Acarrea Líquidos S.A. de C.V. (Transporte especializado de líquidos, fundada en 1981). ¿En qué puedo apoyarte hoy? Puedes consultarme sobre transporte de grado alimenticio (Kosher/Cofepris), alcoholes y solventes en acero inoxidable, o solicitar una cotización técnica inmediata.",
     },
   ]);
 
@@ -102,16 +102,16 @@ export const AiConciergeDrawer: React.FC = () => {
 
   return (
     <>
-      {/* Floating Trigger Button */}
+      {/* Floating Trigger Button (Bottom Right) */}
       <motion.button
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-20 md:bottom-6 right-6 z-40 p-3.5 rounded-full bg-safety-orange text-white shadow-glow hover:shadow-glow-lg flex items-center gap-2 border border-white/20 select-none"
+        className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 inline-flex items-center gap-2.5 rounded-full bg-[#ED2B2C] hover:bg-[#D81B1C] text-white px-4 py-3 shadow-[0_4px_20px_rgba(237,43,44,0.4)] hover:shadow-[0_6px_25px_rgba(237,43,44,0.55)] transition-all border border-white/20 select-none cursor-pointer"
         aria-label="Abrir Asistente de IA"
       >
-        <Sparkles className="w-5 h-5 animate-pulse" />
-        <span className="hidden sm:inline text-xs font-mono font-bold">
+        <Sparkles className="w-5 h-5 animate-pulse shrink-0" />
+        <span className="inline-block font-mono text-xs font-bold tracking-wide">
           Consultor IA
         </span>
       </motion.button>
@@ -138,7 +138,7 @@ export const AiConciergeDrawer: React.FC = () => {
                   </h4>
                   <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Gemini 1.5 Flash · 45 Años</span>
+                    <span>Gemini 1.5 Flash</span>
                   </div>
                 </div>
               </div>

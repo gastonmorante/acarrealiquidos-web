@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const SYSTEM_INSTRUCTION = `Identity: Eres el Consultor Técnico de Transporte y Asistente de Operaciones de Acarrea Líquidos S.A. de C.V. Representas a una empresa con 45 años de trayectoria en el transporte especializado, fundada en 1981 y operando desde Amatlán de los Reyes, Veracruz, con cobertura en todo el territorio nacional.
+const SYSTEM_INSTRUCTION = `Identity: Eres el Consultor Técnico de Transporte y Asistente de Operaciones de Acarrea Líquidos S.A. de C.V. Representas a una empresa líder especializada en el transporte en autotanques, fundada en 1981 y operando desde Amatlán de los Reyes, Veracruz, con cobertura en todo el territorio nacional.
 
 Tagline Oficial: "Solución confiable y máxima seguridad en el transporte para el sector industrial."
 

@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Navbar } from "@/components/organisms/Navbar";
 import { HeroSection } from "@/components/organisms/HeroSection";
@@ -6,7 +8,6 @@ import { AboutGovernance } from "@/components/organisms/AboutGovernance";
 import { SpecialtiesSection } from "@/components/organisms/SpecialtiesSection";
 import { FleetShowcase } from "@/components/organisms/FleetShowcase";
 import { InfrastructureSection } from "@/components/organisms/InfrastructureSection";
-import { QuoteCalculator } from "@/components/organisms/QuoteCalculator";
 import { TestimonialsSection } from "@/components/organisms/TestimonialsSection";
 import { TechnicalQuoteSection } from "@/components/organisms/TechnicalQuoteSection";
 import { Footer } from "@/components/organisms/Footer";
@@ -25,20 +26,17 @@ export default function HomePage() {
       {/* 3. Acreditaciones Oficiales e Instituciones (Kosher OU, SICT, Cofepris, CANACAR) */}
       <TrustSection />
 
-      {/* 4. Trayectoria y Gobernanza (45 Años de Liderazgo) */}
+      {/* 4. Gobernanza y Cumplimiento Normativo */}
       <AboutGovernance />
 
-      {/* 4. Especialidades (Grado Alimenticio, Materiales Peligrosos, Plataformas y Carga General) */}
+      {/* 5. Especialidades (Grado Alimenticio, Materiales Peligrosos, Plataformas y Carga General) */}
       <SpecialtiesSection />
 
-      {/* 5. Flota y Equipo (Interactive Fleet Inspector) */}
+      {/* 6. Flota y Equipo (Interactive Fleet Inspector) */}
       <FleetShowcase />
 
-      {/* 6. Infraestructura Técnica y Control de Rutas (Bento Grid) */}
+      {/* 7. Infraestructura Técnica y Control de Rutas (Bento Grid) */}
       <InfrastructureSection />
-
-      {/* 7. Simulador Interactivo de Cubicaje y Cotización */}
-      <QuoteCalculator />
 
       {/* 8. La Voz de los Líderes Industriales de México (Testimonios) */}
       <TestimonialsSection />
@@ -46,10 +44,10 @@ export default function HomePage() {
       {/* 9. Solicite una Cotización Técnica Formal */}
       <TechnicalQuoteSection />
 
-      {/* 10. Corporate Footer */}
+      {/* 10. Corporate Footer with Language Switcher */}
       <Footer />
 
-      {/* 11. Floating WhatsApp Tráfico Button */}
+      {/* 11. Floating WhatsApp (Bottom Left) */}
       <FloatingWhatsApp />
 
       {/* 12. Mobile Bottom Tab Bar */}

@@ -4,11 +4,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ShieldCheck, Award, Droplets, Truck, ArrowRight, Activity } from "lucide-react";
+import { ShieldCheck, Award, Droplets, Truck, ArrowRight } from "lucide-react";
 
 export const HeroSection: React.FC = () => {
   return (
-    <section className="relative w-full min-h-[92vh] flex items-center justify-center overflow-hidden pt-36 sm:pt-40 pb-20">
+    <section className="relative w-full min-h-[92vh] flex items-center justify-center overflow-hidden pt-28 sm:pt-32 pb-20">
       {/* Full-width High-Impact Video / Image Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <video
@@ -39,19 +39,19 @@ export const HeroSection: React.FC = () => {
 
       <div className="relative z-10 mx-auto max-w-[84rem] px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center">
-          {/* Commemorative 45-Year Milestone Pill */}
+          {/* Official Technical Accreditation Pill */}
           <motion.div
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2.5 rounded-full bg-slate-900/80 backdrop-blur-md px-4 sm:px-5 py-1.5 shadow-lg border border-amber-500/30 text-amber-300"
+            className="inline-flex items-center gap-2.5 rounded-full bg-slate-900/80 backdrop-blur-md px-4 sm:px-5 py-1.5 shadow-lg border border-slate-700/80 text-slate-200"
           >
-            <span className="flex h-2.5 w-2.5 relative">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-amber-400 opacity-75"></span>
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-amber-400"></span>
+            <span className="flex h-2 w-2 relative">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
             </span>
-            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-amber-200">
-              ⭐ 45 años de trayectoria en el transporte especializado · 1981-2026
+            <span className="text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
+              Transporte Especializado en Autotanques · SICT &amp; Kosher OU
             </span>
           </motion.div>
 
@@ -126,7 +126,7 @@ export const HeroSection: React.FC = () => {
           >
             <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-amber-500/10 border border-amber-400/40 backdrop-blur-sm text-amber-300 font-bold">
               <span className="w-2 h-2 rounded-full bg-amber-400"></span>
-              <span>⭐ Kosher Orthodox Union (OU) · Grado Alimenticio 95%</span>
+              <span>Kosher Orthodox Union (OU) · Grado Alimenticio 95%</span>
             </div>
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/60 border border-slate-700/60 backdrop-blur-sm">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -152,9 +152,9 @@ export const HeroSection: React.FC = () => {
                 <span className="text-[#ED2B2C] ml-0.5">+</span>
               </div>
               <span className="mt-2 text-xs text-slate-200 uppercase tracking-wider font-bold">
-                Años de Trayectoria
+                Años de Experiencia
               </span>
-              <span className="mt-1 text-[11px] text-slate-400 font-medium">Desde 1981 en Veracruz</span>
+              <span className="mt-1 text-[11px] text-slate-400 font-medium">Fundada en 1981 en Veracruz</span>
             </div>
 
             {/* KPI 2 */}
@@ -178,7 +178,7 @@ export const HeroSection: React.FC = () => {
               <span className="mt-2 text-xs text-slate-200 uppercase tracking-wider font-bold">
                 Monitoreo Satelital
               </span>
-              <span className="mt-1 text-[11px] text-slate-400 font-medium">SAF &amp; GPS en Tiempo Real</span>
+              <span className="mt-1 text-[11px] text-slate-400 font-medium">Torre de Control Continua</span>
             </div>
 
             {/* KPI 4 */}

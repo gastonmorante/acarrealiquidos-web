@@ -145,32 +145,90 @@ export const TrustSection: React.FC = () => {
         </div>
 
         {/* Banner Destacado Kosher - Display Premium Alta Fidelidad (Stitch Physics) */}
-        <div className="animate-float-slow relative bg-gradient-to-r from-[#0f172a] via-[#18234D] to-[#253375] text-white rounded-2xl p-8 lg:p-12 overflow-hidden shadow-2xl border border-slate-700 tech-grid-dark">
-          <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
-          <div className="absolute right-12 top-1/2 -translate-y-1/2 opacity-10 pointer-events-none hidden lg:block">
-            <img src="/assets/logo-kosher-ou-white.svg" alt="Kosher OU Seal" className="w-56 h-56" />
+        <div
+          className="animate-float-slow relative rounded-3xl p-8 sm:p-10 lg:p-12 overflow-hidden shadow-2xl border border-slate-700/80 ring-1 ring-white/10"
+          style={{
+            background: "linear-gradient(135deg, #090e1a 0%, #0f172a 45%, #162456 100%)",
+          }}
+        >
+          {/* Ambient Lighting Accents */}
+          <div className="absolute -right-20 -bottom-20 w-96 h-96 bg-red-600/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -left-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Subtle Watermark Seal in Background */}
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-5 pointer-events-none hidden xl:block">
+            <img src="/assets/logo-kosher-ou-white.svg" alt="" className="w-96 h-96" />
           </div>
-          <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-red-600/30 border border-red-500/40 text-red-200 font-display text-xs uppercase tracking-widest font-bold mb-3">
-                <span className="material-symbols-outlined text-[16px] text-red-400">star</span>
-                MÁXIMA INOCUIDAD AGROALIMENTARIA
+
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+            {/* Left Content Column */}
+            <div className="flex-1 max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-500/20 border border-red-500/40 text-red-300 font-display text-xs uppercase tracking-widest font-bold mb-4 shadow-sm backdrop-blur-md">
+                <span className="material-symbols-outlined text-[16px] text-red-400">verified</span>
+                <span>MÁXIMA INOCUIDAD AGROALIMENTARIA</span>
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl uppercase font-bold mb-3 tracking-tight text-white">
-                Garantía Total Kosher Orthodox Union (OU)
+              <h3 className="font-headline text-2xl sm:text-3xl lg:text-4xl uppercase font-bold mb-4 tracking-tight text-white leading-tight">
+                Garantía Total{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-300 to-amber-200">
+                  Kosher Orthodox Union (OU)
+                </span>
               </h3>
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-200 leading-relaxed mb-6 font-normal">
                 Nuestra flota de autotanques térmicos de acero inoxidable cuenta con supervisión rabínica permanente y protocolo de sanitización grado alimenticio, erradicando cualquier riesgo de contaminación cruzada para aceites vegetales, jarabes, melazas y alcohol potable.
               </p>
+
+              {/* Guarantees Matrix */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8 pt-4 border-t border-slate-700/70">
+                <div className="flex items-center gap-2.5 text-xs text-slate-200 font-medium">
+                  <span className="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span>
+                  <span>Autotanques dedicados de acero inoxidable</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-slate-200 font-medium">
+                  <span className="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span>
+                  <span>Protocolo de vapor presurizado certificado</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-slate-200 font-medium">
+                  <span className="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span>
+                  <span>Cero riesgo de contaminación cruzada</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-xs text-slate-200 font-medium">
+                  <span className="material-symbols-outlined text-emerald-400 text-[18px]">check_circle</span>
+                  <span>Emisión de constancia sanitaria por viaje</span>
+                </div>
+              </div>
+
+              <div>
+                <Link
+                  href="#contacto"
+                  className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.02] active:scale-95 transition-all duration-300 border-t border-white/30 shadow-xl"
+                >
+                  <span className="material-symbols-outlined text-[18px]">verified</span>
+                  <span>Solicitar Protocolo Kosher</span>
+                </Link>
+              </div>
             </div>
-            <div className="flex-shrink-0">
-              <Link
-                href="#contacto"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.02] active:scale-95 transition-all duration-300 border-t border-white/30"
-              >
-                <span className="material-symbols-outlined text-[18px]">verified</span>
-                <span>Solicitar Protocolo Kosher</span>
-              </Link>
+
+            {/* Right Card Column: Prominent Dedicated Kosher Seal Showcase */}
+            <div className="flex-shrink-0 w-full sm:w-auto flex flex-col items-center justify-center">
+              <div className="w-full sm:w-64 bg-white/95 backdrop-blur-xl rounded-2xl p-6 sm:p-7 shadow-2xl border border-white/40 ring-1 ring-black/5 text-center flex flex-col items-center group hover:scale-[1.02] transition-transform duration-300">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 mb-3.5 p-2 bg-white rounded-2xl border border-slate-100 shadow-inner flex items-center justify-center">
+                  <img
+                    src="/assets/logo-kosher-ou.svg"
+                    alt="Certificación Internacional Kosher Orthodox Union"
+                    className="w-full h-full object-contain filter drop-shadow-sm"
+                  />
+                </div>
+                <span className="font-display text-sm uppercase font-extrabold text-[#18234D] tracking-wider block">
+                  Orthodox Union
+                </span>
+                <span className="font-mono text-[11px] font-bold text-red-600 block mt-0.5">
+                  Sello Certificado OU
+                </span>
+                <div className="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  <span>Inocuidad 95% de Flota</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

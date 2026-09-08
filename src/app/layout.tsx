@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-headline",
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["500", "600", "700"],
 });
 
 const inter = Inter({
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://acarrealiquidos.com.mx"),
   title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
   description:
-    "Transporte grado alimenticio Veracruz y transporte de alcoholes y solventes México. Acarrea Líquidos Amatlán: Solución confiable y máxima seguridad en el transporte para el sector industrial bajo normas SICT, Kosher y Cofepris.",
+    "Solución confiable y máxima seguridad en el transporte para el sector industrial. Grado alimenticio Kosher OU, alcoholes y solventes SICT, y plataformas multimodales desde Amatlán de los Reyes, Veracruz.",
   keywords: [
     "Transporte grado alimenticio Veracruz",
     "Transporte de alcoholes y solventes México",
@@ -58,13 +58,13 @@ export const metadata: Metadata = {
     apple: "/icons/icon-192.png",
   },
   openGraph: {
-    type: "website",
-    locale: "es_MX",
-    url: "https://acarrealiquidos.com.mx/",
     title: "Acarrea Líquidos | Transporte Especializado en Autotanques",
     description:
-      "Transporte grado alimenticio Veracruz y transporte de alcoholes y solventes México. Operando desde Amatlán de los Reyes, Veracruz, con cobertura en territorio nacional.",
+      "Solución confiable y máxima seguridad en el transporte para el sector industrial. Operando desde Amatlán de los Reyes, Veracruz, con cobertura estratégica en todo el territorio nacional.",
+    url: "https://acarrealiquidos.com.mx",
     siteName: "Acarrea Líquidos",
+    locale: "es_MX",
+    type: "website",
     images: [
       {
         url: "/assets/hero_tanker.webp",
@@ -94,7 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
+      className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} scroll-smooth`}
     >
       <head>
         <link rel="icon" type="image/svg+xml" href="/assets/logo-splash.svg" />
@@ -108,7 +108,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
       </head>
-      <body className="min-h-screen bg-background text-on-surface font-sans antialiased selection:bg-secondary selection:text-white">
+      <body className="min-h-screen bg-surface font-sans text-on-surface antialiased selection:bg-red-500 selection:text-white">
         {children}
         <AiConciergeDrawer />
         <InstallPwaBanner />

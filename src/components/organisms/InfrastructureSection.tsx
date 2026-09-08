@@ -1,143 +1,131 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
 
 export const InfrastructureSection: React.FC = () => {
   return (
-    <section className="w-full bg-surface-container-low py-space-3xl" id="infraestructura">
-      <div className="mx-auto max-w-[80rem] px-gutter-desktop">
-        <div className="flex flex-col items-center text-center">
-          <span className="font-label-badge text-label-badge text-secondary uppercase font-bold tracking-widest">
+    <section className="w-full bg-white py-20 border-b border-slate-200/80" id="infraestructura">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+        <div className="mb-10">
+          <span className="font-display text-xs uppercase tracking-widest text-[#18234D] font-bold block mb-1">
             Soporte Integral
           </span>
-          <h2 className="mt-space-2xs font-headline-lg text-2xl sm:text-headline-lg text-primary tracking-tight font-bold">
+          <h3 className="font-display text-2xl sm:text-3xl uppercase font-bold text-[#131b2e] mb-2">
             Infraestructura Técnica y Control de Rutas en Tiempo Real
-          </h2>
-          <p className="mt-space-2xs max-w-2xl font-body-md text-body-md text-on-surface-variant">
+          </h3>
+          <p className="text-sm text-slate-600 max-w-3xl">
             Respaldamos cada kilómetro mediante mantenimiento propio de vanguardia, capacitación constante CANACAR y pólizas ambientales con cobertura integral.
           </p>
         </div>
 
-        {/* Bento Grid (High Polish B2B Enterprise Layout) */}
-        <div className="mt-space-2xl grid grid-cols-1 md:grid-cols-3 gap-space-lg">
-          {/* Bento 1: Mantenimiento Vehicular Propio (Wide 2 columns) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="md:col-span-2 rounded-3xl bg-surface-container-lowest p-space-xl shadow-sm transition-all hover:shadow-md border border-outline-variant/20"
-          >
-            <div className="flex items-center gap-space-xs text-secondary mb-space-xs">
-              <span className="material-symbols-outlined text-3xl">build_circle</span>
-              <span className="font-label-badge text-xs font-bold uppercase">Talleres Certificados Propios</span>
+        {/* Cards de Infraestructura con Levitación */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Card 1 */}
+          <div className="animate-levitate-card bg-slate-50/60 rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-red-600 mb-2">
+                <span className="material-symbols-outlined">build_circle</span>
+                <span className="font-display text-xs uppercase font-bold">Talleres Certificados Propios</span>
+              </div>
+              <h4 className="font-display text-lg uppercase font-bold text-[#131b2e] mb-2">Mantenimiento Preventivo NOM-068-SICT</h4>
+              <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+                Operamos centros de servicio propios en Veracruz con técnicos mecánicos certificados. Mantenemos inventario de refacciones críticas al 100% y convenios directos con fabricantes para erradicar retrasos por fallas electromecánicas.
+              </p>
             </div>
-            <h3 className="font-headline-sm text-headline-sm text-primary font-bold">
-              Mantenimiento Preventivo NOM-068-SICT
-            </h3>
-            <p className="mt-space-xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              Operamos centros de servicio propios en Veracruz con técnicos mecánicos certificados. Mantenemos inventario de refacciones críticas al 100% y convenios directos con fabricantes para erradicar retrasos por fallas electromecánicas.
-            </p>
-            <div className="mt-space-md grid grid-cols-2 sm:grid-cols-3 gap-space-xs pt-space-xs">
-              <div className="rounded-xl bg-surface-container-low p-space-xs text-center border border-outline-variant/20">
-                <span className="font-bold text-primary text-sm">100%</span>
-                <p className="text-[11px] text-on-surface-variant">Stock Repuestos</p>
+            <div className="grid grid-cols-3 gap-2 bg-white p-2.5 rounded-xl border border-slate-200 text-center">
+              <div>
+                <span className="font-display text-xs font-bold text-[#131b2e] block">100%</span>
+                <span className="text-[10px] text-slate-500">Stock Repuestos</span>
               </div>
-              <div className="rounded-xl bg-surface-container-low p-space-xs text-center border border-outline-variant/20">
-                <span className="font-bold text-primary text-sm">Semanal</span>
-                <p className="text-[11px] text-on-surface-variant">Inspección Válvulas</p>
+              <div>
+                <span className="font-display text-xs font-bold text-[#131b2e] block">Semanal</span>
+                <span className="text-[10px] text-slate-500">Inspección</span>
               </div>
-              <div className="rounded-xl bg-surface-container-low p-space-xs text-center border border-outline-variant/20">
-                <span className="font-bold text-primary text-sm">0 Fallas</span>
-                <p className="text-[11px] text-on-surface-variant">En Trayecto</p>
+              <div>
+                <span className="font-display text-xs font-bold text-red-600 block">0 Fallas</span>
+                <span className="text-[10px] text-slate-500">En Trayecto</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Bento 2: Seguridad y Cobertura Ecológica */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-3xl bg-surface-container-lowest p-space-xl shadow-sm transition-all hover:shadow-md border border-outline-variant/20"
-          >
-            <div className="flex items-center gap-space-xs text-primary mb-space-xs">
-              <span className="material-symbols-outlined text-3xl">policy</span>
-              <span className="font-label-badge text-xs font-bold uppercase">Seguridad Integral</span>
+          {/* Card 2 */}
+          <div className="animate-levitate-card bg-slate-50/60 rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between" style={{ animationDelay: "0.8s" }}>
+            <div>
+              <div className="flex items-center gap-2 text-[#18234D] mb-2">
+                <span className="material-symbols-outlined">policy</span>
+                <span className="font-display text-xs uppercase font-bold">Seguridad Integral</span>
+              </div>
+              <h4 className="font-display text-lg uppercase font-bold text-[#131b2e] mb-2">Pólizas de Cobertura Ecológica</h4>
+              <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+                Pólizas de seguro amplio de responsabilidad civil y daño ecológico integral ante derrames accidentales en cualquier tramo del territorio nacional.
+              </p>
             </div>
-            <h3 className="font-headline-sm text-headline-sm text-primary font-bold">
-              Pólizas de Cobertura Ecológica
-            </h3>
-            <p className="mt-space-xs font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-              Pólizas de seguro amplio de responsabilidad civil y daño ecológico integral ante derrames accidentales en cualquier tramo del territorio nacional.
-            </p>
-            <div className="mt-space-md rounded-xl bg-surface-container-low p-space-sm flex items-center gap-space-xs border border-outline-variant/20">
-              <span className="material-symbols-outlined text-secondary">verified</span>
-              <span className="font-label-badge text-xs text-primary font-semibold">Respaldo Ambiental Federal</span>
+            <div className="flex items-center gap-2 text-[#18234D] font-display text-xs uppercase font-bold bg-blue-50/70 p-2.5 rounded-xl border border-blue-100">
+              <span className="material-symbols-outlined text-[#18234D] text-[18px]">verified</span>
+              <span>Respaldo Ambiental Federal</span>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Bento 3: Telemetría Avanzada & SAF */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="rounded-3xl bg-surface-container-lowest p-space-xl shadow-sm transition-all hover:shadow-md border border-outline-variant/20"
-          >
-            <div className="flex items-center gap-space-xs text-primary mb-space-xs">
-              <span className="material-symbols-outlined text-3xl">satellite_alt</span>
-              <span className="font-label-badge text-xs font-bold uppercase">Telemetría SAF</span>
+          {/* Card 3 */}
+          <div className="animate-levitate-card bg-slate-50/60 rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between" style={{ animationDelay: "1.5s" }}>
+            <div>
+              <div className="flex items-center gap-2 text-[#0078b6] mb-2">
+                <span className="material-symbols-outlined">satellite_alt</span>
+                <span className="font-display text-xs uppercase font-bold">Telemetría SAF</span>
+              </div>
+              <h4 className="font-display text-lg uppercase font-bold text-[#131b2e] mb-2">Monitoreo Satelital en Tiempo Real</h4>
+              <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+                Plataforma GPS conectada a las computadoras de abordo con medición continua de velocidad, rendimiento y geocercas antibloqueo 24/7.
+              </p>
             </div>
-            <h3 className="font-headline-sm text-headline-sm text-primary font-bold">
-              Monitoreo Satelital en Tiempo Real
-            </h3>
-            <p className="mt-space-xs font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-              Plataforma GPS conectada a las computadoras de abordo con medición continua de velocidad, rendimiento y geocercas antibloqueo 24/7.
-            </p>
-          </motion.div>
+            <div className="flex items-center gap-2 text-slate-800 font-display text-xs uppercase font-bold bg-white p-2.5 rounded-xl border border-slate-200">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.7)]"></span>
+              <span>Rastreo Activo 24/7/365</span>
+            </div>
+          </div>
 
-          {/* Bento 4: Ubicación Estratégica en Veracruz */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="rounded-3xl bg-surface-container-lowest p-space-xl shadow-sm transition-all hover:shadow-md border border-outline-variant/20"
-          >
-            <div className="flex items-center gap-space-xs text-secondary mb-space-xs">
-              <span className="material-symbols-outlined text-3xl">hub</span>
-              <span className="font-label-badge text-xs font-bold uppercase">Nodo Estratégico</span>
+          {/* Card 4 */}
+          <div className="animate-levitate-card bg-slate-50/60 rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between" style={{ animationDelay: "2.1s" }}>
+            <div>
+              <div className="flex items-center gap-2 text-red-600 mb-2">
+                <span className="material-symbols-outlined">hub</span>
+                <span className="font-display text-xs uppercase font-bold">Nodo Estratégico</span>
+              </div>
+              <h4 className="font-display text-lg uppercase font-bold text-[#131b2e] mb-2">Patio Central en Amatlán de los Reyes</h4>
+              <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+                Ubicación en el corredor carretero Veracruz-México. Patio de maniobras con capacidad para más de 80 autotanques y despacho expedito.
+              </p>
             </div>
-            <h3 className="font-headline-sm text-headline-sm text-primary font-bold">
-              Patio Central en Amatlán de los Reyes
-            </h3>
-            <p className="mt-space-xs font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-              Ubicación en el corredor carretero Veracruz-México. Patio de maniobras con capacidad para más de 80 autotanques y despacho expedito.
-            </p>
-          </motion.div>
+            <div className="flex items-center gap-2 text-slate-800 font-display text-xs uppercase font-bold bg-white p-2.5 rounded-xl border border-slate-200">
+              <span className="material-symbols-outlined text-red-600 text-[18px]">pin_drop</span>
+              <span className="truncate">Km 341 Carr. Fed. Córdoba-Veracruz</span>
+            </div>
+          </div>
 
-          {/* Bento 5: Capacitación CANACAR y Cero Siniestros */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="rounded-3xl bg-surface-container-lowest p-space-xl shadow-sm transition-all hover:shadow-md border border-outline-variant/20"
-          >
-            <div className="flex items-center gap-space-xs text-emerald-600 mb-space-xs">
-              <span className="material-symbols-outlined text-3xl">school</span>
-              <span className="font-label-badge text-xs font-bold uppercase">Personal Certificado</span>
+          {/* Card 5 (Doble Columna) */}
+          <div className="animate-levitate-card bg-slate-50/60 rounded-2xl p-6 border border-slate-200/90 shadow-sm flex flex-col justify-between md:col-span-2 lg:col-span-2" style={{ animationDelay: "2.7s" }}>
+            <div>
+              <div className="flex items-center gap-2 text-[#18234D] mb-2">
+                <span className="material-symbols-outlined">school</span>
+                <span className="font-display text-xs uppercase font-bold">Personal Certificado</span>
+              </div>
+              <h4 className="font-display text-lg uppercase font-bold text-[#131b2e] mb-2">Capacitación y Cero Siniestralidad</h4>
+              <p className="text-xs text-slate-600 mb-5 leading-relaxed">
+                Socios CANACAR. Evaluaciones toxicológicas y psicométricas continuas, junto a instrucción de manejo defensivo de cargas peligrosas. Cero tolerancia y cumplimiento estricto con la jornada NOM-035.
+              </p>
             </div>
-            <h3 className="font-headline-sm text-headline-sm text-primary font-bold">
-              Capacitación y Cero Siniestralidad
-            </h3>
-            <p className="mt-space-xs font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-              Socios CANACAR. Evaluaciones toxicológicas y psicométricas continuas, junto a instrucción de manejo defensivo de cargas peligrosas.
-            </p>
-          </motion.div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-800 font-display text-xs font-semibold">
+                Licencia Federal SICT E
+              </span>
+              <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-800 font-display text-xs font-semibold">
+                Protocolo Manejo Defensivo
+              </span>
+              <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-800 font-display text-xs font-semibold">
+                Inocuidad Alimentaria Certificada
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

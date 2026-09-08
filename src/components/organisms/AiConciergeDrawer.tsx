@@ -107,7 +107,7 @@ export const AiConciergeDrawer: React.FC = () => {
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 inline-flex items-center gap-2.5 rounded-full bg-[#ED2B2C] hover:bg-[#D81B1C] text-white px-4 py-3 shadow-[0_4px_20px_rgba(237,43,44,0.4)] hover:shadow-[0_6px_25px_rgba(237,43,44,0.55)] transition-all border border-white/20 select-none cursor-pointer"
+        className="animate-float-reverse fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-40 inline-flex items-center gap-2.5 rounded-full bg-[#ED2B2C] hover:bg-[#D81B1C] text-white px-4 py-3 shadow-[0_4px_20px_rgba(237,43,44,0.4)] hover:shadow-[0_6px_25px_rgba(237,43,44,0.55)] transition-all border border-white/20 select-none cursor-pointer"
         aria-label="Abrir Asistente de IA"
       >
         <Sparkles className="w-5 h-5 animate-pulse shrink-0" />

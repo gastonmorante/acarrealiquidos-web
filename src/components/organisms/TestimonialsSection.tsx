@@ -1,83 +1,98 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { Star } from "lucide-react";
 
 export const TestimonialsSection: React.FC = () => {
-  const reviews = [
-    {
-      text: "La inocuidad de Acarrea Líquidos en el transporte de aceites y grasas vegetales es impecable. Sus autotanques térmicos de acero inoxidable cumplen cabalmente con nuestras auditorías anuales Kosher Orthodox Union y Cofepris.",
-      initials: "EV",
-      initialsBg: "bg-secondary text-on-secondary",
-      author: "Lic. Elena Villalobos",
-      role: "Gerente de Calidad e Inocuidad • Agroalimentos del Bajío",
-    },
-    {
-      text: "Para el traslado especializado de alcoholes y solventes industriales, la rigurosidad técnica de sus operadores con licencia SICT Tipo E y el equipamiento de sus unidades nos garantizan cero incidentes y entrega puntual.",
-      initials: "RM",
-      initialsBg: "bg-primary text-on-primary",
-      author: "Ing. Roberto Méndez",
-      role: "Director de Tráfico • Soluciones Químicas Industriales",
-    },
-    {
-      text: "Excelente servicio en plataformas de 40 pies y autotanques para melaza desde Veracruz hacia el centro y norte del país. La visibilidad GPS y comunicación directa con la central en Amatlán es insuperable.",
-      initials: "CS",
-      initialsBg: "bg-amber-600 text-white",
-      author: "Carlos Santillán",
-      role: "Coordinador de Logística Multimodal • Grupo Agroindustrial de Córdoba",
-    },
-  ];
-
   return (
-    <section className="w-full bg-surface-container-lowest py-space-3xl" id="testimonios">
-      <div className="mx-auto max-w-[80rem] px-gutter-desktop">
-        <div className="flex flex-col items-center text-center">
-          <span className="font-label-badge text-label-badge text-secondary uppercase font-bold tracking-widest">
+    <section className="w-full bg-slate-50/70 py-20 border-b border-slate-200/80">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+        <div className="max-w-3xl mb-12">
+          <span className="font-display text-xs uppercase tracking-widest text-[#18234D] font-bold block mb-2">
             Confianza Técnica Comprobada
           </span>
-          <h2 className="mt-space-2xs font-headline-lg text-2xl sm:text-headline-lg text-primary tracking-tight font-bold">
+          <h2 className="font-display text-3xl sm:text-4xl uppercase text-[#131b2e] tracking-tight mb-3 font-bold">
             La Voz de los Líderes Industriales de México
           </h2>
-          <p className="mt-space-2xs max-w-xl font-body-md text-body-md text-on-surface-variant">
+          <p className="text-base text-slate-600 leading-relaxed">
             Entregas puntuales, máxima seguridad e inocuidad certificada para el sector agroalimentario, químico y multimodal.
           </p>
         </div>
 
-        <div className="mt-space-2xl grid grid-cols-1 md:grid-cols-3 gap-space-lg">
-          {reviews.map((rev, i) => (
-            <motion.div
-              key={rev.author}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="flex flex-col justify-between rounded-3xl bg-surface-container-low p-space-xl shadow-sm transition-transform duration-200 hover:-translate-y-1 border border-outline-variant/20"
-            >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Testimonio 1 */}
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+            <div>
+              <div className="flex items-center gap-1 text-amber-400 mb-4">
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+              </div>
+              <p className="text-sm text-slate-700 mb-6 italic leading-relaxed">
+                “La inocuidad de Acarrea Líquidos en el transporte de aceites y grasas vegetales es impecable. Sus autotanques térmicos de acero inoxidable cumplen cabalmente con nuestras auditorías anuales Kosher Orthodox Union y Cofepris.”
+              </p>
+            </div>
+            <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div className="w-10 h-10 rounded-full bg-red-100 text-red-700 font-display font-bold flex items-center justify-center text-sm border border-red-200">
+                EV
+              </div>
               <div>
-                <div className="flex text-amber-500 mb-space-sm gap-1">
-                  {[...Array(5)].map((_, starIdx) => (
-                    <Star key={starIdx} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="font-body-md text-sm sm:text-body-md text-on-surface italic leading-relaxed">
-                  &ldquo;{rev.text}&rdquo;
-                </p>
+                <span className="font-display text-xs font-bold text-[#131b2e] block">Lic. Elena Villalobos</span>
+                <span className="text-[11px] text-slate-500 block">Gerente de Calidad e Inocuidad • Agroalimentos del Bajío</span>
               </div>
+            </div>
+          </div>
 
-              <div className="mt-space-lg flex items-center gap-space-sm border-t border-surface-container pt-space-sm">
-                <div
-                  className={`flex h-10 w-10 items-center justify-center rounded-full font-bold text-xs shrink-0 ${rev.initialsBg}`}
-                >
-                  {rev.initials}
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-button-text text-sm font-bold text-primary">{rev.author}</span>
-                  <span className="font-label-badge text-[11px] text-on-surface-variant">{rev.role}</span>
-                </div>
+          {/* Testimonio 2 */}
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow" style={{ animationDelay: "0.8s" }}>
+            <div>
+              <div className="flex items-center gap-1 text-amber-400 mb-4">
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
               </div>
-            </motion.div>
-          ))}
+              <p className="text-sm text-slate-700 mb-6 italic leading-relaxed">
+                “Para el traslado especializado de alcoholes y solventes industriales, la rigurosidad técnica de sus operadores con licencia SICT Tipo E y el equipamiento de sus unidades nos garantizan cero incidentes y entrega puntual.”
+              </p>
+            </div>
+            <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div className="w-10 h-10 rounded-full bg-blue-100 text-[#18234D] font-display font-bold flex items-center justify-center text-sm border border-blue-200">
+                RM
+              </div>
+              <div>
+                <span className="font-display text-xs font-bold text-[#131b2e] block">Ing. Roberto Méndez</span>
+                <span className="text-[11px] text-slate-500 block">Director de Tráfico • Soluciones Químicas Industriales</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Testimonio 3 */}
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow" style={{ animationDelay: "1.6s" }}>
+            <div>
+              <div className="flex items-center gap-1 text-amber-400 mb-4">
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+                <span className="material-symbols-outlined text-[18px]">star</span>
+              </div>
+              <p className="text-sm text-slate-700 mb-6 italic leading-relaxed">
+                “Excelente servicio en plataformas de 40 pies y autotanques para melaza desde Veracruz hacia el centro y norte del país. La visibilidad GPS y comunicación directa con la central en Amatlán es insuperable.”
+              </p>
+            </div>
+            <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 font-display font-bold flex items-center justify-center text-sm border border-slate-200">
+                CS
+              </div>
+              <div>
+                <span className="font-display text-xs font-bold text-[#131b2e] block">Carlos Santillán</span>
+                <span className="text-[11px] text-slate-500 block">Coord. Logística • Grupo Agroindustrial de Córdoba</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

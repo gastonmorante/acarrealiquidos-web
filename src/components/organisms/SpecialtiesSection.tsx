@@ -2,177 +2,171 @@
 
 import React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ShieldCheck, Award, ArrowRight } from "lucide-react";
 
 export const SpecialtiesSection: React.FC = () => {
-  const services = [
-    {
-      id: "grado-alimenticio",
-      priority: "PRIORIDAD OPERATIVA · 95% DE ENFOQUE",
-      title: "Grado Alimenticio",
-      copy: "Transporte de aceites y grasas vegetales en tanques de acero inoxidable con aislamiento térmico.",
-      certifications: [
-        { name: "Certificación Kosher (Orthodox Union)", icon: "verified" },
-        { name: "Lavado Sanitario Certificado por Cofepris", icon: "clean_hands" },
-        { name: "Tanques de Acero Inox Térmicos", icon: "shield" },
-      ],
-      icon: "soup_kitchen",
-      theme: "primary",
-      highlight: true,
-    },
-    {
-      id: "materiales-peligrosos",
-      priority: "AUTOTANQUE ESPECIALIZADO",
-      title: "Materiales y Residuos Peligrosos",
-      copy: "Transporte especializado de alcoholes y solventes en tanques de acero inoxidable.",
-      certifications: [
-        { name: "Norma SICT HazMat Vigente", icon: "policy" },
-        { name: "Válvulas Neumáticas de Fondo Betts", icon: "tune" },
-        { name: "Acero Inoxidable 316L Calibre 10", icon: "science" },
-      ],
-      icon: "science",
-      theme: "secondary",
-      highlight: false,
-    },
-    {
-      id: "plataformas-carga-general",
-      priority: "TRANSPORTE MULTIMODAL",
-      title: "Plataformas y Carga General",
-      copy: "Soluciones de transporte multimodal. Contamos con plataformas de 40 pies, portacontenedores, cajas secas y tanques para melaza.",
-      certifications: [
-        { name: "Plataformas 40 Pies & Candados ISO", icon: "grid_view" },
-        { name: "Tanques Dedicados para Melaza", icon: "water_drop" },
-        { name: "Arrastre Sencillo y Full (NOM-012)", icon: "local_shipping" },
-      ],
-      icon: "view_stream",
-      theme: "neutral",
-      highlight: false,
-    },
-  ];
-
   return (
-    <section className="w-full bg-surface-container-low py-space-3xl" id="servicios">
-      <div className="mx-auto max-w-[80rem] px-gutter-desktop">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <span className="font-label-badge text-label-badge text-secondary uppercase tracking-widest font-bold">
+    <section className="w-full bg-white py-20 border-b border-slate-200/80" id="servicios">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+        <div className="max-w-3xl mb-14">
+          <span className="font-display text-xs uppercase tracking-widest text-[#18234D] font-bold block mb-2">
             Servicios de Transporte Especializado
           </span>
-          <h2 className="mt-space-2xs font-headline-lg text-2xl sm:text-headline-lg text-primary tracking-tight font-bold">
+          <h2 className="font-display text-3xl sm:text-4xl uppercase text-[#131b2e] tracking-tight mb-3 font-bold">
             Especialización Técnica y Máxima Confiabilidad
           </h2>
-          <p className="mt-space-2xs font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          <p className="text-base text-slate-600 leading-relaxed">
             Nuestros procesos operativos están diseñados con rigurosos controles sanitarios y mecánicos para garantizar la integridad absoluta de cada embarque.
           </p>
         </div>
 
-        {/* 3 Strict Services Grid */}
-        <div className="mt-space-2xl grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-stretch">
-          {services.map((srv, index) => (
-            <motion.div
-              key={srv.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`flex flex-col justify-between rounded-3xl p-space-xl shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl relative border ${
-                srv.highlight
-                  ? "bg-surface-container-lowest border-primary/30 ring-2 ring-primary/10"
-                  : "bg-surface-container-lowest border-outline-variant/20"
-              }`}
+        {/* Service Cards Grid con Física de Flotación */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+          {/* Service 1: Grado Alimenticio (Priority Card) */}
+          <div className="animate-levitate-card bg-white rounded-2xl p-7 shadow-lg border-2 border-red-600/30 flex flex-col justify-between relative overflow-hidden ring-1 ring-red-500/10 group hover:shadow-2xl transition-all duration-300">
+            <div className="absolute top-0 right-0 bg-gradient-to-r from-red-600 to-red-700 text-white font-display text-[10px] font-bold uppercase px-4 py-1 rounded-bl-xl tracking-wider shadow-sm">
+              Enfoque Central (95% Operaciones)
+            </div>
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-red-50 border border-red-200 text-red-600 flex items-center justify-center mb-5 mt-2 shadow-inner">
+                <span className="material-symbols-outlined text-[28px]">soup_kitchen</span>
+              </div>
+              <span className="font-display text-[11px] uppercase font-bold text-red-600 tracking-wider block mb-1">
+                PRIORIDAD OPERATIVA · 95% DE ENFOQUE
+              </span>
+              <h3 className="font-display text-2xl uppercase font-bold text-[#131b2e] mb-2">
+                Grado Alimenticio
+              </h3>
+              <p className="text-sm text-slate-700 italic mb-5 leading-relaxed bg-slate-50 p-3 rounded-lg border-l-2 border-red-500">
+                “Transporte de aceites y grasas vegetales en tanques de acero inoxidable con aislamiento térmico.”
+              </p>
+              <div className="bg-slate-50 rounded-xl p-3.5 mb-5 border border-slate-200">
+                <span className="font-display text-xs font-bold text-[#18234D] block mb-0.5">
+                  Certificación Kosher Orthodox Union (OU)
+                </span>
+                <span className="text-xs text-slate-500">Auditoría permanente e inocuidad garantizada</span>
+              </div>
+              <span className="font-display text-[11px] uppercase text-slate-500 font-bold block mb-2 tracking-wider">
+                Acreditaciones y Especificaciones:
+              </span>
+              <ul className="flex flex-col gap-2 mb-8 text-xs text-slate-700 font-medium">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-red-600 text-[18px]">verified</span>
+                  <span>Certificación Kosher (Orthodox Union)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-red-600 text-[18px]">clean_hands</span>
+                  <span>Lavado Sanitario Certificado por Cofepris</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-red-600 text-[18px]">shield</span>
+                  <span>Tanques de Acero Inox Térmicos</span>
+                </li>
+              </ul>
+            </div>
+            <Link
+              href="#contacto"
+              className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.01] active:scale-95 transition-all duration-300 border-t border-white/25"
             >
-              {/* Highlight ribbon for Food Grade priority */}
-              {srv.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-on-primary text-[10px] font-label-badge font-bold px-space-md py-1 rounded-full uppercase tracking-wider shadow-sm flex items-center gap-1">
-                  <Award className="w-3 h-3 text-amber-400" />
-                  <span>Enfoque Central (95% Operaciones)</span>
-                </div>
-              )}
+              <span className="material-symbols-outlined text-[18px]">request_quote</span>
+              <span>Cotizar Grado Alimenticio</span>
+            </Link>
+          </div>
 
-              <div>
-                {/* Top Badge & Icon */}
-                <div className="flex items-center justify-between gap-space-xs pt-1">
-                  <div
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
-                      srv.theme === "primary"
-                        ? "bg-primary text-on-primary"
-                        : srv.theme === "secondary"
-                        ? "bg-secondary text-on-secondary"
-                        : "bg-surface-container text-primary"
-                    }`}
-                  >
-                    <span className="material-symbols-outlined text-2xl">{srv.icon}</span>
-                  </div>
-                  <span className="font-label-badge text-[10px] font-bold text-on-surface-variant uppercase tracking-wider bg-surface-container-low px-space-xs py-1 rounded-md">
-                    {srv.priority}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="mt-space-md font-headline-md text-xl sm:text-2xl text-primary font-bold">
-                  {srv.title}
-                </h3>
-
-                {/* Directive Copy */}
-                <p className="mt-space-xs font-body-md text-sm text-on-surface-variant leading-relaxed">
-                  &ldquo;{srv.copy}&rdquo;
-                </p>
-
-                {/* Prominent Kosher OU Badge for Food Grade */}
-                {srv.highlight && (
-                  <div className="mt-4 p-3 rounded-xl bg-amber-50 border border-amber-300/80 flex items-center gap-3">
-                    <img
-                      src="/assets/logo-kosher-ou.svg"
-                      alt="Kosher Orthodox Union"
-                      className="h-10 w-auto object-contain shrink-0"
-                    />
-                    <div>
-                      <span className="text-xs font-mono font-bold text-amber-950 block">
-                        Certificación Kosher Orthodox Union (OU)
-                      </span>
-                      <span className="text-[10px] text-amber-800 font-medium">
-                        Auditoría permanente e inocuidad garantizada
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {/* Official Certifications List */}
-                <div className="mt-space-lg space-y-space-xs pt-space-xs border-t border-surface-container">
-                  <span className="font-label-badge text-[10px] text-primary uppercase font-bold tracking-wider block">
-                    Acreditaciones y Especificaciones:
-                  </span>
-                  {srv.certifications.map((cert) => (
-                    <div
-                      key={cert.name}
-                      className="flex items-center gap-space-xs text-xs text-on-surface bg-surface-container-low p-2 rounded-xl"
-                    >
-                      <span className="material-symbols-outlined text-emerald-700 text-base shrink-0">
-                        {cert.icon}
-                      </span>
-                      <span className="font-semibold">{cert.name}</span>
-                    </div>
-                  ))}
-                </div>
+          {/* Service 2: Materiales y Residuos Peligrosos */}
+          <div className="animate-levitate-card bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl border border-slate-200/90 hover:border-[#18234D]/40 transition-all duration-300 flex flex-col justify-between group" style={{ animationDelay: "1s" }}>
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 text-[#18234D] flex items-center justify-center mb-5 mt-2">
+                <span className="material-symbols-outlined text-[28px]">science</span>
               </div>
-
-              {/* Bottom Action CTA */}
-              <div className="mt-space-xl pt-space-md border-t border-surface-container">
-                <Link
-                  href="#contacto"
-                  className={`flex items-center justify-center gap-space-xs w-full py-2.5 px-space-md rounded-xl font-button-text text-xs sm:text-sm font-bold transition-all ${
-                    srv.highlight
-                      ? "bg-secondary hover:bg-secondary-container text-on-secondary shadow-md"
-                      : "bg-surface-container hover:bg-surface-container-high text-primary"
-                  }`}
-                >
-                  <span>Cotizar {srv.title}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+              <span className="font-display text-[11px] uppercase font-bold text-[#18234D] tracking-wider block mb-1">
+                AUTOTANQUE ESPECIALIZADO
+              </span>
+              <h3 className="font-display text-2xl uppercase font-bold text-[#131b2e] mb-2">
+                Materiales y Residuos Peligrosos
+              </h3>
+              <p className="text-sm text-slate-700 italic mb-5 leading-relaxed bg-slate-50 p-3 rounded-lg border-l-2 border-[#18234D]">
+                “Transporte especializado de alcoholes y solventes en tanques de acero inoxidable.”
+              </p>
+              <div className="bg-slate-50 rounded-xl p-3.5 mb-5 border border-slate-200">
+                <span className="font-display text-xs font-bold text-[#18234D] block mb-0.5">
+                  Seguridad Integral HazMat SICT
+                </span>
+                <span className="text-xs text-slate-500">Operadores con Licencia Federal Tipo E</span>
               </div>
-            </motion.div>
-          ))}
+              <span className="font-display text-[11px] uppercase text-slate-500 font-bold block mb-2 tracking-wider">
+                Acreditaciones y Especificaciones:
+              </span>
+              <ul className="flex flex-col gap-2 mb-8 text-xs text-slate-700 font-medium">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#18234D] text-[18px]">policy</span>
+                  <span>Norma SICT HazMat Vigente</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#18234D] text-[18px]">tune</span>
+                  <span>Válvulas Neumáticas de Fondo Betts</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#18234D] text-[18px]">science</span>
+                  <span>Acero Inoxidable 316L Calibre 10</span>
+                </li>
+              </ul>
+            </div>
+            <Link
+              href="#contacto"
+              className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#18234D] to-[#253375] text-white font-display text-xs uppercase font-bold tracking-wider hover:shadow-lg hover:shadow-blue-900/20 active:scale-95 transition-all duration-300 border-t border-white/20"
+            >
+              <span className="material-symbols-outlined text-[18px]">request_quote</span>
+              <span>Cotizar Materiales Peligrosos</span>
+            </Link>
+          </div>
+
+          {/* Service 3: Plataformas y Carga General */}
+          <div className="animate-levitate-card bg-white rounded-2xl p-7 shadow-sm hover:shadow-xl border border-slate-200/90 hover:border-slate-400 transition-all duration-300 flex flex-col justify-between group" style={{ animationDelay: "1.8s" }}>
+            <div>
+              <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center mb-5 mt-2">
+                <span className="material-symbols-outlined text-[28px]">view_stream</span>
+              </div>
+              <span className="font-display text-[11px] uppercase font-bold text-slate-600 tracking-wider block mb-1">
+                TRANSPORTE MULTIMODAL
+              </span>
+              <h3 className="font-display text-2xl uppercase font-bold text-[#131b2e] mb-2">
+                Plataformas y Carga General
+              </h3>
+              <p className="text-sm text-slate-700 italic mb-5 leading-relaxed bg-slate-50 p-3 rounded-lg border-l-2 border-slate-400">
+                “Soluciones de transporte multimodal. Contamos con plataformas de 40 pies, portacontenedores, cajas secas y tanques para melaza.”
+              </p>
+              <div className="bg-slate-50 rounded-xl p-3.5 mb-5 border border-slate-200">
+                <span className="font-display text-xs font-bold text-[#18234D] block mb-0.5">
+                  Capacidad y Versatilidad de Carga
+                </span>
+                <span className="text-xs text-slate-500">Conexión directa puertos y aduanas</span>
+              </div>
+              <span className="font-display text-[11px] uppercase text-slate-500 font-bold block mb-2 tracking-wider">
+                Acreditaciones y Especificaciones:
+              </span>
+              <ul className="flex flex-col gap-2 mb-8 text-xs text-slate-700 font-medium">
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#18234D] text-[18px]">grid_view</span>
+                  <span>Plataformas 40 Pies &amp; Candados ISO</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#18234D] text-[18px]">water_drop</span>
+                  <span>Tanques Dedicados para Melaza</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[#18234D] text-[18px]">local_shipping</span>
+                  <span>Arrastre Sencillo y Full (NOM-012)</span>
+                </li>
+              </ul>
+            </div>
+            <Link
+              href="#contacto"
+              className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/90 text-slate-800 border border-slate-300 font-display text-xs uppercase font-bold tracking-wider active:scale-95 transition-all duration-300"
+            >
+              <span className="material-symbols-outlined text-[18px]">request_quote</span>
+              <span>Cotizar Plataformas y Carga</span>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

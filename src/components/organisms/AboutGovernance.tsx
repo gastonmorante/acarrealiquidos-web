@@ -1,115 +1,90 @@
 "use client";
 
 import React from "react";
-import { ShieldCheck, Award, CheckCircle2, FileText, BadgeCheck } from "lucide-react";
 
 export const AboutGovernance: React.FC = () => {
   return (
-    <section className="w-full bg-surface-container-lowest py-space-3xl border-t border-outline-variant/20" id="cumplimiento">
-      <div className="mx-auto max-w-[80rem] px-gutter-desktop">
-        <div className="grid grid-cols-1 gap-space-2xl lg:grid-cols-12 lg:items-center">
-          {/* Left Column: Industrial Trust & Authority */}
-          <div className="lg:col-span-6 flex flex-col">
-            <div className="inline-flex items-center gap-space-2xs text-secondary font-label-badge text-label-badge uppercase font-bold tracking-widest">
-              <ShieldCheck className="h-4 w-4" />
-              <span>Gobernanza &amp; Cumplimiento SICT</span>
-            </div>
-            
-            <h2 className="mt-space-xs font-headline-lg text-2xl sm:text-headline-lg text-primary tracking-tight font-bold">
+    <section className="w-full bg-slate-50 py-20 border-b border-slate-200/80" id="cumplimiento">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-12 items-center">
+          <div className="lg:col-span-7">
+            <span className="font-display text-xs uppercase tracking-widest text-[#18234D] font-bold block mb-2">
+              Gobernanza &amp; Cumplimiento SICT
+            </span>
+            <h2 className="font-display text-3xl sm:text-4xl uppercase text-[#131b2e] tracking-tight mb-4 font-bold">
               Liderazgo y Solvencia en el Transporte Especializado
             </h2>
-
-            <p className="mt-space-md font-body-md text-body-md text-on-surface-variant leading-relaxed">
-              Operando desde <strong className="text-primary font-semibold">Amatlán de los Reyes, Veracruz</strong>, <strong className="text-primary font-semibold">Acarrea Líquidos</strong> ofrece una solución confiable y máxima seguridad en el transporte para el sector industrial, con cobertura en todo el territorio nacional.
+            <p className="text-base text-slate-600 mb-5 leading-relaxed">
+              Operando desde <strong className="text-[#131b2e] font-semibold">Amatlán de los Reyes, Veracruz</strong>, <strong className="text-[#131b2e] font-semibold">Acarrea Líquidos</strong> ofrece una solución confiable y máxima seguridad en el transporte para el sector industrial, con cobertura en todo el territorio nacional.
             </p>
-
-            {/* Board Agreement Key Compliance Statement */}
-            <div className="mt-space-md rounded-xl bg-surface-container-low p-space-md border-l-4 border-primary border border-outline-variant/30">
-              <p className="font-body-md text-sm sm:text-body-md text-primary font-medium leading-relaxed">
-                &ldquo;Nuestras operaciones cumplen con las Normas Oficiales Mexicanas (NOM) aplicables al sector de transporte, incluyendo NOM-012, NOM-068 y NOM-035.&rdquo;
-              </p>
-            </div>
-
-            {/* Official Institutional Logos Cluster */}
-            <div className="mt-space-lg grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-amber-300/80 shadow-sm hover:scale-105 transition-transform">
-                <img src="/assets/logo-kosher-ou.svg" alt="Kosher Orthodox Union" className="h-12 w-full object-contain" />
-                <span className="text-[10px] font-mono font-bold text-amber-900 mt-1.5 uppercase">Kosher OU</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform">
-                <img src="/assets/logo-sict.svg" alt="SICT" className="h-12 w-full object-contain" />
-                <span className="text-[10px] font-mono font-bold text-slate-800 mt-1.5 uppercase">SICT Federal</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform">
-                <img src="/assets/logo-cofepris.svg" alt="COFEPRIS" className="h-12 w-full object-contain" />
-                <span className="text-[10px] font-mono font-bold text-emerald-800 mt-1.5 uppercase">COFEPRIS</span>
-              </div>
-
-              <div className="flex flex-col items-center justify-center p-3 rounded-xl bg-surface-container-low border border-outline-variant/30 shadow-sm hover:scale-105 transition-transform">
-                <img src="/assets/logo-canacar.svg" alt="CANACAR" className="h-12 w-full object-contain" />
-                <span className="text-[10px] font-mono font-bold text-slate-800 mt-1.5 uppercase">CANACAR</span>
-              </div>
-            </div>
+            <blockquote className="p-4 rounded-xl bg-white border-l-4 border-red-600 shadow-sm text-slate-800 font-display text-sm italic">
+              “Nuestras operaciones cumplen con las Normas Oficiales Mexicanas (NOM) aplicables al sector de transporte, incluyendo NOM-012, NOM-068 y NOM-035.”
+            </blockquote>
           </div>
 
-          {/* Right Column: Clean Technical Specifications ("Menos es más") */}
-          <div className="lg:col-span-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
-              {/* NOM-012 */}
-              <div className="rounded-xl bg-surface-container-low p-space-md border border-outline-variant/30 hover:border-primary/40 transition-colors">
-                <div className="flex items-center gap-space-2xs text-primary font-bold text-sm mb-space-2xs">
-                  <FileText className="h-4 w-4 text-secondary shrink-0" />
-                  <span>NOM-012-SCT-2-2017</span>
-                </div>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
-                  Pesos y dimensiones máximas autorizadas. Operación certificada para configuraciones sencillas y full (doble semirremolque articulado).
-                </p>
-              </div>
-
-              {/* NOM-068 */}
-              <div className="rounded-xl bg-surface-container-low p-space-md border border-outline-variant/30 hover:border-primary/40 transition-colors">
-                <div className="flex items-center gap-space-2xs text-primary font-bold text-sm mb-space-2xs">
-                  <FileText className="h-4 w-4 text-secondary shrink-0" />
-                  <span>NOM-068-SCT-2-2014</span>
-                </div>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
-                  Condiciones físico-mecánicas y de seguridad con dictamen preventivo semestral, frenos antibloqueo ABS y control antivuelco.
-                </p>
-              </div>
-
-              {/* NOM-035 */}
-              <div className="rounded-xl bg-surface-container-low p-space-md border border-outline-variant/30 hover:border-primary/40 transition-colors">
-                <div className="flex items-center gap-space-2xs text-primary font-bold text-sm mb-space-2xs">
-                  <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
-                  <span>NOM-035-STPS-2018</span>
-                </div>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
-                  Bienestar y prevención de riesgos psicosociales. Jornadas reguladas y descansos normativos para operadores certificados.
-                </p>
-              </div>
-
-              {/* Inocuidad Grado Alimenticio */}
-              <div className="rounded-xl bg-surface-container-low p-space-md border border-outline-variant/30 hover:border-primary/40 transition-colors">
-                <div className="flex items-center gap-space-2xs text-primary font-bold text-sm mb-space-2xs">
-                  <CheckCircle2 className="h-4 w-4 text-secondary shrink-0" />
-                  <span>Inocuidad Alimentaria</span>
-                </div>
-                <p className="text-xs text-on-surface-variant leading-relaxed">
-                  Tanques de acero inoxidable grado alimenticio con aislamiento térmico y bitácora de lavado sanitario certificado.
-                </p>
-              </div>
+          <div className="lg:col-span-5 flex flex-wrap gap-3 items-center justify-start lg:justify-end">
+            <div className="animate-float-subtle px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
+              <span className="material-symbols-outlined text-red-600 text-[22px]">star</span>
+              <span className="font-display text-xs uppercase font-bold text-[#18234D]">Kosher OU</span>
             </div>
-
-            {/* Support Note */}
-            <div className="mt-space-sm rounded-xl bg-surface-container-lowest p-space-sm border border-outline-variant/20 flex items-center justify-between">
-              <div className="flex items-center gap-space-xs text-xs text-on-surface-variant">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span>Auditorías permanentes y trazabilidad satelital 24/7</span>
-              </div>
-              <span className="text-[11px] font-bold text-primary">Amatlán de los Reyes, Ver.</span>
+            <div className="animate-float-medium px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
+              <span className="material-symbols-outlined text-[#18234D] text-[22px]">badge</span>
+              <span className="font-display text-xs uppercase font-bold text-[#18234D]">SICT Federal</span>
             </div>
+            <div className="animate-float-reverse px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
+              <span className="material-symbols-outlined text-[#0078b6] text-[22px]">verified_user</span>
+              <span className="font-display text-xs uppercase font-bold text-[#18234D]">COFEPRIS</span>
+            </div>
+            <div className="animate-float-subtle px-4 py-3 bg-white rounded-xl shadow-sm border border-slate-200 flex items-center gap-2.5">
+              <span className="material-symbols-outlined text-slate-700 text-[22px]">shield</span>
+              <span className="font-display text-xs uppercase font-bold text-[#18234D]">CANACAR</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Tarjetas Técnicas NOM con Levitación */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-200/80 flex items-center justify-center text-[#18234D] mb-4">
+              <span className="material-symbols-outlined text-[24px]">scale</span>
+            </div>
+            <h3 className="font-display text-base uppercase font-bold text-[#131b2e] mb-2">NOM-012-SCT-2-2017</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Pesos y dimensiones máximas autorizadas. Operación certificada para configuraciones sencillas y full (doble semirremolque articulado).
+            </p>
+          </div>
+
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow" style={{ animationDelay: "0.7s" }}>
+            <div className="w-11 h-11 rounded-xl bg-red-50 border border-red-200/80 flex items-center justify-center text-red-600 mb-4">
+              <span className="material-symbols-outlined text-[24px]">build</span>
+            </div>
+            <h3 className="font-display text-base uppercase font-bold text-[#131b2e] mb-2">NOM-068-SCT-2-2014</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Condiciones físico-mecánicas y de seguridad con dictamen preventivo semestral, frenos antibloqueo ABS y control antivuelco.
+            </p>
+          </div>
+
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow" style={{ animationDelay: "1.4s" }}>
+            <div className="w-11 h-11 rounded-xl bg-cyan-50 border border-cyan-200/80 flex items-center justify-center text-cyan-700 mb-4">
+              <span className="material-symbols-outlined text-[24px]">health_and_safety</span>
+            </div>
+            <h3 className="font-display text-base uppercase font-bold text-[#131b2e] mb-2">NOM-035-STPS-2018</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Bienestar y prevención de riesgos psicosociales. Jornadas reguladas y descansos normativos para operadores certificados.
+            </p>
+          </div>
+
+          <div className="animate-levitate-card bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow" style={{ animationDelay: "2.1s" }}>
+            <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center text-emerald-700 mb-4">
+              <span className="material-symbols-outlined text-[24px]">sanitizer</span>
+            </div>
+            <h3 className="font-display text-base uppercase font-bold text-[#131b2e] mb-2">Inocuidad Alimentaria</h3>
+            <p className="text-sm text-slate-600 leading-relaxed mb-3">
+              Tanques de acero inoxidable grado alimenticio con aislamiento térmico y bitácora de lavado sanitario certificado.
+            </p>
+            <span className="font-display text-[11px] text-[#18234D] uppercase font-bold block pt-2 border-t border-slate-100">
+              Auditorías permanentes y trazabilidad satelital 24/7 · Amatlán de los Reyes, Ver.
+            </span>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ export interface BrandLogoProps {
   variant?: "default" | "light" | "dark";
   showSubtitle?: boolean;
   showTagline?: boolean;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   customSrc?: string;
   href?: string;
 }
@@ -24,60 +24,97 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   href = "/",
 }) => {
   const [imageError, setImageError] = useState(false);
-  const logoPath = customSrc || "/assets/logo.png"; // Ready to receive new logo (SVG/PNG)
-
-  const isDarkTheme = variant === "light"; // White text for dark backgrounds (e.g. footer)
+  const isDarkBg = variant === "light"; // White typography for dark backgrounds
   const displaySubtitle = showTagline !== undefined ? showTagline : showSubtitle;
 
-  const sizeClasses = {
+  // Select optimal SVG vector file based on theme/background
+  const logoFile = customSrc
+    ? customSrc
+    : isDarkBg
+    ? "/assets/logo-white.svg"
+    : "/assets/logo.svg";
+
+  const sizeConfigs = {
     sm: {
-      box: "w-8 h-8 text-xs",
-      text: "text-sm",
-      sub: "text-[9px]",
+      imgHeight: 30,
+      imgWidth: 158,
+      containerHeight: "h-7 sm:h-8",
+      subText: "text-[9px] tracking-[0.18em]",
     },
     md: {
-      box: "w-10 h-10 text-sm",
-      text: "text-base sm:text-lg",
-      sub: "text-[10px]",
+      imgHeight: 38,
+      imgWidth: 200,
+      containerHeight: "h-9 sm:h-10",
+      subText: "text-[10px] tracking-[0.2em]",
     },
     lg: {
-      box: "w-12 h-12 text-base",
-      text: "text-lg sm:text-xl",
-      sub: "text-xs",
+      imgHeight: 46,
+      imgWidth: 242,
+      containerHeight: "h-11 sm:h-12",
+      subText: "text-[11px] tracking-[0.22em]",
+    },
+    xl: {
+      imgHeight: 56,
+      imgWidth: 295,
+      containerHeight: "h-14 sm:h-16",
+      subText: "text-xs tracking-[0.25em]",
     },
   }[size];
 
   const content = (
-    <div className={`flex items-center gap-space-xs group ${className}`}>
-      {/* Modern Monogram & Vector Badge */}
-      <div className={`flex items-center justify-center rounded-lg bg-primary text-on-primary font-headline-sm font-bold tracking-tight shadow-sm transition-transform duration-200 group-hover:scale-105 shrink-0 ${sizeClasses.box}`}>
-        AL
-      </div>
-
-      {/* Typography Identity */}
-      <div className="flex flex-col justify-center">
-        <span
-          className={`font-headline-sm font-extrabold tracking-tight leading-none ${sizeClasses.text} ${
-            isDarkTheme ? "text-white" : "text-primary"
-          }`}
-        >
-          Acarrea Líquidos
-        </span>
-        {displaySubtitle && (
-          <span
-            className={`font-label-badge uppercase tracking-wider mt-1 font-semibold ${sizeClasses.sub} ${
-              isDarkTheme ? "text-slate-400" : "text-on-surface-variant"
-            }`}
-          >
-            Transporte Especializado · Est. 1981
-          </span>
+    <div className={`flex flex-col items-start group select-none ${className}`}>
+      {/* Crisp Vector SVG Logo */}
+      <div className="relative flex items-center transition-all duration-300 group-hover:brightness-110 group-hover:scale-[1.02]">
+        {!imageError ? (
+          <img
+            src={logoFile}
+            alt="Acarrea Líquidos - Transporte Especializado"
+            width={sizeConfigs.imgWidth}
+            height={sizeConfigs.imgHeight}
+            className={`w-auto ${sizeConfigs.containerHeight} object-contain transition-transform`}
+            onError={() => setImageError(true)}
+            loading="eager"
+          />
+        ) : (
+          /* High-fidelity Vector Fallback */
+          <div className="flex items-center gap-2">
+            <span className="font-extrabold text-2xl tracking-tighter text-[#ED2B2C]">
+              ACARREA
+            </span>
+            <span
+              className={`font-extrabold text-2xl tracking-tight ${
+                isDarkBg ? "text-white" : "text-[#2C2F7E]"
+              }`}
+            >
+              LÍQUIDOS
+            </span>
+          </div>
         )}
       </div>
+
+      {/* Subtitle / Corporate Sub-brand */}
+      {displaySubtitle && (
+        <span
+          className={`font-semibold uppercase transition-colors duration-200 mt-1 font-mono ${
+            sizeConfigs.subText
+          } ${
+            isDarkBg
+              ? "text-slate-400 group-hover:text-amber-400"
+              : "text-slate-500 group-hover:text-primary"
+          }`}
+        >
+          Transporte Especializado · Est. 1981
+        </span>
+      )}
     </div>
   );
 
   if (href) {
-    return <Link href={href}>{content}</Link>;
+    return (
+      <Link href={href} className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-secondary/50 rounded-lg">
+        {content}
+      </Link>
+    );
   }
 
   return content;

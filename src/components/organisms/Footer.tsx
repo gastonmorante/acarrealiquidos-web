@@ -14,25 +14,25 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-xl pb-space-2xl border-b border-white/10">
           {/* Col 1: Identity & Credentials */}
           <div className="lg:col-span-4 flex flex-col items-start">
-            <div className="mb-space-md">
-              <BrandLogo variant="light" size="md" showTagline={false} />
-              <p className="mt-space-xs font-label-badge text-xs text-amber-400 font-bold uppercase tracking-wider">
-                45 años de trayectoria en el transporte especializado
+            <div className="mb-6">
+              <BrandLogo variant="light" size="lg" showSubtitle={true} />
+              <p className="mt-3 text-xs text-amber-400 font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <span>⭐ 45 años de trayectoria en el transporte especializado</span>
               </p>
             </div>
-            <p className="font-body-md text-sm text-slate-400 max-w-sm mb-space-lg leading-relaxed">
-              Solución confiable y máxima seguridad en el transporte para el sector industrial. Operando desde Amatlán de los Reyes, Veracruz, con cobertura en territorio nacional.
+            <p className="text-sm text-slate-400 max-w-sm mb-6 leading-relaxed">
+              Solución confiable y máxima seguridad en el transporte para el sector industrial. Operando desde Amatlán de los Reyes, Veracruz, con cobertura estratégica en territorio nacional.
             </p>
-            <div className="flex flex-wrap items-center gap-space-xs">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 font-label-badge text-[11px] text-slate-300 border border-white/10">
-                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 font-mono text-[11px] text-slate-300 border border-slate-800">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 SICT REGULADO
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 font-label-badge text-[11px] text-slate-300 border border-white/10">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 font-mono text-[11px] text-slate-300 border border-slate-800">
                 <span className="w-2 h-2 rounded-full bg-amber-400"></span>
                 KOSHER OU
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 font-label-badge text-[11px] text-slate-300 border border-white/10">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900 font-mono text-[11px] text-slate-300 border border-slate-800">
                 <span className="w-2 h-2 rounded-full bg-sky-400"></span>
                 COFEPRIS
               </span>

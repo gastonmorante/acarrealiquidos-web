@@ -17,7 +17,7 @@ import { MobileTabBar } from "@/components/organisms/MobileTabBar";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-background text-on-surface relative selection:bg-secondary selection:text-white pb-16 md:pb-0">
+    <main className="min-h-screen bg-background text-on-surface relative selection:bg-secondary selection:text-white pb-24 md:pb-0">
       {/* 1. Fixed Top Header Navigation */}
       <Navbar />
 

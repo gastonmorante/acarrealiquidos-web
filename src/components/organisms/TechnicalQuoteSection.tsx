@@ -116,7 +116,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.nameLabel} *
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder="Ing. Alejandro Morales"
                       required
                       type="text"
@@ -127,7 +127,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.companyLabel} *
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder="Industrias Alimenticias S.A."
                       required
                       type="text"
@@ -141,7 +141,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.emailLabel} *
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder="contacto@empresa.com"
                       required
                       type="email"
@@ -152,7 +152,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.phoneLabel} *
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder="+52 (271) 000-0000"
                       required
                       type="tel"
@@ -165,7 +165,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                     <label className="font-display text-xs uppercase text-[#131b2e] font-bold block mb-1">
                       {t.quote.cargoType}
                     </label>
-                    <select className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500/20">
+                    <select className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-500/20">
                       <option>{t.quote.options.foodGrade}</option>
                       <option>{t.quote.options.chemical}</option>
                       <option>{t.quote.options.flatbed}</option>
@@ -176,7 +176,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.volumeLabel}
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder="Ej. 45,000 Litros"
                       type="text"
                     />
@@ -189,7 +189,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.originLabel}
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder={t.quote.originPlaceholder}
                       type="text"
                     />
@@ -199,7 +199,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                       {t.quote.destinationLabel}
                     </label>
                     <input
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
+                      className="w-full px-3.5 py-3 min-h-[46px] rounded-xl bg-white border border-slate-300 text-base sm:text-xs font-sans text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-red-500/20"
                       placeholder={t.quote.destPlaceholder}
                       type="text"
                     />
@@ -207,7 +207,7 @@ export const TechnicalQuoteSection: React.FC = () => {
                 </div>
 
                 <button
-                  className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.01] active:scale-95 transition-all duration-300 border-t border-white/30 shadow-md mt-2 flex items-center justify-center gap-2"
+                  className="w-full py-4 min-h-[50px] px-6 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.01] active:scale-95 transition-all duration-300 border-t border-white/30 shadow-md mt-2 flex items-center justify-center gap-2"
                   type="submit"
                 >
                   <span className="material-symbols-outlined text-[18px]">send</span>

@@ -17,6 +17,14 @@ const rawTranslations = {
       "callCentral": "Llamar a Central",
       "requestQuote": "Cotizar Servicio"
     },
+    "mobileTabs": {
+      "home": "Inicio",
+      "fleet": "Flota",
+      "kosher": "Kosher OU",
+      "quote": "Cotizar",
+      "dispatch": "Despacho",
+      "ai": "Consultor IA"
+    },
     "hero": {
       "headlinePre": "Solución confiable y máxima seguridad en el transporte para el",
       "headlineHighlight": "sector industrial",
@@ -258,6 +266,14 @@ const rawTranslations = {
       "contact": "Contact",
       "callCentral": "Call Central",
       "requestQuote": "Request Quote"
+    },
+    "mobileTabs": {
+      "home": "Home",
+      "fleet": "Fleet",
+      "kosher": "Kosher OU",
+      "quote": "Quote",
+      "dispatch": "Dispatch",
+      "ai": "AI Consultant"
     },
     "hero": {
       "headlinePre": "Reliable solutions and maximum transport safety for the",

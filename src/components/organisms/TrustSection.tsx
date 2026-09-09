@@ -187,7 +187,7 @@ export const TrustSection: React.FC = () => {
               <div>
                 <Link
                   href="#contacto"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.02] active:scale-95 transition-all duration-300 border-t border-white/30 shadow-lg"
+                  className="w-full sm:w-auto min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red hover:scale-[1.02] active:scale-95 transition-all duration-300 border-t border-white/30 shadow-lg"
                 >
                   <span className="material-symbols-outlined text-[16px]">verified</span>
                   <span>{t.trust.kosherCta}</span>

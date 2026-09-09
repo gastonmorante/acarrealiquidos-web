@@ -17,7 +17,7 @@ export const HeroSection: React.FC = () => {
       <div className="relative max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div className="lg:col-span-7 flex flex-col items-start">
-            <h1 className="font-headline text-3xl sm:text-4xl lg:text-5xl uppercase text-[#131b2e] tracking-tight mb-5 font-bold leading-[1.15]">
+            <h1 className="font-headline text-2xl sm:text-4xl lg:text-5xl uppercase text-[#131b2e] tracking-tight mb-4 font-bold leading-[1.2]">
               {t.hero.headlinePre}{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#DC2626] to-[#991b1b]">
                 {t.hero.headlineHighlight}
@@ -36,14 +36,14 @@ export const HeroSection: React.FC = () => {
             <div className="flex flex-wrap items-center gap-4 mb-2 w-full sm:w-auto">
               <Link
                 href="#contacto"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red transition-all duration-300 transform active:scale-95 border-t border-white/30"
+                className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#DC2626] via-[#D11E2E] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red transition-all duration-300 transform active:scale-95 border-t border-white/30"
               >
                 <span className="material-symbols-outlined text-[20px]">request_quote</span>
                 <span>{t.hero.ctaQuote}</span>
               </Link>
               <Link
                 href="#equipo"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300/90 text-[#18234D] font-display text-xs uppercase font-bold tracking-wider shadow-sm hover:shadow-md hover:border-slate-400 transition-all duration-200 btn-chrome"
+                className="w-full sm:w-auto min-h-[48px] inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300/90 text-[#18234D] font-display text-xs uppercase font-bold tracking-wider shadow-sm hover:shadow-md hover:border-slate-400 transition-all duration-200 btn-chrome"
               >
                 <span className="material-symbols-outlined text-[20px] text-[#18234D]">local_shipping</span>
                 <span>{t.hero.ctaFleet}</span>
@@ -53,7 +53,7 @@ export const HeroSection: React.FC = () => {
 
           <div className="lg:col-span-5 relative">
             <div className="animate-float-slow relative bg-white rounded-2xl p-3.5 shadow-2xl border border-slate-200/90 ring-1 ring-slate-100">
-              <div className="relative w-full h-80 sm:h-96 rounded-xl overflow-hidden group">
+              <div className="relative w-full h-72 sm:h-96 rounded-xl overflow-hidden group">
                 <Image
                   src="/assets/hero_tanker.webp"
                   alt="Tractocamión Kenworth con autotanque térmico de acero inoxidable Acarrea Líquidos"

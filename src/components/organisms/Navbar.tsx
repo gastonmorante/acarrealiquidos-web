@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-slate-700 hover:text-[#b70011] hover:bg-slate-100 rounded-xl transition-colors focus:outline-none"
+              className="xl:hidden min-h-[44px] min-w-[44px] flex items-center justify-center p-2 text-slate-700 hover:text-[#b70011] hover:bg-slate-100 rounded-xl transition-colors focus:outline-none active:scale-95"
               aria-label="Abrir menú"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -157,7 +157,7 @@ export const Navbar: React.FC = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-between px-4 py-3 rounded-xl text-sm font-display font-semibold uppercase tracking-wider text-slate-800 hover:text-[#b70011] hover:bg-slate-50 transition-all"
+                  className="flex items-center justify-between px-4 py-3.5 min-h-[48px] rounded-xl text-sm font-display font-semibold uppercase tracking-wider text-slate-800 hover:text-[#b70011] hover:bg-slate-50 active:bg-slate-100 transition-all"
                 >
                   <span>{link.name}</span>
                   <ArrowRight className="w-4 h-4 text-slate-400" />
@@ -168,7 +168,7 @@ export const Navbar: React.FC = () => {
                 <Link
                   href="#contacto"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 min-h-[48px] rounded-xl bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white font-display text-xs uppercase font-bold tracking-wider btn-glow-red active:scale-95"
                 >
                   <span className="material-symbols-outlined text-[18px]">request_quote</span>
                   <span>{t.nav.requestQuote}</span>
@@ -176,7 +176,7 @@ export const Navbar: React.FC = () => {
 
                 <a
                   href="tel:+522717128316"
-                  className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-emerald-600 text-white font-display text-xs uppercase font-bold tracking-wider shadow-sm"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 min-h-[48px] rounded-xl bg-emerald-600 text-white font-display text-xs uppercase font-bold tracking-wider shadow-sm active:scale-95"
                 >
                   <span className="material-symbols-outlined text-[18px]">call</span>
                   <span>{t.nav.callCentral}</span>
